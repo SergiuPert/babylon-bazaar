@@ -46,8 +46,8 @@ namespace BabylonBazar.DAL
         {
             Location? existing = _dbManager.Location.FirstOrDefault(l => l.Id == item.Id);
             if (existing is null) return;
-            existing.AddresLine1 = item.AddresLine1;
-            existing.AddresLine2 = item.AddresLine2;
+            existing.Addres = item.Addres;
+            existing.Name = item.Name;
             existing.PhoneNumber = item.PhoneNumber;
             existing.Email = item.Email;
             existing.Country = item.Country;

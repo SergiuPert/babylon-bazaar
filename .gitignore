@@ -1,6 +1,6 @@
-src/bin/
-src/obj/
-.vs/
+BabylonBazar/BabylonBazar/src/bin/
+BabylonBazar/BabylonBazar/src/obj/
+BabylonBazar/.vs/
 
 # Created by https://www.gitignore.io/api/visualstudio,jetbrains+all,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudio,jetbrains+all,visualstudiocode

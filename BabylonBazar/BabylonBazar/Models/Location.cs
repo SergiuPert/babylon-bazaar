@@ -1,8 +1,8 @@
 ﻿namespace BabylonBazar.Models {
 	public class Location:BaseModel {
 		public int UserId { get; set; }
-		public string AddresLine1 { get; set; }
-		public string? AddresLine2 { get; set; }
+		public string Addres { get; set; }
+		public string Name { get; set; }
 		public string PhoneNumber { get; set; }
 		public string Email { get; set; }
 		public string Country { get; set; }
