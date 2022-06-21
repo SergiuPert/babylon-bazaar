@@ -1864,24 +1864,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Radu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Sergiu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Radu\\Documents\\CodeCool\\projects\\projects.md4\\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\\BabylonBazar\\BabylonBazar\\BabylonBazar.csproj",
+      "projectUniqueName": "D:\\Code\\Projects\\BabylonBazar\\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\\BabylonBazar\\BabylonBazar\\BabylonBazar.csproj",
       "projectName": "BabylonBazar",
-      "projectPath": "C:\\Users\\Radu\\Documents\\CodeCool\\projects\\projects.md4\\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\\BabylonBazar\\BabylonBazar\\BabylonBazar.csproj",
-      "packagesPath": "C:\\Users\\Radu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Radu\\Documents\\CodeCool\\projects\\projects.md4\\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\\BabylonBazar\\BabylonBazar\\obj\\",
+      "projectPath": "D:\\Code\\Projects\\BabylonBazar\\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\\BabylonBazar\\BabylonBazar\\BabylonBazar.csproj",
+      "packagesPath": "C:\\Users\\Sergiu\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\Projects\\BabylonBazar\\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\\BabylonBazar\\BabylonBazar\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Radu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Sergiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1940,7 +1935,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
