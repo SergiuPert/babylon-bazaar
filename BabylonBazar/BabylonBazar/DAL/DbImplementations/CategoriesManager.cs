@@ -37,7 +37,8 @@ namespace BabylonBazar.DAL
         {
             Categories? existing = _dbManager.Categories.FirstOrDefault(c => c.Id == item.Id);
             if (existing is null) return;
-            existing.Name = item.Name;
+            existing.Name=item.Name;
+            existing.ParentId=item.ParentId;
             _dbManager.Categories.Update(existing);
             _dbManager.SaveChanges();
         }

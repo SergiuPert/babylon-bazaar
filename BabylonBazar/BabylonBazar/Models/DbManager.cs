@@ -9,7 +9,7 @@ namespace BabylonBazar.Models {
 		public DbSet<OrderItem> OrderItem { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Images> Images { get; set; }
-		public DbSet<Ratings> Ratings { get; set; }
+		public DbSet<Notifications> Notifications { get; set; }
 		public DbSet<CardInfo> CardInfo { get; set; }
 		public DbSet<Location> Location { get; set; }
 		public DbSet<Categories> Categories { get; set; }

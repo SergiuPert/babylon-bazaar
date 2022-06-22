@@ -43,5 +43,15 @@ namespace BabylonBazar.DAL
             _dbManager.Reviews.Update(existing);
             _dbManager.SaveChanges();
         }
+
+        public IEnumerable<Reviews> GetReviewsForProduct(int productId){
+            return _dbManager.Reviews.Where(r => r.ProductId == productId && !String.IsNullOrEmpty(r.Comment));
+        }
+
+        public double GetRatingForProduct(int productId) {
+            List<Reviews> ratings=_dbManager.Reviews.Where(r => r.ProductId==productId).ToList();
+            return ratings.Average(r => r.Rating);
+        }
+
     }
 }
