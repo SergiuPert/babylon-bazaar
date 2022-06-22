@@ -33,7 +33,7 @@ namespace BabylonBazar.DAL
             _dbManager.SaveChanges();
         }
 
-        public IEnumerable<Images> GetImagerForProduct(int productId)
+        public IEnumerable<Images> GetImagesForProduct(int productId)
         {
             return _dbManager.Images.Where(i => i.ProductId == productId);
         }

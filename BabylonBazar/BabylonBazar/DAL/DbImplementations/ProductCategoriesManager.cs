@@ -26,9 +26,12 @@ namespace BabylonBazar.DAL
             return _dbManager.ProductCategories.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<ProductCategories> GetCategoriesForProduct(int productId)
-        {
-            return _dbManager.ProductCategories.Where(c => c.ProductId == productId);
+        public IEnumerable<ProductCategories> GetCategoriesForProduct(int productId) {
+            return _dbManager.ProductCategories.Where(c => c.ProductId==productId);
+        }
+
+        public IEnumerable<ProductCategories> GetProductsForCategory(int categoryId) {
+            return _dbManager.ProductCategories.Where(c => c.CategoryId==categoryId);
         }
 
         public void Remove(ProductCategories productCategories)
