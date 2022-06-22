@@ -15,6 +15,10 @@ namespace BabylonBazar.DAL {
 			return _dbManager.Notifications;
 		}
 
+		public IEnumerable<Notifications> GetNotificationsByUser(int userId)
+		{
+			return _dbManager.Notifications.Where(n => n.UserId == userId);
+		}
 		public Notifications? GetById(int id) {
 			return _dbManager.Notifications.FirstOrDefault(r => r.Id==id);
 		}
@@ -25,7 +29,6 @@ namespace BabylonBazar.DAL {
 			_dbManager.Notifications.Remove(existing);
 			_dbManager.SaveChanges();
 		}
-
 		public void Update(Notifications item) {
 			Notifications? existing = _dbManager.Notifications.FirstOrDefault(r => r.Id==item.Id);
 			if(existing is null) return;
