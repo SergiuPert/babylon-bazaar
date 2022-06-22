@@ -4,6 +4,6 @@ namespace BabylonBazar.DAL
 {
     public interface IImagesManager: IBaseManager<Images>
     {
-        public IEnumerable<Images> GetImagerForProduct(int productId);
+        public IEnumerable<Images> GetImagesForProduct(int productId);
     }
 }
