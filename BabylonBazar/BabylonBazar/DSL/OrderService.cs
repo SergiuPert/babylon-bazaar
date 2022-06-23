@@ -3,16 +3,13 @@ using BabylonBazar.Models;
 
 namespace BabylonBazar.DSL {
 	public class OrderService {
-		private IOrderManager _orderManager;
-		private IOrderItemManager _orderItemManager;
-		private ICartManager _cartManager;
-		private IProductManager _productManager;
-		public OrderService(IOrderManager orderManager,IOrderItemManager orderItemManager,
-			ICartManager cartManager,IProductManager productManager) { 
+		private readonly IOrderManager _orderManager;
+		private readonly IOrderItemManager _orderItemManager;
+		private readonly ICartManager _cartManager;
+		public OrderService(IOrderManager orderManager,IOrderItemManager orderItemManager,ICartManager cartManager) { 
 			_orderManager = orderManager;
 			_orderItemManager = orderItemManager;
 			_cartManager = cartManager;
-			_productManager = productManager;
 		}
 		public void AddToUserCart(int userId,int productId,int quantity) {
 			Cart cart = new();

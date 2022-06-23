@@ -1,3 +1,6 @@
+using BabylonBazar.DAL;
+using BabylonBazar.DAL.DbImplementations;
+using BabylonBazar.DSL;
 using BabylonBazar.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,7 +17,21 @@ namespace BabylonBazar {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<DbManager>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
-                //.AddScoped<>()
+				.AddScoped<ICardInfoManager,CardInfoManager>()
+                .AddScoped<ICartManager,CartManager>()
+                .AddScoped<ICategoriesManager,CategoriesManager>()
+                .AddScoped<IImagesManager,ImagesManager>()
+                .AddScoped<ILocationManager,LocationManager>()
+                .AddScoped<INotificationsManager,NotificationsManager>()
+                .AddScoped<IOrderItemManager,OrderItemManager>()
+                .AddScoped<IOrderManager,OrderManager>()
+                .AddScoped<IProductCategoriesManager,ProductCategoriesManager>()
+                .AddScoped<IProductManager,ProductManager>()
+                .AddScoped<IReviewsManager,ReviewsManager>()
+                .AddScoped<IUserManager,UserManager>()
+                .AddScoped<OrderService>()
+                .AddScoped<ProductService>()
+                .AddScoped<UserService>()
                 .AddHttpContextAccessor()
                 .AddSession();
 //            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();

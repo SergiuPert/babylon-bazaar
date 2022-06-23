@@ -2,7 +2,7 @@
 
 namespace BabylonBazar.DAL
 {
-    public class CartManager:ICartManager;
+    public class CartManager:ICartManager
     {
         private readonly DbManager _dbManager;
         public CartManager(DbManager dbManager)

@@ -25,7 +25,7 @@ namespace BabylonBazar.DAL
         public CardInfo? GetById(int id)
         {
             Console.WriteLine("Naaah Brah");
-            CardInfo cardInfo = new CardInfo();
+            CardInfo cardInfo = new();
             return cardInfo;
         }
 

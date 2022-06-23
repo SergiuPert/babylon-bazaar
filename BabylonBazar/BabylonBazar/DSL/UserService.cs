@@ -8,23 +8,18 @@ namespace BabylonBazar.DSL
 {
     public class UserService
     {
-        private IUserManager _userManager;
-        private IProductManager _productManager;
-        private IOrderManager _orderManager;
-        private IOrderItemManager _orderItemManager;
-        private INotificationsManager _notificationsManager;
-        private ICardInfoManager _cardInfoManager;
-        private ILocationManager _locationManager;
+        private readonly IUserManager _userManager;
+        private readonly IOrderManager _orderManager;
+        private readonly INotificationsManager _notificationsManager;
+        private readonly ICardInfoManager _cardInfoManager;
+        private readonly ILocationManager _locationManager;
         private HttpContext _httpContext;
 
-        public UserService(IUserManager userManager, IProductManager productManager, 
-            IOrderManager orderManager, IOrderItemManager orderItemManager, 
+        public UserService(IUserManager userManager, IOrderManager orderManager, 
             INotificationsManager notificationsManager, ICardInfoManager cardInfoManager, ILocationManager locationManager, HttpContext httpContext)
         {
             _userManager = userManager;
-            _productManager = productManager;
             _orderManager = orderManager;
-            _orderItemManager = orderItemManager;
             _notificationsManager = notificationsManager;
             _cardInfoManager = cardInfoManager;
             _locationManager = locationManager;
@@ -33,7 +28,7 @@ namespace BabylonBazar.DSL
 
         public void Register(string username, string password, string email)
         {
-            Users user = new Users();
+            Users user = new();
             user.Name = username;
             user.Password = password;
             user.Email = email;
