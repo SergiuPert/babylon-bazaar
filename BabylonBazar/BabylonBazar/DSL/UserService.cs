@@ -13,16 +13,22 @@ namespace BabylonBazar.DSL
         private readonly INotificationsManager _notificationsManager;
         private readonly ICardInfoManager _cardInfoManager;
         private readonly ILocationManager _locationManager;
+        private readonly IOrderItemManager _orderItemManager;
+        private readonly IProductManager _productManager;
         private HttpContext _httpContext;
 
         public UserService(IUserManager userManager, IOrderManager orderManager, 
-            INotificationsManager notificationsManager, ICardInfoManager cardInfoManager, ILocationManager locationManager, HttpContext httpContext)
+            INotificationsManager notificationsManager, ICardInfoManager cardInfoManager, 
+            ILocationManager locationManager, IOrderItemManager orderItemManager,
+            IProductManager productManager, HttpContext httpContext)
         {
             _userManager = userManager;
             _orderManager = orderManager;
             _notificationsManager = notificationsManager;
             _cardInfoManager = cardInfoManager;
             _locationManager = locationManager;
+            _orderItemManager = orderItemManager;
+            _productManager = productManager;
             _httpContext = httpContext;
         }
 
@@ -64,7 +70,7 @@ namespace BabylonBazar.DSL
         {
             _userManager.Update(user);
         }
-        public List<Notifications> GetUSerNotifications(int userId)
+        public List<Notifications> GetUserNotifications(int userId)
         {
             return _notificationsManager.GetNotificationsByUser(userId).ToList();
         }
@@ -96,16 +102,37 @@ namespace BabylonBazar.DSL
         {
             Console.WriteLine("TOOOOOOOOO DOOOOOOOOOOOOO");
         }
-        public void UpdateUserBalance(int userId, int balance)
+        public void UpdateUserBalance(int userId, double balance)
         {
             Users? user = _userManager.GetById(userId);
             user.Balance += balance;
             _userManager.Update(user);
         }
+        public Location GetLocation(int id)
+        {
+            return _locationManager.GetById(id);
+        }
+        public List<Location> GetLocations(int userId)
+        {
+            return _locationManager.GetLocationsForUser(userId).ToList();
+        }
+        public CardInfo GetCard(int id)
+        {
+            return _cardInfoManager.GetById(id);
+        }
 
-
-
-
-
+        public List<CardInfo> GetCardsForUser(int userId)
+        {
+            return _cardInfoManager.GetCardsForUser(userId).ToList();
+        }
+        public void CompleteNotification(int id)
+        {
+            Notifications notification = _notificationsManager.GetById(id);
+            notification.Completed = true;
+            OrderItem orderItem = _orderItemManager.GetById(notification.OrderItemId);
+            Product product = _productManager.GetById(orderItem.ProductId);
+            _notificationsManager.Update(notification);
+            UpdateUserBalance(notification.UserId, product.Price * orderItem.Quantity);
+        }
     }
 }

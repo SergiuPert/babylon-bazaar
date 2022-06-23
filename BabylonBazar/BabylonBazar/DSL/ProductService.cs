@@ -61,5 +61,29 @@ namespace BabylonBazar.DSL {
 			}
 			return headers;
 		}
+		public List<ProductHeadersVM> GetProducts(int page)
+        {
+			List<ProductHeadersVM> headers = new();
+			List<Product> products = _productManager.GetFirstXProducts(page).ToList();
+			foreach (Product product in products)
+            {
+				ProductHeadersVM productHeaders = new();
+				productHeaders.product = product;
+				productHeaders.supplier = _userManager.GetById(product.UserId).Name;
+				productHeaders.image = _imagesManager.GetImagesForProduct(product.Id).ToList()[0];
+				productHeaders.rating = _reviewsManager.GetRatingForProduct(product.Id);
+				productHeaders.categories = _categoriesManager.GetCategoriesForProduct(product.Id).ToList();
+				headers.Add(productHeaders);
+			}
+			return headers;
+        }
+		public void Update(Product product)
+        {
+			_productManager.Update(product);
+        }
+		public Product GetProductById(int id)
+        {
+			return _productManager.GetById(id);
+        }
 	}
 }

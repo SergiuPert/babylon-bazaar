@@ -34,6 +34,9 @@ namespace BabylonBazar.DAL
                 _dbManager.SaveChanges();
             }
         }
-
+        public IEnumerable<OrderItem> GetOrderItemsForOrder(int orderId)
+        {
+            return _dbManager.OrderItem.Where(o => o.OrderId == orderId);
+        }
     }
 }

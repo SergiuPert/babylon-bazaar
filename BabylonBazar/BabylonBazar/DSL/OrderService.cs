@@ -6,10 +6,15 @@ namespace BabylonBazar.DSL {
 		private readonly IOrderManager _orderManager;
 		private readonly IOrderItemManager _orderItemManager;
 		private readonly ICartManager _cartManager;
-		public OrderService(IOrderManager orderManager,IOrderItemManager orderItemManager,ICartManager cartManager) { 
+		private readonly INotificationsManager _notificationsManager;
+		private readonly IProductManager _productManager;
+		public OrderService(IOrderManager orderManager,IOrderItemManager orderItemManager,ICartManager cartManager, 
+			INotificationsManager notificationsManager, IProductManager productManager) { 
 			_orderManager = orderManager;
 			_orderItemManager = orderItemManager;
 			_cartManager = cartManager;
+			_notificationsManager = notificationsManager;
+			_productManager = productManager;
 		}
 		public void AddToUserCart(int userId,int productId,int quantity) {
 			Cart cart = new();
@@ -24,7 +29,7 @@ namespace BabylonBazar.DSL {
 		public List<Cart> GetUserCart(int userId) { 
 			return _cartManager.GetCartItemsForUser(userId).ToList();
 		}
-		public void ProcessUserOrder(int userId) { 
+		public int ProcessUserOrder(int userId) { 
 			List<Cart> carts = GetUserCart(userId);
 			Order order = new();
 			order.UserId = userId;
@@ -41,6 +46,47 @@ namespace BabylonBazar.DSL {
 			foreach(Cart cart in carts) {
 				_cartManager.Remove(cart);
 			}
+			return order.Id;
+		}
+		public OrderItem GetOrderItem(int Id)
+        {
+			return _orderItemManager.GetById(Id);
+        }
+		public List<Order> GetOrdersForUser(int userId)
+        {
+			return _orderManager.GetAllOrdersForUser(userId).ToList();
+        }
+
+		public List<OrderItem> GetOrderItems(int orderId)
+        {
+			return _orderItemManager.GetOrderItemsForOrder(orderId).ToList();
+        }
+		public Cart GetCartById(int id)
+        {
+			return _cartManager.GetById(id);
+        }
+		public void SendNotifications(int orderId, int locationId)
+        {
+			List<OrderItem> items = _orderItemManager.GetOrderItemsForOrder(orderId).ToList();
+			foreach(OrderItem item in items)
+            {
+				Notifications notification = new Notifications();
+				notification.UserId = _orderManager.GetById(orderId).UserId;
+				notification.OrderItemId = item.Id;
+				notification.LocationId = locationId;
+				_notificationsManager.Add(notification);
+            }
+        }
+		public double GetTotalOrderCost(int userId)
+        {
+			double total = 0;
+			List<Cart> cart = _cartManager.GetCartItemsForUser(userId).ToList();
+			foreach (Cart cartItem in cart)
+            {
+				Product product = _productManager.GetById(cartItem.ProductId);
+				total += product.Price * cartItem.Quantity;
+            }
+			return total;
 		}
 	}
 }

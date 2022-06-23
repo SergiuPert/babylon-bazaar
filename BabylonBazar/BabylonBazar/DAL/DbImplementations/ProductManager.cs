@@ -51,6 +51,10 @@ namespace BabylonBazar.DAL
             _dbManager.Products.Update(existing);
             _dbManager.SaveChanges();
         }
-
+        public IEnumerable<Product> GetFirstXProducts(int page)
+        {
+            int productsPerPage = 10;
+            return _dbManager.Products.Skip(page*productsPerPage).Take(productsPerPage);
+        }
     }
 }
