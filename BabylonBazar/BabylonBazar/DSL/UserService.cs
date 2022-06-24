@@ -15,12 +15,12 @@ namespace BabylonBazar.DSL
         private readonly ILocationManager _locationManager;
         private readonly IOrderItemManager _orderItemManager;
         private readonly IProductManager _productManager;
-        private HttpContext _httpContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserService(IUserManager userManager, IOrderManager orderManager, 
             INotificationsManager notificationsManager, ICardInfoManager cardInfoManager, 
             ILocationManager locationManager, IOrderItemManager orderItemManager,
-            IProductManager productManager, HttpContext httpContext)
+            IProductManager productManager,IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _orderManager = orderManager;
@@ -29,7 +29,7 @@ namespace BabylonBazar.DSL
             _locationManager = locationManager;
             _orderItemManager = orderItemManager;
             _productManager = productManager;
-            _httpContext = httpContext;
+            _httpContextAccessor=httpContextAccessor;
         }
 
         public void Register(string username, string password, string email)
@@ -47,7 +47,7 @@ namespace BabylonBazar.DSL
             Users? user = _userManager.Login(name, password);
             if (user is not null)
             {
-                _httpContext.Session.Set("user", Encoding.ASCII.GetBytes($"{user.Id}"));
+                _httpContextAccessor.HttpContext.Session.Set("user", Encoding.ASCII.GetBytes($"{user.Id}"));
                 return user.Id;
             }
             return -1;
@@ -59,7 +59,7 @@ namespace BabylonBazar.DSL
         }
         public void Logout()
         {
-            _httpContext.Session.Remove("user");
+            _httpContextAccessor.HttpContext.Session.Remove("user");
         }
 
         public Users? Get(int userId)

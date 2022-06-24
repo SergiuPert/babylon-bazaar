@@ -11,17 +11,17 @@ namespace BabylonBazar.Controllers
         private OrderService _orderService;
         private ProductService _productService;
         private UserService _userService;
-        private HttpContext _httpContext;
-        public OrderController(OrderService orderService, ProductService productService, UserService userService, HttpContext httpContext)
+        private IHttpContextAccessor _contextAccessor;
+        public OrderController(OrderService orderService, ProductService productService, UserService userService, IHttpContextAccessor httpContextAccessor)
         {
             _orderService = orderService;
             _productService = productService;
-            _httpContext = httpContext;
+            _contextAccessor = httpContextAccessor;
             _userService = userService;
         }
         public IActionResult Cart()
         {
-            byte[] userByte = _httpContext.Session.Get("user");
+            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
             int userId = int.Parse(Encoding.ASCII.GetString(userByte));
             CartVM cartVM = new CartVM();
             Users user = _userService.Get(userId);
@@ -41,7 +41,7 @@ namespace BabylonBazar.Controllers
         [HttpPost]
         public IActionResult AddToCart(int productId)
         {
-            byte[] userByte = _httpContext.Session.Get("user");
+            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
             int userId = int.Parse(Encoding.ASCII.GetString(userByte));
             _orderService.AddToUserCart(userId, productId, 1);
             return View();
@@ -56,7 +56,7 @@ namespace BabylonBazar.Controllers
         [HttpGet]
         public IActionResult Checkout()
         {
-            byte[] userByte = _httpContext.Session.Get("user");
+            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
             int userId = int.Parse(Encoding.ASCII.GetString(userByte));
             List<Location> locations = _userService.GetLocations(userId);
             return View(locations);
@@ -64,7 +64,7 @@ namespace BabylonBazar.Controllers
         [HttpPost]
         public IActionResult Checkout(int locationId)
         {
-            byte[] userByte = _httpContext.Session.Get("user");
+            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
             int userId = int.Parse(Encoding.ASCII.GetString(userByte));
             double totalCost = _orderService.GetTotalOrderCost(userId);
             int orderId = _orderService.ProcessUserOrder(userId);
