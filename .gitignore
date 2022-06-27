@@ -2,6 +2,30 @@ BabylonBazar/BabylonBazar/src/bin/
 BabylonBazar/BabylonBazar/src/obj/
 BabylonBazar/.vs/
 
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+babylonbazarfrontend/node_modules
+babylonbazarfrontend/.pnp
+babylonbazarfrontend/.pnp.js
+
+# testing
+babylonbazarfrontend/coverage
+
+# production
+babylonbazarfrontend/build
+
+# misc
+babylonbazarfrontend/.DS_Store
+babylonbazarfrontend/.env.local
+babylonbazarfrontend/.env.development.local
+babylonbazarfrontend/.env.test.local
+babylonbazarfrontend/.env.production.local
+
+babylonbazarfrontend/npm-debug.log*
+babylonbazarfrontend/yarn-debug.log*
+babylonbazarfrontend/yarn-error.log*
+	
 # Created by https://www.gitignore.io/api/visualstudio,jetbrains+all,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudio,jetbrains+all,visualstudiocode
 
