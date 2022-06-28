@@ -43,12 +43,12 @@ class SideBar extends React.Component {
     }
     render() {
         return (
-            <div >
+            <div>
                 <Categories msg={this.SetCategory(this.state)} />
                 <Filter msg={this.SetFilterSupplier(this.state)} />
                 <Filter msg={this.SetFilterRating(this.state)} />
                 <Filter msg={this.SetFilterPrice(this.state)} />
-                <DropDown msg={this.SetSorting(this.state)}/>
+                {/*<DropDown msg={this.SetSorting(this.state)}/>*/}
             </div>
         );
     }

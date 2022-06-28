@@ -4,9 +4,25 @@ class DropDown extends React.Component {
     constructor(props) {
         super(props);
     }
+    
+
     render() {
+        console.log(this.props.names)
+        let aaa = ["aaa", "abb", "ccc"];
+        const result = [];
+
         return (
-            <span>{this.props.msg}</span>
+            <div>
+            <select>
+                    {
+                this.props.names?.map(item => {
+                        <option>{item}</option>
+                    }
+                    )};
+                    {result}
+                </select>
+            </div>
+            /*<span>{this.props.msg}</span>*/
         );
     }
 }
