@@ -5,7 +5,7 @@
 const Button = (props) => {
     return (
         <div>
-            <button>{props.text}</button>
+            <button onClick={() => props.link(props.categoryId)}>{props.text}</button>
         </div>
     );
 }

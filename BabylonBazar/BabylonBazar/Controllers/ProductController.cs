@@ -1,7 +1,9 @@
 ﻿using BabylonBazar.DSL;
 using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BabylonBazar.Controllers {
 	public class ProductController:Controller {
@@ -51,5 +53,10 @@ namespace BabylonBazar.Controllers {
         {
 			throw new NotImplementedException();
         }
+		//[EnableCors("Policy")]
+		public JsonResult GetMainCategories()
+        {
+			return Json(_productService.GetMainCategories());
+        } 
 	}
 }

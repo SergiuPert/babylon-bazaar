@@ -1,3 +1,4 @@
+import Button from "./Button";
 import SubSubCategories from "./SubSubCategories"
 
 
@@ -32,6 +33,7 @@ const SubCategories = (props) => {
         subSubCategories = subCategories.map(subCategory =>
             <>
                 <h4>{subCategory.name}</h4>
+                <Button categoryId={subCategory.id} link={props.changeSubCategoryId} text={subCategory.name} />
                 <SubSubCategories currentSubCategoryId={currentSubCategoryId} parentSubCategoryId={subCategory.id} />
             </>
         )
