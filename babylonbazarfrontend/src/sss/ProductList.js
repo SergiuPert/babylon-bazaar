@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Button from "../components/Button";
+import Button from "./Button";
 import ProductAddForm from "./ProductAddForm";
 import ProductCard from "./ProductCard";
 
@@ -10,13 +10,13 @@ import ProductCard from "./ProductCard";
 const ProductList = (props) => {
     const [showForm, setShowForm] = useState(false)
     let [productModels, setProductModels] = useState([])
-    useEffect(() => {
-        fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}`, { method: "GET", })
-            .then(response => { console.log(response); JSON.parse(response).json() })
-            .then((response) => { console.log(response); setProductModels(response) })////////to work on
-    }, [])
-    console.log()
-    console.log(productModels)
+    //useEffect(() => {
+    //    fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}`, { method: "GET", })
+    //        .then(response => response.json())
+    //        .then((response) => { setProductModels(response) })////////to work ss
+    //}, [])
+
+    console.log(props.productModels)
     //const [productModels, setProductModels] = useState([
     //    {
     //        product:
@@ -148,7 +148,7 @@ const ProductList = (props) => {
     return (
         <div>
             {showForm && <ProductAddForm add={add} />}
-            {!showForm && productModels.map(productModel =>
+            {!showForm && props.productModels.map(productModel =>
                         <ProductCard productModel={productModel} />
                     )
             }
