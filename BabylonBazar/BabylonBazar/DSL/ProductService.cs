@@ -37,11 +37,13 @@ namespace BabylonBazar.DSL {
 			List<Product> products = new();
 			foreach(int productId in productIds) { products.Add(_productManager.GetById(productId)); }
 			foreach(Product product in products) {
+				List<Images> ProductImages=_imagesManager.GetImagesForProduct(product.Id).ToList();
+				Images defaultImage = new() {Name="default",ProductId=0};
 			ProductHeadersVM productHeaders = new();
 				productHeaders.product=product;
 				productHeaders.supplier=_userManager.GetById(product.UserId).Name;
-                productHeaders.image = _imagesManager.GetImagesForProduct(product.Id).ToList()[0];
-                productHeaders.rating=_reviewsManager.GetRatingForProduct(product.Id);
+				productHeaders.image=(ProductImages.Count==0)?defaultImage:ProductImages[0];
+				productHeaders.rating=_reviewsManager.GetRatingForProduct(product.Id);
 				productHeaders.categories=_categoriesManager.GetCategoriesForProduct(product.Id).ToList();
 				headers.Add(productHeaders);
 			}

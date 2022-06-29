@@ -50,7 +50,7 @@ namespace BabylonBazar.DAL
 
         public double GetRatingForProduct(int productId) {
             List<Reviews> ratings=_dbManager.Reviews.Where(r => r.ProductId==productId).ToList();
-            return ratings.Average(r => r.Rating);
+            return (ratings.Count==0)?0:ratings.Average(r => r.Rating);
         }
 
     }
