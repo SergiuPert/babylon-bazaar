@@ -7,38 +7,16 @@ import { useEffect, useState } from 'react'
 
 
 const Categories = (props) => {
-    //let [thing, setThing] = useState([])
-    //useEffect(() => {
-    //    fetch(`https://localhost:7136/Product/GetMainCategories`, { method: "GET", })
-    //        .then(response => response.json())
-    //        .then((response) => { setThing(response) })
-    //    },[])
+    let [categories, setCategories] = useState([])
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetCategoriesGroup`, { method: "GET", })
+            .then(response => response.json())
+            .then((response) => { setCategories(response) })
+        },[])
 
-    //console.log(thing)
     let [currentCategoryId, setCurrentCategoryId] = useState(0)
     let [currentSubCategoryId, setCurrentSubCategoryId] = useState(0)
-    const categories = [
-        {
-            id: 1,
-            parentId: null,
-            name: "Electronics"
-        },
-        {
-            id: 2,
-            parentId: null,
-            name: "Cars"
-        },
-        {
-            id: 3,
-            parentId: null,
-            name: "Household"
-        },
-        {
-            id: 4,
-            parentId: null,
-            name: "Pet"
-        }
-    ]
+    
     const changeCurrentCategoryId = (id) => {
         setCurrentCategoryId(id)
         setCurrentSubCategoryId(0)
@@ -53,7 +31,7 @@ const Categories = (props) => {
                 <>
                     <h2>{category.name}</h2>
                     <Button categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
-                    <SubCategories parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} />
+                    <SubCategories changeCategory={props.changeCategory} parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} />
                 </>
                 )}
         </div>

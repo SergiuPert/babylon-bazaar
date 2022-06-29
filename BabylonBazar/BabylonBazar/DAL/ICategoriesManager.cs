@@ -5,6 +5,6 @@ namespace BabylonBazar.DAL
     public interface ICategoriesManager: IBaseManagerWithUpdate<Categories>
     {
         IEnumerable<Categories>GetCategoriesForProduct(int productId);
-        IEnumerable<Categories> GetMainCategories();
+        IEnumerable<Categories> GetCategoriesGroup(int id);
     }
 }

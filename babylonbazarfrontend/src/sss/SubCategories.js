@@ -1,30 +1,37 @@
 import Button from "./Button";
 import SubSubCategories from "./SubSubCategories"
+import { useEffect, useState } from 'react'
 
 
 const SubCategories = (props) => {
-    const subCategories = [
-        {
-            id: 10,
-            parentId: 1,
-            name: "PC"
-        },
-        {
-            id: 21,
-            parentId: 1,
-            name: "Kitchen"
-        },
-        {
-            id: 30,
-            parentId: 1,
-            name: "Sport Cars"
-        },
-        {
-            id: 40,
-            parentId: 1,
-            name: "Kitchen Supplies"
-        }
-    ]
+    let [subCategories, setSubCategories] = useState([])
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetCategoriesGroup/${props.parentId}`, { method: "GET", })
+            .then(response => response.json())
+            .then((response) => { setSubCategories(response) })
+    }, [])
+    //const subCategories = [
+    //    {
+    //        id: 10,
+    //        parentId: 1,
+    //        name: "PC"
+    //    },
+    //    {
+    //        id: 21,
+    //        parentId: 1,
+    //        name: "Kitchen"
+    //    },
+    //    {
+    //        id: 30,
+    //        parentId: 1,
+    //        name: "Sport Cars"
+    //    },
+    //    {
+    //        id: 40,
+    //        parentId: 1,
+    //        name: "Kitchen Supplies"
+    //    }
+    //]
 
 
     let currentSubCategoryId = props.currentSubCategoryId;
@@ -34,7 +41,7 @@ const SubCategories = (props) => {
             <>
                 <h4>{subCategory.name}</h4>
                 <Button categoryId={subCategory.id} link={props.changeSubCategoryId} text={subCategory.name} />
-                <SubSubCategories currentSubCategoryId={currentSubCategoryId} parentSubCategoryId={subCategory.id} />
+                <SubSubCategories changeCategory={props.changeCategory} parentId={subCategory.id} currentSubCategoryId={currentSubCategoryId} parentSubCategoryId={subCategory.id} />
             </>
         )
     }

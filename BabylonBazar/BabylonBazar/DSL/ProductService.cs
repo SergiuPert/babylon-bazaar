@@ -85,9 +85,9 @@ namespace BabylonBazar.DSL {
         {
 			return _productManager.GetById(id);
         }
-		public List<Categories> GetMainCategories()
+		public List<Categories> GetCategoriesGroup(int id)
         {
-			return _categoriesManager.GetMainCategories().ToList();
+			return _categoriesManager.GetCategoriesGroup(id).ToList();
         }
 	}
 }

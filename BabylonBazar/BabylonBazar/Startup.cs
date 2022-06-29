@@ -32,13 +32,16 @@ namespace BabylonBazar {
                 .AddScoped<OrderService>()
                 .AddScoped<ProductService>()
                 .AddScoped<UserService>()
-                //.AddCors(options => {
-                //    options.AddPolicy(name: "Policy",
-                //        builder => {
-                //            builder.WithOrigins("http://localhost:44344").AllowAnyHeader().AllowAnyMethod();
-                //        }
-                //        );
-                //})
+                .AddCors(options =>
+                {
+                    options.AddPolicy(name: "Policy",
+                        builder =>
+                        {
+                            //builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                            builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
+                        }
+                        );
+                })
                 .AddHttpContextAccessor()
                 .AddSession();
 //            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
@@ -52,7 +55,7 @@ namespace BabylonBazar {
                 .UseStaticFiles()
                 .UseSession()
                 .UseRouting()
-                //.UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); })
+                .UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); })
                 //.UseAuthentication()
                 //.UseAuthorization()
                 .UseEndpoints(endpoints => {

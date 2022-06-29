@@ -47,9 +47,9 @@ namespace BabylonBazar.DAL
             List<int> categoryIDs = categories.Select(c => c.CategoryId).ToList();
             return _dbManager.Categories.Where(c=> categoryIDs.Contains(c.Id));
         }
-        public IEnumerable<Categories> GetMainCategories()
+        public IEnumerable<Categories> GetCategoriesGroup(int id)
         {
-            return _dbManager.Categories.Where(c => c.ParentId == 0);
+            return _dbManager.Categories.Where(c => c.ParentId == id);
         }
     }
 }

@@ -7,7 +7,6 @@
 
 
 const ProductCard = (props) => {
-    console.log(props.productModel)
     return (
         <div style={{ borderStyle: "solid", borderColor: "black" }}>
             <h1>Name: {props.productModel.product.Name}</h1>

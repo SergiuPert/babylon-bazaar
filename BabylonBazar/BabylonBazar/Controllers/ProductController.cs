@@ -22,13 +22,13 @@ namespace BabylonBazar.Controllers {
 		public IActionResult FilterByCategory(int id)
 		{
 			List <ProductHeadersVM> products = _productService.GetProductHeadersForCategory(id);
-			return View(products);
+			return Json(products);
 		}
 
 		public IActionResult ProductDetails(int id)
         {
 			ProductDetailsVM product = _productService.GetProductDetails(id);
-			return View(product);
+			return Json(product);
         }
 
 		public IActionResult FilterBySupplier(int id)
@@ -53,10 +53,10 @@ namespace BabylonBazar.Controllers {
         {
 			throw new NotImplementedException();
         }
-		//[EnableCors("Policy")]
-		public JsonResult GetMainCategories()
+        [EnableCors("Policy")]
+        public JsonResult GetCategoriesGroup(int id=0)
         {
-			return Json(_productService.GetMainCategories());
+			return Json(_productService.GetCategoriesGroup(id));
         } 
 	}
 }

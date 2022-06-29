@@ -1,17 +1,21 @@
-import ProductList from "./ProductList"
-import Sidebar from "./Sidebar"
+import { useEffect, useState } from 'react'
+import MainPage from './MainPage';
+
+const Content = () => {
+    let [page, setPage] = useState("Main page")
+    let result = ``;
+    switch (page) {
+        case "Main page":
+            result = <MainPage />
+            break;
+        default:
+            result = <MainPage />
+    }
 
 
-
-
-
-
-
-const Content = (props) => {
     return (
-        <div style={{ display: "flex" }}>
-            <Sidebar />
-            <ProductList />
+        <div>
+            {result}
         </div>
     );
 }
