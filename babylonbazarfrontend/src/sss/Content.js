@@ -11,7 +11,7 @@ const Content = (props) => {
     return (
         <div style={{ display: "flex" }}>
             <Sidebar />
-            {/*<ProductList />*/}
+            <ProductList />
         </div>
     );
 }

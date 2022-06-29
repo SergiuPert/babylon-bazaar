@@ -32,6 +32,13 @@ namespace BabylonBazar {
                 .AddScoped<OrderService>()
                 .AddScoped<ProductService>()
                 .AddScoped<UserService>()
+                //.AddCors(options => {
+                //    options.AddPolicy(name: "Policy",
+                //        builder => {
+                //            builder.WithOrigins("http://localhost:44344").AllowAnyHeader().AllowAnyMethod();
+                //        }
+                //        );
+                //})
                 .AddHttpContextAccessor()
                 .AddSession();
 //            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
@@ -45,8 +52,9 @@ namespace BabylonBazar {
                 .UseStaticFiles()
                 .UseSession()
                 .UseRouting()
-                .UseAuthentication()
-                .UseAuthorization()
+                //.UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); })
+                //.UseAuthentication()
+                //.UseAuthorization()
                 .UseEndpoints(endpoints => {
                     endpoints.MapControllerRoute(
                         name: "default",
