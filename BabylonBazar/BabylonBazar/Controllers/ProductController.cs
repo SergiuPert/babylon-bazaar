@@ -19,13 +19,16 @@ namespace BabylonBazar.Controllers {
 			return View(products);
 		}
 
-		public IActionResult FilterByCategory(int id)
+		[EnableCors("Policy")]
+		public JsonResult FilterByCategory(int id)
 		{
 			List <ProductHeadersVM> products = _productService.GetProductHeadersForCategory(id);
-			return Json(products);
+			string productsJson = JsonConvert.SerializeObject(products);
+			return Json(productsJson);
 		}
 
-		public IActionResult ProductDetails(int id)
+		[EnableCors("Policy")]
+		public JsonResult ProductDetails(int id)
         {
 			ProductDetailsVM product = _productService.GetProductDetails(id);
 			return Json(product);

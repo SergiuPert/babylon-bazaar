@@ -12,9 +12,10 @@ const ProductList = (props) => {
     let [productModels, setProductModels] = useState([])
     useEffect(() => {
         fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}`, { method: "GET", })
-            .then(response => response.json())
-            .then((response) => { setProductModels(response) })////////to work on
+            .then(response => { console.log(response); JSON.parse(response).json() })
+            .then((response) => { console.log(response); setProductModels(response) })////////to work on
     }, [])
+    console.log()
     console.log(productModels)
     //const [productModels, setProductModels] = useState([
     //    {
