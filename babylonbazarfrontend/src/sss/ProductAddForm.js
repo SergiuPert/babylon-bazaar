@@ -1,31 +1,39 @@
 //import ComponentName from "./ComponentName.js";
+// need a way to pass categories to select from...
 
-import { useState } from "react";
+import { useEffect, useState } from 'react'
 
-const ProductForm = (props) => {
+const ProductAddForm = (props) => {
 	let [pname, setName] = useState("Write name here");
 	let [pdesc, setDesc] = useState("Write description here");
 	let [pprice, setPrice] = useState("Write price here");
 	let [prating, setRating] = useState("Write rating here");
 	let [pimage, setImage] = useState("Write image name here");
+	let [psupplier, setSupplier] = useState("Write supplier name here");
 	let [show, Hide] = useState("Show");
 	const setName = (newName) => { pname = newName; }
 	const setDesc = (newDesc) => { pdesc = newDesc; }
 	const setPrice = (newPrice) => { pprice = newPrice; }
 	const setRating = (newRating) => { prating = newRating; }
 	const setImage = (newImage) => { pimage = newImage; }
+	const setSupplier = (newSupplier) => { psupplier = newSupplier; }
 	const Hide = () => { show = "Hide"; }
+	const Show = () => {
+		show = "Show";
+	}
 	const retProduct = () => {
 		let product = {
 			name: { pname },
 			description: { pdesc },
 			price: { pprice },
 			rating: { prating },
-			image: { pimage }
+			image: { pimage },
+			supplier: { psupplier}
 		};
 		Hide();
 		return this.props.add(product);
 	};
+	useEffect(Show);
 	let content = () => {
 		return (
 			<div class="form">
@@ -37,8 +45,10 @@ const ProductForm = (props) => {
 					<input type="text" name="pprice" value={pprice} oninput={setPrice(this.value)} />
 				</label> <br /> <br /><label> Rating: <br />
 					<input type="text" name="prating" value={prating} oninput={setRating(this.value)} />
-				</label><label> Image: <br />
+				</label> <br /> <br /><label> Image: <br />
 					<input type="text" name="pimage" value={pimage} oninput={setImage(this.value)} />
+				</label> <br /> <br /><label> Rating: <br />
+					<input type="text" name="psupplier" value={psupplier} oninput={setSupplier(this.value)} />
 				</label> <br /> <br />
 				<input type="button" onclick={retProduct} />
 			</div>
@@ -49,4 +59,4 @@ const ProductForm = (props) => {
 	return (result);
 }
 
-export default ProductForm;
+export default ProductAddForm;
