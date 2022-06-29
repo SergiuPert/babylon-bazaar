@@ -19,13 +19,13 @@ namespace BabylonBazar.Controllers {
 			return View(products);
 		}
 
-		public IActionResult FilterByCategory(int id)
+		public JsonResult FilterByCategory(int id)
 		{
 			List <ProductHeadersVM> products = _productService.GetProductHeadersForCategory(id);
 			return Json(products);
 		}
 
-		public IActionResult ProductDetails(int id)
+		public JsonResult ProductDetails(int id)
         {
 			ProductDetailsVM product = _productService.GetProductDetails(id);
 			return Json(product);
