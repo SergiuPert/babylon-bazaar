@@ -41,7 +41,7 @@ const SubSubCategories = (props) => {
             )
     }
     return (
-        <div>
+        <div className="SubSubCategories">
             {result}
         </div>
     );

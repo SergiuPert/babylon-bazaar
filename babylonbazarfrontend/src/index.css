@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+body {
+
+}
+
+button {
+    border: none;
+    background: none;
+    position: relative;
+    align-content: center;
+    top: 50%;
+    left: 50%;
+}
+
+.SubSubCategories {
+    background-image: url('/images/VerticalScroll1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    background-position: center;
+}
+
+
