@@ -1,5 +1,5 @@
 import ProductList from "./ProductList"
-import Sidebar from "./Sidebar"
+import Sidebar from "./SideBar"
 import { useEffect, useState } from 'react'
 
 

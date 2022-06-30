@@ -8,7 +8,7 @@
 
 const ProductCard = (props) => {
     return (
-        <div style={{ borderStyle: "solid", borderColor: "black" }}>
+        <div className="ProductCard">
             <h1>Name: {props.productModel.product.name}</h1>
             <h2>Price: {props.productModel.product.price}</h2>
             <h4>Description: {props.productModel.product.description}</h4>
@@ -18,7 +18,7 @@ const ProductCard = (props) => {
             <div style={{ display: "flex" }}>
                 <h3>Categories: </h3>
                 {props.productModel.categories.map(category =>
-                    <h3>{category.name}, </h3>
+                    <h3>{category.name} </h3>
                     )}
             </div>
         </div>

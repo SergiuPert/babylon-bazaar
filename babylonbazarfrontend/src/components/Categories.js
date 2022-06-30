@@ -24,13 +24,13 @@ const Categories = (props) => {
     const changeSubCategoryId = (id) => {
         setCurrentSubCategoryId(id)
     }
+//                    <h2>{category.name}</h2>
 
     return (
         <div>
             {categories.map(category =>
                 <>
-                    <h2>{category.name}</h2>
-                    <Button categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
+                    <Button class="CategoriesHeaderButton" categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
                     <SubCategories changeCategory={props.changeCategory} parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} />
                 </>
                 )}

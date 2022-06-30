@@ -15,7 +15,6 @@ const ProductList = (props) => {
             .then(response => response.json())
             .then((response) => { setProductModels(response) })////////to work ss
     })
-
     const add = (product) => {
         const id = productModels.length
         let newProduct =
@@ -29,7 +28,7 @@ const ProductList = (props) => {
                 Description: product.description,
                 Approved: true
             },
-            rating: 0,
+            rating: product.rating,
             supplier: product.supplier,
             image:
             {
@@ -54,14 +53,14 @@ const ProductList = (props) => {
     const activateForm = () => {
         setShowForm(!showForm)
     }
+//            {!showForm && <Button link={activateForm} text="Add Product" />}
     return (
         <div>
             {showForm && <ProductAddForm add={add} />}
             {!showForm && productModels.map(productModel =>
-                        <ProductCard productModel={productModel} />
+                <ProductCard productModel={productModel} />
                     )
             }
-            {!showForm && <Button link={activateForm} text="Add Product" />}
         </div>
     );
 }
