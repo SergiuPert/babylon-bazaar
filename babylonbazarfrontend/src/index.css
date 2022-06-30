@@ -8,6 +8,57 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.ProductCard {
+    border-style: solid;
+    border-color: black;
+    background-color: burlywood;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.CategoriesHeaderButton {
+    border-style: double;
+    border-color: black;
+    border-end-end-radius: 3px;
+    border-end-start-radius: 3px;
+    background-color: crimson;
+    font-weight: bold;
+    font-size: larger;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+
+.SubCategoryButton {
+    border-style: solid;
+    border-color: black;
+    border-end-end-radius: 3px;
+    border-end-start-radius: 3px;
+    background-color: crimson;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.SubSubCategoryButton {
+    border-style: dashed;
+    border-color: black;
+    border-end-end-radius: 3px;
+    border-end-start-radius: 3px;
+    background-color: crimson;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.Categories {
+    padding: 20px;
+    background-color: darkseagreen;
+    border-style: solid;
+    border-color: black;
+}
+
+.SubCategories {
+    background-color: darkgoldenrod;
 }

@@ -37,11 +37,11 @@ const SubSubCategories = (props) => {
     let result;
     if (props.currentSubCategoryId === props.parentSubCategoryId) {
         result = subSubCategories.map(category =>
-            <Button categoryId={category.id} link={props.changeCategory} text={category.name} />
+            <Button class="SubSubCategoryButton" categoryId={category.id} link={props.changeCategory} text={category.name} />
             )
     }
     return (
-        <div>
+        <div className="SubCategories">
             {result}
         </div>
     );

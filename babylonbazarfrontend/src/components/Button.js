@@ -5,7 +5,7 @@
 const Button = (props) => {
     return (
         <div>
-            <button onClick={() => props.link(props.categoryId)}>{props.text}</button>
+            <button className={props.class} onClick={() => props.link(props.categoryId)}>{props.text}</button>
         </div>
     );
 }

@@ -7,7 +7,7 @@ import Categories from "./Categories"
 const Sidebar = (props) => {
     
     return (
-        <div>
+        <div className="Categories">
             <h1>Categories</h1>
             <Categories changeCategory={props.changeCategory} />
             {/*<Filter msg={this.SetFilterSupplier(this.state)} />*/}
