@@ -1,45 +1,41 @@
-import React from 'react';
-import Button from './Button';
-import DropDown from './DropDown';
-import Info from './Info';
+import SubCategories from "./SubCategories";
+import Button from "./Button"
+import { useEffect, useState } from 'react'
+//import axios from "axios"
 
-class Categories extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        const categories = [
-                {
-                    id: 1,
-                    parentId: null,
-                    name: "Electronics"
-                },
-                {
-                    id: 2,
-                    parentId: 1,
-                    name: "PC"
-                },
-                {
-                    id: 3,
-                    parentId: 2,
-                    name: "Laptop"
-                },
-                {
-                    id: 4,
-                    parentId: 2,
-                    name: "Desktop"
-                }
-        ]
-        const names = ["aaa", "abb", "ccc"]
-        return (
-            //<span>{this.props.msg}</span>
-            <div>
 
-                <Button link="" text={categories[0].name} />
-                <Info msg={categories[1].name} />
-                <DropDown names={names} />
-            </div>
-        );
+
+
+const Categories = (props) => {
+    let [categories, setCategories] = useState([])
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetCategoriesGroup`, { method: "GET", })
+            .then(response => response.json())
+            .then((response) => { setCategories(response) })
+        },[])
+
+    let [currentCategoryId, setCurrentCategoryId] = useState(0)
+    let [currentSubCategoryId, setCurrentSubCategoryId] = useState(0)
+    
+    const changeCurrentCategoryId = (id) => {
+        setCurrentCategoryId(id)
+        setCurrentSubCategoryId(0)
     }
+    const changeSubCategoryId = (id) => {
+        setCurrentSubCategoryId(id)
+    }
+
+    return (
+        <div>
+            {categories.map(category =>
+                <>
+                    <h2>{category.name}</h2>
+                    <Button categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
+                    <SubCategories changeCategory={props.changeCategory} parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} />
+                </>
+                )}
+        </div>
+    );
 }
+
 export default Categories;

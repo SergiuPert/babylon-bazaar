@@ -1,32 +1,23 @@
-import React from 'react';
-import HomePage from './HomePage.js'
+import { useEffect, useState } from 'react'
+import MainPage from './MainPage';
 
-class Content extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { activePage: "HomePage" };
-        this.setPage = this.setPage.bind(this);
+const Content = () => {
+    let [page, setPage] = useState("Main page")
+    let result = ``;
+    switch (page) {
+        case "Main page":
+            result = <MainPage />
+            break;
+        default:
+            result = <MainPage />
     }
-    componentDidMount() {
-    }
-    componentWillUnmount() {
-    }
-    setPage() {
-        this.setState(() => ({ activePage: this.props.showPage }));
-    }
-    render() {
-        return (
-            < div >
-            {this.state.activePage=="HomePage" && <HomePage />}
-            {/*    <ProductPage />*/}
-            {/*    <UserPage />*/}
-            {/*    <UserCart />*/}
-            {/*    <AdminPage />*/}
-            {/*    <AboutPage />*/}
-            {/*    <PrivacyPage />*/}
-            {/*    <ContactPage />*/}
-            </div>
-        );
-    }
+
+
+    return (
+        <div>
+            {result}
+        </div>
+    );
 }
+
 export default Content;

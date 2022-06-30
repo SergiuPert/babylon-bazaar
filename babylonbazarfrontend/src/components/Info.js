@@ -1,13 +1,13 @@
-import React from 'react';
 
-class Info extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <span>{this.props.msg}</span>
-        );
-    }
+
+
+
+const Info = (props) => {
+    return (
+        <div>
+            <span>{props.text}</span>
+        </div>
+    );
 }
+
 export default Info;

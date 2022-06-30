@@ -1,13 +1,13 @@
-import React from 'react';
 
-class Button extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <button onClick={this.props.link}>{this.props.text}</button>
-        );
-    }
+
+
+
+const Button = (props) => {
+    return (
+        <div>
+            <button onClick={() => props.link(props.categoryId)}>{props.text}</button>
+        </div>
+    );
 }
+
 export default Button;

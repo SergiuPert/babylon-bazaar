@@ -1,40 +1,30 @@
-import React from 'react';
-import Button from './Button.js'
-import Info from './Info.js'
+import Button from "./Button"
+import Info from "./Info"
+import { useEffect, useState } from 'react'
 
-class NavBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { msg: "", LoggedIn:"none" };
-    }
-    componentDidMount() {
-    }
-    componentWillUnmount() {
-    }
-    GetUserBalance() {
-    }
-    GetUserName() {
-    }
-    render() {
-        return (
-            <div>
-                <Button link={this.props.msg("HomePage")} text="HomePage" />
-                {this.state.LoggedIn == "none" &&
-                    <>
-                        <Button link="" text="LogIn" />
-                        <Button link="" text="Register" />
-                    </>
-                    }
-                {this.state.LoggedIn != "none" &&
-                    <>
-                        <Info msg="user name" />
-                        <Info msg="user balance" />
-                        <Button link="" text="Profile" />
-                        <Button link="" text="LogOut" />
-                    </>
-                    }
-            </div>
-        );
-    }
+
+const NavBar = () => {
+    let [loggedIn, setLoggedIn] = useState(false)
+
+    return (
+        <div style={{ display: "flex" }}>
+            <Button link="" text="HomePage" />
+            {!loggedIn &&
+                <>
+                    <Button link="" text="LogIn" />
+                    <Button link="" text="Register" />
+                </>
+            }
+            {loggedIn &&
+                <>
+                    <Info text="User name" />
+                    <Info text="User balance" />
+                    <Button link="" text="Profile" />
+                    <Button link="" text="LogOut" />
+                </>
+            }
+        </div>
+    );
 }
+
 export default NavBar;
