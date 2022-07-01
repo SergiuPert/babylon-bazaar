@@ -7,20 +7,20 @@ const NavBar = () => {
     let [loggedIn, setLoggedIn] = useState(false)
 
     return (
-        <div style={{ display: "flex" }}>
-            <Button link="" text="HomePage" />
+        <div className="NavBar" >
+            <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Home" />
             {!loggedIn &&
                 <>
-                    <Button link="" text="LogIn" />
-                    <Button link="" text="Register" />
+                    <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="LogIn" />
+                <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Register" />
                 </>
             }
             {loggedIn &&
                 <>
                     <Info text="User name" />
                     <Info text="User balance" />
-                    <Button link="" text="Profile" />
-                    <Button link="" text="LogOut" />
+                    <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Profile" />
+                    <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="LogOut" />
                 </>
             }
         </div>

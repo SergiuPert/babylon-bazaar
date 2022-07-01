@@ -15,12 +15,14 @@ const ProductCard = (props) => {
             <h4>Rating: {props.productModel.rating}</h4>
             <h3>Supplier: {props.productModel.supplier}</h3>
             <h5>Image: {props.productModel.image.name}</h5>
-            <div style={{ display: "flex" }}>
+
+            <span>
                 <h3>Categories: </h3>
+
                 {props.productModel.categories.map(category =>
-                    <h3>{category.name} </h3>
+                    <span>{category.name}</span>
                     )}
-            </div>
+            </span>
         </div>
     );
 }

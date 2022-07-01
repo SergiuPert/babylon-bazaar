@@ -5,7 +5,7 @@
 const Info = (props) => {
     return (
         <div>
-            <span>{props.text}</span>
+            <span className={props.class}>{props.text}</span>
         </div>
     );
 }

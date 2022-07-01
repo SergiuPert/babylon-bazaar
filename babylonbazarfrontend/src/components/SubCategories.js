@@ -40,7 +40,7 @@ const SubCategories = (props) => {
     if (props.parentId === props.currentCategoryId) {
         subSubCategories = subCategories.map(subCategory =>
             <>
-                <Button class="SubCategoryButton" categoryId={subCategory.id} link={props.changeSubCategoryId} text={subCategory.name} />
+                <Button buttonStyle="SubCategoryButton" buttonTextStyle="SubCategoryButtonText" categoryId={subCategory.id} link={props.changeSubCategoryId} text={subCategory.name} />
                 <SubSubCategories changeCategory={props.changeCategory} parentId={subCategory.id} currentSubCategoryId={currentSubCategoryId} parentSubCategoryId={subCategory.id} />
             </>
         )

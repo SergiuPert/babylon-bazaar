@@ -1,5 +1,5 @@
 import ProductList from "./ProductList"
-import Sidebar from "./SideBar"
+import Sidebar from "./Sidebar"
 import { useEffect, useState } from 'react'
 
 
@@ -16,7 +16,7 @@ const MainPage = (props) => {
     }
 
     return (
-        <div style={{ display: "flex" }}>
+        <div className="MainPage">
             <Sidebar changeCategory={changeCategory} />
             <ProductList categoryId={categoryId} />
         </div>

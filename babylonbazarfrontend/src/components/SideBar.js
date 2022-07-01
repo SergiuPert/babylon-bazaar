@@ -3,12 +3,12 @@ import Categories from "./Categories"
 
 
 
+  //          {/*<h1>Categories</h1>*/}
 
 const Sidebar = (props) => {
     
     return (
         <div className="Categories">
-            <h1>Categories</h1>
             <Categories changeCategory={props.changeCategory} />
             {/*<Filter msg={this.SetFilterSupplier(this.state)} />*/}
             {/*<Filter msg={this.SetFilterRating(this.state)} />*/}

@@ -55,7 +55,7 @@ const ProductList = (props) => {
     }
 //            {!showForm && <Button link={activateForm} text="Add Product" />}
     return (
-        <div>
+        <div className="ProductList">
             {showForm && <ProductAddForm add={add} />}
             {!showForm && productModels.map(productModel =>
                 <ProductCard productModel={productModel} />

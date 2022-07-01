@@ -12,11 +12,11 @@ const Categories = (props) => {
         fetch(`https://localhost:7136/Product/GetCategoriesGroup`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setCategories(response) })
-        },[])
+    }, [])
 
     let [currentCategoryId, setCurrentCategoryId] = useState(0)
     let [currentSubCategoryId, setCurrentSubCategoryId] = useState(0)
-    
+
     const changeCurrentCategoryId = (id) => {
         setCurrentCategoryId(id)
         setCurrentSubCategoryId(0)
@@ -24,13 +24,12 @@ const Categories = (props) => {
     const changeSubCategoryId = (id) => {
         setCurrentSubCategoryId(id)
     }
-//                    <h2>{category.name}</h2>
-
+    //                    <h2>{category.name}</h2>
     return (
         <div>
             {categories.map(category =>
                 <>
-                    <Button class="CategoriesHeaderButton" categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
+                    <Button buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
                     <SubCategories changeCategory={props.changeCategory} parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} />
                 </>
                 )}

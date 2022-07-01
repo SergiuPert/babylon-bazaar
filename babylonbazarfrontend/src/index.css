@@ -1,10 +1,11 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url('/images/background3.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 code {
@@ -12,51 +13,88 @@ code {
 }
 
 .ProductCard {
-    border-style: solid;
-    border-color: black;
-    background-color: burlywood;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-left:2%;
+    margin-top:3%;
+    padding-left: 5%;
+    padding-top: 9%;
+
+    background-image: url('/images/VerticalScroll3.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 40%;
+
+    background-position: center;
+    position: relative;
+    text-align: center;
 }
 
-.CategoriesHeaderButton {
-    border-style: double;
-    border-color: black;
-    border-end-end-radius: 3px;
-    border-end-start-radius: 3px;
-    background-color: crimson;
+.NavBarButtonStyle {
+    background-image: url('/images/WideScroll4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 1%;
+    margin-top: 5px;
+    width: 6%;
+    text-align: center;
+}
+
+
+
+.NavBarButtonText {
     font-weight: bold;
     font-size: larger;
     font-style: italic;
-    margin-top: 5px;
 }
+
+
+
+.CategoriesHeaderButton {
+    background-image: url('/images/WideScroll4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 10%;
+    margin-top: 5px;
+    width: 40%;
+    text-align: center;
+}
+
+.CategoriesHeaderButtonText {
+    font-weight: bold;
+    font-size: larger;
+    font-style: italic;
+}
+
+
+
 
 
 .SubCategoryButton {
-    border-style: solid;
-    border-color: black;
-    border-end-end-radius: 3px;
-    border-end-start-radius: 3px;
-    background-color: crimson;
-    margin-left: 10px;
+    background-image: url('/images/HorizontalScroll4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 10%;
     margin-top: 5px;
+    width: 59%;
+    text-align: center;
+}
+
+.SubCategoryButtonText {
+    font-weight: bold;
+    font-size: larger;
+    font-style: italic;
 }
 
 .SubSubCategoryButton {
-    border-style: dashed;
-    border-color: black;
-    border-end-end-radius: 3px;
-    border-end-start-radius: 3px;
-    background-color: crimson;
-    margin-left: 10px;
-    margin-top: 5px;
+    border: none;
+    background: none;
+    position: relative;
+    align-content: center;
 }
 
 .Categories {
-    padding: 20px;
-    background-color: darkseagreen;
-    border-style: solid;
-    border-color: black;
+    /*padding: 20px;*/
+    width:20%;
 }
 
 .SubCategories {
@@ -64,17 +102,40 @@ code {
 }
 
 
-body {
-
-}
-
 button {
     border: none;
     background: none;
     position: relative;
-    align-content: center;
+    text-align:center;
+/*    align-content: center;
     top: 50%;
-    left: 50%;
+    left: 50%;*/
+}
+.Layout {
+    height: 100%;
+}
+
+.MainPage {
+    height: 800px;
+    display: flex;
+    margin-top:5%;
+}
+
+.NavBar {
+    display: flex;
+    /*overflow: hidden;*/
+    background-color: #333;
+    height: 7%;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%;
+}
+.Footer {
+    display: flex;
+    background-color: #333;
+    position: fixed; /* Set the navbar to fixed position */
+    bottom: 0; /* Position the navbar at the top of the page */
+    width: 100%
 }
 
 .SubSubCategories {
@@ -83,7 +144,21 @@ button {
     background-size: contain;
     padding-top: 20%;
     padding-bottom: 20%;
+    width: 80%;
     background-position: center;
+    position: relative;
+    text-align: center;
+}
+
+.ProductList {
+    display: flex;
+    width: 80%;
+    background-image: url('/images/NoticeBoard.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
+.Info {
+    color: white;
+}
