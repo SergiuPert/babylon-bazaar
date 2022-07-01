@@ -2,7 +2,6 @@ import Button from "./Button"
 import Info from "./Info"
 import { useEffect, useState } from 'react'
 
-
 const NavBar = () => {
     let [loggedIn, setLoggedIn] = useState(false)
 

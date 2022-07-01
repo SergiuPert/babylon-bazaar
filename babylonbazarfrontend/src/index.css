@@ -38,15 +38,11 @@ code {
     text-align: center;
 }
 
-
-
 .NavBarButtonText {
     font-weight: bold;
     font-size: larger;
     font-style: italic;
 }
-
-
 
 .CategoriesHeaderButton {
     background-image: url('/images/WideScroll4.png');
@@ -63,10 +59,6 @@ code {
     font-size: larger;
     font-style: italic;
 }
-
-
-
-
 
 .SubCategoryButton {
     background-image: url('/images/HorizontalScroll4.png');
@@ -100,7 +92,6 @@ code {
 .SubCategories {
     background-color: darkgoldenrod;
 }
-
 
 button {
     border: none;
@@ -157,7 +148,6 @@ button {
     background-repeat: no-repeat;
     background-size: cover;
 }
-
 
 .Info {
     color: white;

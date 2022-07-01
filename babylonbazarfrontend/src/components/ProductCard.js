@@ -1,28 +1,23 @@
-
-
-
-
-
-
-
+import Info from './Info.js'
 
 const ProductCard = (props) => {
     return (
         <div className="ProductCard">
-            <h1>Name: {props.productModel.product.name}</h1>
-            <h2>Price: {props.productModel.product.price}</h2>
-            <h4>Description: {props.productModel.product.description}</h4>
-            <h4>Rating: {props.productModel.rating}</h4>
-            <h3>Supplier: {props.productModel.supplier}</h3>
-            <h5>Image: {props.productModel.image.name}</h5>
-
-            <span>
-                <h3>Categories: </h3>
-
+            <div style={{ paddingBottom: "3%" }}>
                 {props.productModel.categories.map(category =>
-                    <span>{category.name}</span>
-                    )}
-            </span>
+                    <span>{category.name}  </span>
+                )}
+                <span style={{ fontWeight:"bold", fontSize:"larger" }}>{props.productModel.product.name}</span>
+            </div>
+            <div style={{ paddingBottom: "3%" }}>
+                <Info text="Sold by: " /><h3 style={{ display: "inline"}}>{props.productModel.supplier}</h3>
+            </div>
+            <h5>Image: {props.productModel.image.name}</h5>
+            <div style={{ display: "flex", alignContent: "space-between", paddingLeft:"10%" }}>
+                <h2 style={{ display: "inline", paddingLeft:"10%"}}>{props.productModel.product.price}$</h2>
+                <h4 style={{ display: "inline", paddingLeft:"30%"}}>Rating:<br/> {props.productModel.rating}</h4>
+            </div>
+            <h4>{props.productModel.product.description}</h4>
         </div>
     );
 }

@@ -1,10 +1,6 @@
 import SubCategories from "./SubCategories";
 import Button from "./Button"
 import { useEffect, useState } from 'react'
-//import axios from "axios"
-
-
-
 
 const Categories = (props) => {
     let [categories, setCategories] = useState([])
@@ -24,7 +20,7 @@ const Categories = (props) => {
     const changeSubCategoryId = (id) => {
         setCurrentSubCategoryId(id)
     }
-    //                    <h2>{category.name}</h2>
+
     return (
         <div>
             {categories.map(category =>

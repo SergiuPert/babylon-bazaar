@@ -1,10 +1,5 @@
 import Categories from "./Categories"
 
-
-
-
-  //          {/*<h1>Categories</h1>*/}
-
 const Sidebar = (props) => {
     
     return (

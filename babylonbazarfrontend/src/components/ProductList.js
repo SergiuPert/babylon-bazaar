@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react'
-import Button from "./Button";
 import ProductAddForm from "./ProductAddForm";
 import ProductCard from "./ProductCard";
-
-
-
-
 
 const ProductList = (props) => {
     const [showForm, setShowForm] = useState(false)
@@ -14,7 +9,7 @@ const ProductList = (props) => {
         fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setProductModels(response) })////////to work ss
-    })
+    }, [props.categoryId])
     const add = (product) => {
         const id = productModels.length
         let newProduct =
@@ -53,7 +48,7 @@ const ProductList = (props) => {
     const activateForm = () => {
         setShowForm(!showForm)
     }
-//            {!showForm && <Button link={activateForm} text="Add Product" />}
+
     return (
         <div className="ProductList">
             {showForm && <ProductAddForm add={add} />}

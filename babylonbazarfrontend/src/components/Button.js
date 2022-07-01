@@ -1,7 +1,4 @@
 
-
-
-
 const Button = (props) => {
     return (
         <div className={props.buttonStyle}>

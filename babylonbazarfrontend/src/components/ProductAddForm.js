@@ -1,6 +1,3 @@
-//import ComponentName from "./ComponentName.js";
-// need a way to pass categories to select from...
-
 import { useEffect, useState } from 'react'
 
 const ProductAddForm = (props) => {
@@ -11,16 +8,6 @@ const ProductAddForm = (props) => {
 	let [pimage, setImage] = useState("Write image name here");
 	let [psupplier, setSupplier] = useState("Write supplier name here");
 	let [show, Hide] = useState("Show");
-	//const setName = (newName) => { pname = newName; }
-	//const setDesc = (newDesc) => { pdesc = newDesc; }
-	//const setPrice = (newPrice) => { pprice = newPrice; }
-	//const setRating = (newRating) => { prating = newRating; }
-	//const setImage = (newImage) => { pimage = newImage; }
-	//const setSupplier = (newSupplier) => { psupplier = newSupplier; }
-	//const Hide = () => { show = "Hide"; }
-	//const Show = () => {
-	//	show = "Show";
-	//}
 	const retProduct = () => {
 		let name = document.getElementById("name").value
 		let desc = document.getElementById("desc").value
@@ -41,7 +28,6 @@ const ProductAddForm = (props) => {
 		//return this.props.add(product);
 
 	};
-	//useEffect(Show);
 	return (
 		<div >
 			<label> Name: <br />
@@ -58,12 +44,8 @@ const ProductAddForm = (props) => {
 				<input id="supplier" type="text" name="psupplier" defaultValue={psupplier} />
 			</label> <br /> <br />
 			<button type="button" onClick={() => retProduct()}>Add</button>
-			{/*<input type="button" value="Add"  />*/}
 		</div>
 		);
-	//let empty = () => { return (<div></div>); }
-	//let result = (show == "Show") ? content : empty;
-	//return (result);
 }
 
 export default ProductAddForm;

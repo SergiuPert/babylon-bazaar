@@ -2,7 +2,6 @@ import Button from "./Button";
 import SubSubCategories from "./SubSubCategories"
 import { useEffect, useState } from 'react'
 
-
 const SubCategories = (props) => {
     let [subCategories, setSubCategories] = useState([])
     useEffect(() => {
@@ -10,30 +9,6 @@ const SubCategories = (props) => {
             .then(response => response.json())
             .then((response) => { setSubCategories(response) })
     }, [])
-    //const subCategories = [
-    //    {
-    //        id: 10,
-    //        parentId: 1,
-    //        name: "PC"
-    //    },
-    //    {
-    //        id: 21,
-    //        parentId: 1,
-    //        name: "Kitchen"
-    //    },
-    //    {
-    //        id: 30,
-    //        parentId: 1,
-    //        name: "Sport Cars"
-    //    },
-    //    {
-    //        id: 40,
-    //        parentId: 1,
-    //        name: "Kitchen Supplies"
-    //    }
-    //]
-
-//                <h4>{subCategory.name}</h4>
 
     let currentSubCategoryId = props.currentSubCategoryId;
     let subSubCategories;
@@ -45,7 +20,7 @@ const SubCategories = (props) => {
             </>
         )
     }
-    
+
     return (
         <div>
             {subSubCategories}

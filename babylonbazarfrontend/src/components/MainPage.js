@@ -2,12 +2,6 @@ import ProductList from "./ProductList"
 import Sidebar from "./Sidebar"
 import { useEffect, useState } from 'react'
 
-
-
-
-
-
-
 const MainPage = (props) => {
     let [categoryId, setCategoryId] = useState(0)
 
