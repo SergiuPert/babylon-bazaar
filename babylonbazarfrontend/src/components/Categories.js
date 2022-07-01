@@ -23,11 +23,11 @@ const Categories = (props) => {
 
     return (
         <div>
-            {categories.map(category =>
-                <>
+            {categories.map((category, i) =>
+                <Fragment key={i}>
                     <Button buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
                     <SubCategories changeCategory={props.changeCategory} parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} />
-                </>
+                </Fragment>
                 )}
         </div>
     );

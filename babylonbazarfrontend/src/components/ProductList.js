@@ -56,6 +56,7 @@ const ProductList = (props) => {
                 <ProductCard productModel={productModel} />
                     )
             }
+            {/*try ternary*/}
         </div>
     );
 }

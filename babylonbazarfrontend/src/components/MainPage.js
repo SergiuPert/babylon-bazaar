@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 const MainPage = (props) => {
     let [categoryId, setCategoryId] = useState(0)
-
+    // jotai - state management
     const changeCategory = (id) => {
         setCategoryId(id)
     }

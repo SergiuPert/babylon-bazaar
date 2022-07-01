@@ -11,7 +11,7 @@ const Content = () => {
         default:
             result = <MainPage />
     }
-
+    //react router DOM v6
 
     return (
         <div>
