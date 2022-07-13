@@ -153,5 +153,8 @@ button {
     color: white;
 }
 
+.Flex {
+    display: flex;
+}
 
 /*CSS/styling Frameworks*/

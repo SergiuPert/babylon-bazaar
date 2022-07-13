@@ -1,19 +1,18 @@
 import React from 'react';
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import Cart from "./Cart";
-import { useEffect, useState } from 'react'
+import Profile from "./Profile"
+import {useState} from "react";
 
-const CartPage = (props) => {
+const ProfilePage = (props) => {
     let [userId, setUserId] = useState(2)
-
     return (
-        <div className="Layout">
+        <div>
             <NavBar />
-            <Cart userId={userId} />
+            <Profile userId={userId} />
             <Footer />
         </div>
     );
 }
 
-export default CartPage;
+export default ProfilePage;

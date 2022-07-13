@@ -1,12 +1,12 @@
-import Content from "./Content"
 import Footer from "./Footer"
 import NavBar from "./NavBar"
+import MainPage from "./MainPage";
 
 const Layout = () => {
     return (
         <div className="Layout">
             <NavBar />
-            <Content />
+            <MainPage />
             <Footer />
         </div>
     );

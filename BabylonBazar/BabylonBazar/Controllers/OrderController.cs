@@ -1,6 +1,7 @@
 ﻿using BabylonBazar.DSL;
 using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
@@ -19,13 +20,15 @@ namespace BabylonBazar.Controllers
             _contextAccessor = httpContextAccessor;
             _userService = userService;
         }
-        public IActionResult Cart()
+        [EnableCors("Policy")]
+        public JsonResult Cart(int id)
         {
-            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
-            int userId = int.Parse(Encoding.ASCII.GetString(userByte));
+            //byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
+            //int userId = int.Parse(Encoding.ASCII.GetString(userByte));
+
             CartVM cartVM = new CartVM();
-            Users user = _userService.Get(userId);
-            List<Cart> carts = _orderService.GetUserCart(userId);
+            Users user = _userService.Get(id);
+            List<Cart> carts = _orderService.GetUserCart(id);
             List<CartProductsVM> products = new List<CartProductsVM>();
             foreach (Cart cartItem in carts)
             {
@@ -36,7 +39,7 @@ namespace BabylonBazar.Controllers
             }
             cartVM.user = user;
             cartVM.products = products;
-            return View(cartVM);
+            return Json(cartVM);
         }
         [HttpPost]
         public IActionResult AddToCart(int productId)

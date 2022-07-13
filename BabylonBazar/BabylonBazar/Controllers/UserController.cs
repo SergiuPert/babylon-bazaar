@@ -1,6 +1,7 @@
 ﻿using BabylonBazar.DSL;
 using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabylonBazar.Controllers
@@ -17,11 +18,11 @@ namespace BabylonBazar.Controllers
             _productService = productService;
             _orderService = orderService;
         }
-
-        public IActionResult ProfilePage(int id)
+        [EnableCors("Policy")]
+        public JsonResult ProfilePage(int id)
         {
             Users user = _userService.Get(id);
-            return View(user);
+            return Json(user);
         }
         [HttpGet]
         public IActionResult NotificationsPage(int id)

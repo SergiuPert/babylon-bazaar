@@ -8,7 +8,8 @@ const NavBar = () => {
 
     return (
         <nav className="NavBar" >
-            <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Home" />
+            {/*<Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Home" />*/}
+            <Link className="NavBarButtonStyle NavBarButtonText" to="/" >Home</Link>
             {!loggedIn &&
                 <>
                     <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="LogIn" />
@@ -19,15 +20,14 @@ const NavBar = () => {
                 <>
                     <Info text="User name" />
                     <Info text="User balance" />
-                    <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Cart" />
-                    <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Profile" />
+                    <Link className="NavBarButtonStyle NavBarButtonText" to="/cart" >Cart</Link>
+                    <Link className="NavBarButtonStyle NavBarButtonText" to="/profile" >Profile</Link>
                     <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="LogOut" />
                 </>
             }
 
 
 
-            <Link className="NavBarButtonStyle NavBarButtonText" to="/" >Cart</Link> |{" "}
             <Link to="/about" >About</Link> |{" "}
             <Link to="/contacts" >Contacts</Link>
 
