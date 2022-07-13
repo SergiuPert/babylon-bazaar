@@ -4,9 +4,9 @@ namespace BabylonBazar.ViewModels
 {
     public class NotificationVM
     {
-        public Notifications notification;
-        public Location location;
-        public OrderItem orderItem;
-        public Product product;
+        public Notifications notification { get; set; }
+        public Location location { get; set; }
+        public OrderItem orderItem { get; set; }
+        public Product product { get; set; }
     }
 }

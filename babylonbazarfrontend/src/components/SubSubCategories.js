@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Button from './Button'
+import React from 'react';
 
 const SubSubCategories = (props) => {
     let result;
@@ -14,8 +15,12 @@ const SubSubCategories = (props) => {
 
     if (props.currentSubCategoryId === props.parentSubCategoryId) {
         subSubCategoryClass = "SubSubCategories";
-        result = subSubCategories.map(category =>
-            <Button class="SubSubCategoryButton" categoryId={category.id} link={props.changeCategory} text={category.name} />
+        result = subSubCategories.map((category, index) =>
+                <React.Fragment key={index} >
+                    <div onClick={() => props.selectProduct(0)}>
+                        <Button class="SubSubCategoryButton" categoryId={category.id} link={props.changeCategory} text={category.name} onClick={() => props.selectProduct(0)} />
+                    </div>
+                </React.Fragment>
             )
     }
 

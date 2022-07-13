@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import ProductAddForm from "./ProductAddForm";
 import ProductCard from "./ProductCard";
+import React from 'react';
 
 const ProductList = (props) => {
     const [showForm, setShowForm] = useState(false)
@@ -52,9 +53,11 @@ const ProductList = (props) => {
     return (
         <div className="ProductList">
             {showForm && <ProductAddForm add={add} />}
-            {!showForm && productModels.map(productModel =>
-                <ProductCard productModel={productModel} />
-                    )
+            {!showForm && productModels.map((productModel, index) =>
+                    <React.Fragment key={index}>
+                        <ProductCard productModel={productModel} selectProduct={props.selectProduct} />
+                    </React.Fragment>
+                )
             }
             {/*try ternary*/}
         </div>

@@ -8,6 +8,7 @@ const Content = () => {
         case "Main page":
             result = <MainPage />
             break;
+        // case "Product Details":
         default:
             result = <MainPage />
     }

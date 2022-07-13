@@ -2,7 +2,7 @@ import Info from './Info.js'
 
 const ProductCard = (props) => {
     return (
-        <div className="ProductCard">
+        <div className="ProductCard" onClick={() => props.selectProduct(props.productModel.product.id)}>
             <div style={{ paddingBottom: "3%" }}>
                 {props.productModel.categories.map(category =>
                     <span>{category.name}  </span>
@@ -18,6 +18,7 @@ const ProductCard = (props) => {
                 <h4 style={{ display: "inline", paddingLeft:"30%"}}>Rating:<br/> {props.productModel.rating}</h4>
             </div>
             <h4>{props.productModel.product.description}</h4>
+            <h1>{props.productModel.product.id}</h1>
         </div>
     );
 }
