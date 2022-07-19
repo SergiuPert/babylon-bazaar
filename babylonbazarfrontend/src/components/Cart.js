@@ -14,7 +14,7 @@ const Cart = (props) => {
         return <div>Loading...</div>
     }
     return (
-        <div className="MainPage">
+        <div className="Cart">
             {cart.products.map(product =>
             <CartItem product={product} />
             )}

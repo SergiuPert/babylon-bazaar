@@ -12,11 +12,15 @@ const Profile = (props) => {
         return <div>Loading...</div>
     }
     return (
-        <div style={{backgroundColor: "white"}}>
-            <h1>Username: {user.name}</h1>
-            <h1>Email: {user.email}</h1>
-            <h1>Role: {user.balance}</h1>
-            <h1>Image: {user.image}</h1>
+        <div className="Profile">
+            <div className="Flex">
+                <h1>Image: {user.image}</h1>
+                <div>
+                    <h1>Username: {user.name}</h1>
+                    <h1>Email: {user.email}</h1>
+                    <h1>Balance: {user.balance}</h1>
+                </div>
+            </div>
         </div>
     );
 }

@@ -5,14 +5,14 @@ import Cart from "./Cart";
 import { useEffect, useState } from 'react'
 
 const CartPage = (props) => {
-    let [userId, setUserId] = useState(2)
+    let [userId, setUserId] = useState(2) //consider saving the cart in the front end
 
     return (
-        <div className="Layout">
+        <>
             <NavBar />
             <Cart userId={userId} />
             <Footer />
-        </div>
+        </>
     );
 }
 

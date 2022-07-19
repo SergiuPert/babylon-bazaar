@@ -4,11 +4,11 @@ import MainPage from "./MainPage";
 
 const Layout = () => {
     return (
-        <div className="Layout">
+        <>
             <NavBar />
             <MainPage />
             <Footer />
-        </div>
+        </>
     );
 }
 

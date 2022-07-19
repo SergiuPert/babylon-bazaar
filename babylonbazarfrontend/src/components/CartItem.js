@@ -3,9 +3,9 @@ import ProductCard from "./ProductCard";
 
 const CartItem = (props) => {
     return (
-        <div className="ProductCard">
+        <div className="CartItem">
             <h1>Name: {props.product.product.name}</h1>
-            <div className="Flex">
+            <div>
                 <h1>Price: {props.product.product.price}$</h1>
                 <h1>Quantity: {props.product.cart.quantity}</h1>
             </div>
