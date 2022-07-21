@@ -22,7 +22,7 @@ const NavBar = () => {
                     <Info text="User balance" />
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/cart" >Cart</Link>
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/profile" >Profile</Link>
-                    <Button buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="LogOut" />
+                    <Link className="NavBarButtonStyle NavBarButtonText" to="/" >LogOut</Link>
                 </>
             }
 

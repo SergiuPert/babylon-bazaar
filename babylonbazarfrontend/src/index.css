@@ -14,43 +14,76 @@ code {
 }
 
 h1, h2, h3, h4, h5, p, span, button {
-    font-family: "Arial Rounded MT Bold";
+    /*font-family: "Arial Rounded MT Bold";*/
+    font-family: Tahoma;
+    font-size: 1vw;
+    /*font-family: "Times New Roman";*/
 }
 
+.NavBar {
+    display: flex;
+    z-index: 100;
+    /*overflow: hidden;*/
+    background-color: #333;
+    height: 4.2vw;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%;
+}
 
 .NavBarButtonStyle {
     background-image: url('images/WideScroll4.png');
     text-decoration: none;
-    font-family: "Arial Rounded MT Bold";
+    font-family: Tahoma;
     color: black;
     background-repeat: no-repeat;
     background-size: contain;
     padding: 1%;
-    margin-top: 5px;
+    margin-top: 0.5vw;
     width: 6%;
     text-align: center;
 }
 
 .NavBarButtonText {
     font-weight: bold;
-    font-size: larger;
-    font-style: italic;
+    font-size: 1vw;
+}
+
+.AddButton {
+    background-image: url('images/addButton1.png');
+    text-decoration: none;
+    font-family: Tahoma;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: relative;
+    padding: 2vw 0vw;
+    width: 90%;
+    height: 1vw;
+    text-align: center;
+    font-size: 1vw;
+}
+
+.AddButtonText {
+    font-weight: bold;
+    font-size: 1vw;
+    color: white;
 }
 
 .CategoriesHeaderButton {
     background-image: url('images/WideScroll4.png');
     background-repeat: no-repeat;
     background-size: contain;
-    padding: 10%;
-    margin-top: 5px;
-    width: 40%;
+    background-position: center;
+    padding: 2vw;
+    width: 7vw;
     text-align: center;
 }
 
 .CategoriesHeaderButtonText {
     font-weight: bold;
-    font-size: larger;
-    font-style: italic;
+    font-size: 1vw;
+    /*font-style: italic;*/
 }
 
 .SubCategoryButton {
@@ -59,15 +92,14 @@ h1, h2, h3, h4, h5, p, span, button {
     background-size: contain;
     background-position: center;
     padding: 10%;
-    margin-top: 5px;
     width: 59%;
     text-align: center;
 }
 
 .SubCategoryButtonText {
     font-weight: bold;
-    font-size: larger;
-    font-style: italic;
+    font-size: 1vw;
+    /*font-style: italic;*/
 }
 
 .SubSubCategoryButton {
@@ -77,13 +109,18 @@ h1, h2, h3, h4, h5, p, span, button {
     align-content: center;
 }
 
+.SubSubCategoryButton {
+    font-weight: bold;
+    font-size: 1vw;
+}
+
 .Categories {
     /*padding: 20px;*/
     width:20%;
 }
 
 .SubCategories {
-    background-color: darkgoldenrod;
+
 }
 
 button {
@@ -105,16 +142,7 @@ button {
     margin-bottom:5%;
 }
 
-.NavBar {
-    display: flex;
-    z-index: 100;
-    /*overflow: hidden;*/
-    background-color: #333;
-    height: 7%;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%;
-}
+
 .Footer {
     display: flex;
     background-color: #333;
@@ -137,14 +165,14 @@ button {
 
 .ProductList {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, 24rem);
     width: 100%;
-    background-image: url('images/board3.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 50px  0;
-    /*grid-row-gap: 10px;*/
-    /*grid-column-gap: 10px;*/
+    margin-right: 1vw;
+    background-color: rgba(122, 46, 43, 0.9);
+    gap: 0rem;
+    border: 1vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
 }
 
 .ProductList:empty{
@@ -152,27 +180,47 @@ button {
 }
 
 .ProductCard {
-    margin-top: 0%;
-    padding-left: 5%;
-    padding-top: 21%;
-    padding-bottom: 2%;
-
+    padding-left: 1vw;
+    padding-top: 8vw;
+    padding-bottom: 5vw;
     background-image: url('images/VerticalScroll3.png');
     background-repeat: no-repeat;
     background-size: contain;
-    /*width: 40%;*/
-
+    width: 100%;
+    height: 20vw;
     background-position: center;
     position: relative;
     text-align: center;
 }
 
+.ProductCardText {
+    font-weight: bold;
+    font-size: 1vw;
+    position: relative;
+}
+
+.cardRating {
+    margin-left: 5vw;
+}
+
 .ProductDetails {
-    background-image: url('images/board3.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 50px;
+    border: 2vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+    width: 100%;
+    margin-right: 1vw;
+    background-color: rgba(122, 46, 43, 0.9);
+    /*padding: 50px;*/
     color: white;
+}
+.ProductMainDetails {
+    position: absolute;
+    right: 4vw;
+}
+
+.responsiveCarousel {
+    height: 20vw;
+    width: 20vw;
 }
 
 .Profile {
@@ -213,9 +261,30 @@ button {
 }
 
 .cardImage {
-    height: 50%;
-    width: 60%;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 10vw;
+    width: 13vw;
+    border: 0.7vw solid;
+    border-image: url('images/imageBorder3.png') 10% stretch;
+    border-image-width: 2.1vw 1.8vw;
 }
+
+/*.Border {*/
+/*    position: relative;*/
+/*    height: 50%;*/
+/*    width: 60%;*/
+/*    top: 0px;*/
+/*    left: 0px;*/
+/*}*/
+
+/*.pos {*/
+/*    height: 47%;*/
+/*    top: 34%;*/
+/*    left: 54%;*/
+/*    width: 58%;*/
+/*}*/
 
 .Info {
     color: white;
@@ -223,7 +292,20 @@ button {
 
 .Flex {
     display: flex;
-    column-gap: 700px;
 }
 
+/*.imgDiv {*/
+/*    !*border: 20px solid;*!*/
+/*    !*border-image: url('images/borderImage1.png') 10% round;*!*/
+/*    !*border-image-width: 30px;*!*/
+/*    position: relative;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*}*/
+
+.test {
+    /*border: 10px solid;*/
+    /*border-image: url('images/borderImage1.png') 10% round;*/
+
+}
 /*CSS/styling Frameworks*/
