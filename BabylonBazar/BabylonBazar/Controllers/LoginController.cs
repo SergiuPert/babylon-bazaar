@@ -1,6 +1,8 @@
 ﻿using BabylonBazar.DSL;
 using BabylonBazar.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace BabylonBazar.Controllers
 {
@@ -23,22 +25,24 @@ namespace BabylonBazar.Controllers
             _userService.Register(name, email, password);
             return View("Home");
         }
+        //[HttpGet]
+        //public IActionResult Login()
+        //{
+        //    ViewBag.LoginSuccess = "Login Pending";
+        //    return View();
+        //}
         [HttpGet]
-        public IActionResult Login()
+        public JsonResult Login(string id)
         {
-            ViewBag.LoginSuccess = "Login Pending";
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Login(string name, string passowrd)
-        {
-            int userId = _userService.Login(name, passowrd);
-            if (userId >= 0)
-            {
-                return View("Home");
-            }
-            ViewBag.LoginSuccess = "Login Failed";
-            return View("Login");
+            //JsonNode Credentials = JsonNode.Parse(credentials)!;
+            //string name = Credentials!["username"]!.ToString();
+            //string passowrd = Credentials!["passowrd"]!.ToString();
+            Console.WriteLine("Id: "+id);
+            string name = id.Split("^")[0];
+            string password = id.Split("^")[1];
+            int userId = _userService.Login(name, password);
+            Console.WriteLine(name+" - "+password+" - "+userId);
+            return Json(userId);
         }
     }
 }

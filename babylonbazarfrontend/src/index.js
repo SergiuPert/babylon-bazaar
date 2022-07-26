@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import CartPage from "./components/CartPage";
 import ProfilePage from "./components/ProfilePage";
+import LoginPage from "./components/LoginPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +15,7 @@ root.render(
             <Route path="/" element={<App />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/login" element={<LoginPage />} />
         </Routes>
     </BrowserRouter>
 );
