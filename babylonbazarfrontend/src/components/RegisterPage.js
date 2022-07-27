@@ -9,9 +9,7 @@ const RegisterPage = (props) => {
 
     return (
         <>
-            <NavBar />
             <Register />
-            <Footer />
         </>
     );
 }

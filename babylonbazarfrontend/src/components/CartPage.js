@@ -9,9 +9,7 @@ const CartPage = (props) => {
     let userId = parseInt(sessionStorage.getItem('userId'));
     return (
         <>
-            <NavBar />
             <Cart userId={userId} />
-            <Footer />
         </>
     );
 }

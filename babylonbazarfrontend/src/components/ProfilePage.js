@@ -8,9 +8,7 @@ const ProfilePage = (props) => {
     let [userId, setUserId] = useState(2)
     return (
         <div>
-            <NavBar />
             <Profile userId={userId} />
-            <Footer />
         </div>
     );
 }

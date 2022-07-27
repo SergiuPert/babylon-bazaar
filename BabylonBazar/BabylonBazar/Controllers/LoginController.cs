@@ -30,12 +30,12 @@ namespace BabylonBazar.Controllers
             if (user == null) return BadRequest( new { message = "Invalid credentials" });
             
             var jwt = _jwtService.Generate(user.Id);
-
+            Console.WriteLine(Response.Cookies);
             Response.Cookies.Append("jwt", jwt, new CookieOptions
             {
                 HttpOnly = true
             });
-
+            Console.WriteLine(Response.Cookies);
             return Ok(new {message = "success"});
         }
 

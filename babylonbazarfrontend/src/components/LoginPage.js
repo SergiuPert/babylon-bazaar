@@ -10,9 +10,7 @@ const LoginPage = (props) => {
 
     return (
         <>
-            <NavBar />
             <Login setToken={setToken} />
-            <Footer />
         </>
     );
 }

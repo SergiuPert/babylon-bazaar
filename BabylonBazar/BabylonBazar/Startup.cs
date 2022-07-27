@@ -57,7 +57,7 @@ namespace BabylonBazar {
                 .UseSession()
                 .UseRouting()
                 .UseCors(builder =>  builder
-                    .WithOrigins(new[] { "https://localhost:3000", "https://localhost:3000/cart" })
+                    .WithOrigins(new[] { "http://localhost:3000", "http://localhost:3000/cart", "http://localhost:3000/register" })
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials() 

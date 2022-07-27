@@ -5,9 +5,7 @@ import MainPage from "./MainPage";
 const Layout = () => {
     return (
         <>
-            <NavBar />
             <MainPage />
-            <Footer />
         </>
     );
 }
