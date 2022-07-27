@@ -104,5 +104,9 @@ namespace BabylonBazar.Controllers
             return View("ProfilePage", location.UserId);
         }
 
+        
+
+
+
     }
 }

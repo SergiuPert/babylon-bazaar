@@ -11,6 +11,13 @@ namespace BabylonBazar.DAL.DbImplementations {
 			_dbManager.SaveChanges();
 		}
 
+		public Users AddUser(Users user)
+		{
+			_dbManager.Users.Add(user);
+			user.Id = _dbManager.SaveChanges();
+			return user;
+		}
+
 		public Users? Login(string name, string password)
         {
 			Users? existing = _dbManager.Users.FirstOrDefault(u => u.Name == name && u.Password == password);

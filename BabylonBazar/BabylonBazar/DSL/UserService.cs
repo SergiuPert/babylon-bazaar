@@ -32,35 +32,37 @@ namespace BabylonBazar.DSL
             _httpContextAccessor=httpContextAccessor;
         }
 
-        public void Register(string username, string password, string email)
+        public Users Register(string username, string password, string email)
         {
             Users user = new();
             user.Name = username;
             user.Password = password;
             user.Email = email;
-            user.Role = "user";
+            user.Role = "User";
             user.Balance = 0;
-            _userManager.Add(user);
+            var userId = _userManager.AddUser(user);
+            return userId;
         }
-        public int Login(string name, string password)
+        public Users? Login(string name, string password)
         {
             Users? user = _userManager.Login(name, password);
-            if (user is not null)
-            {
-                _httpContextAccessor.HttpContext.Session.Set("user", Encoding.ASCII.GetBytes($"{user.Id}"));
-                return user.Id;
-            }
-            return -1;
+            //if (user is not null)
+            //{
+            //    _httpContextAccessor.HttpContext.Session.Set("user", Encoding.ASCII.GetBytes($"{user.Id}"));
+            //    return user.Id;
+            //}
+            //return -1;
+            return user;
         }
 
         public void Remove(int userId)
         {
             _userManager.Remove(userId);
         }
-        public void Logout()
-        {
-            _httpContextAccessor.HttpContext.Session.Remove("user");
-        }
+        //public void Logout()
+        //{
+        //    _httpContextAccessor.HttpContext.Session.Remove("user");
+        //}
 
         public Users? Get(int userId)
         {

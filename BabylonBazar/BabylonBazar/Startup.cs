@@ -32,6 +32,7 @@ namespace BabylonBazar {
                 .AddScoped<OrderService>()
                 .AddScoped<ProductService>()
                 .AddScoped<UserService>()
+                .AddScoped<JwtService>()
                 .AddCors(options =>
                 {
                     options.AddPolicy(name: "Policy",
@@ -55,7 +56,12 @@ namespace BabylonBazar {
                 .UseStaticFiles()
                 .UseSession()
                 .UseRouting()
-                .UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); })
+                .UseCors(builder =>  builder
+                    .WithOrigins(new[] { "https://localhost:3000", "https://localhost:3000/cart" })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials() 
+                )
                 //.UseAuthentication()
                 //.UseAuthorization()
                 .UseEndpoints(endpoints => {
