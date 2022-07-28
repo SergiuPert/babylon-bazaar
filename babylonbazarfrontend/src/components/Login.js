@@ -4,13 +4,13 @@ import '../App.css';
 import { useEffect, useState } from 'react'
 import {Navigate} from "react-router-dom";
 
- const Login = () => {
+ const Login = (props) => {
 	const [username, setUserName] = useState('');
 	const [password, setPassword] = useState('');
 	const [redirect, setRedirect] = useState(false);
 	const submit = async (e) => {
 		e.preventDefault();
-		await fetch('https://localhost:7136/login/login', {
+		const response = await fetch('https://localhost:7136/login/login', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
 			credentials: 'include',
@@ -19,6 +19,8 @@ import {Navigate} from "react-router-dom";
 				password
 			})
 		});
+		const content = response.json()
+		props.setUserName(content.name)
 		setRedirect(true)
 	};
 
@@ -27,14 +29,13 @@ import {Navigate} from "react-router-dom";
 	}
 
 	return (
-		<div className="login-wrapper">
+		<div className="registerForm">
 			<h1>Please Log In</h1>
 			<form onSubmit={submit}>
-				<label>Username
-					<input type="text" onChange={e => setUserName(e.target.value)} />
-				</label><label>Password
-					<input type="password" onChange={e => setPassword(e.target.value)} />
-				</label><div><button type="submit">Submit
+					<input type="text" placeholder="Username" onChange={e => setUserName(e.target.value)} />
+					<br/>
+					<input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+					<div><button type="submit">Submit
 				</button></div></form>
 		</div>)
 	}

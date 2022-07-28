@@ -2,9 +2,10 @@ import React from 'react';
 import {useEffect, useState} from "react";
 
 const Profile = (props) => {
+    let [userId, setUserId] = useState(2)
     let [user, setUser] = useState(null)
     useEffect(() => {
-        fetch(`https://localhost:7136/User/ProfilePage/${props.userId}`, { method: "GET", })
+        fetch(`https://localhost:7136/User/ProfilePage/${userId}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setUser(response) })
     }, [props.userId])

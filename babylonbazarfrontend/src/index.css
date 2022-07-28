@@ -142,17 +142,6 @@ button {
     margin-bottom:5%;
 }
 
-.registerForm {
-    margin-top:5%;
-    margin-bottom:5%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-
 .Footer {
     display: flex;
     background-color: #333;
@@ -234,26 +223,23 @@ button {
 }
 
 .Profile {
-    background-image: url('images/board3.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 50px;
+    border: 2vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+    background-color: rgba(122, 46, 43, 0.9);
     color: white;
-    margin-top:5%;
-    margin-bottom:5%;
+    margin: 5% 1vw;
 }
 
 .Cart {
-    margin-top: 5%;
+    margin: 5% 1vw;
+    /*width: 100%;*/
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    width: 100%;
-    background-image: url('images/board3.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 50px  0;
-    /*grid-row-gap: 10px;*/
-    grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fill, 24rem);
+    border: 2vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+    background-color: rgba(122, 46, 43, 0.9);
 }
 
 .CartItem {
@@ -281,21 +267,6 @@ button {
     border-image-width: 2.1vw 1.8vw;
 }
 
-/*.Border {*/
-/*    position: relative;*/
-/*    height: 50%;*/
-/*    width: 60%;*/
-/*    top: 0px;*/
-/*    left: 0px;*/
-/*}*/
-
-/*.pos {*/
-/*    height: 47%;*/
-/*    top: 34%;*/
-/*    left: 54%;*/
-/*    width: 58%;*/
-/*}*/
-
 .Info {
     color: white;
 }
@@ -304,21 +275,20 @@ button {
     display: flex;
 }
 
-/*.imgDiv {*/
-/*    !*border: 20px solid;*!*/
-/*    !*border-image: url('images/borderImage1.png') 10% round;*!*/
-/*    !*border-image-width: 30px;*!*/
-/*    position: relative;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*}*/
-
-.test {
-    /*border: 10px solid;*/
-    /*border-image: url('images/borderImage1.png') 10% round;*/
-
-}
 /*CSS/styling Frameworks*/
+
+.registerForm {
+    margin: 5% 1vw;
+    border: 2vw solid;
+    height: 35vw;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+    background-color: rgba(122, 46, 43, 0.9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .login-wrapper {
     display: flex;

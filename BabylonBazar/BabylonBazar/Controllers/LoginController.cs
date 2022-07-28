@@ -33,7 +33,9 @@ namespace BabylonBazar.Controllers
             Console.WriteLine(Response.Cookies);
             Response.Cookies.Append("jwt", jwt, new CookieOptions
             {
-                HttpOnly = true
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true
             });
             Console.WriteLine(Response.Cookies);
             return Ok(new {message = "success"});
@@ -58,7 +60,11 @@ namespace BabylonBazar.Controllers
         [HttpPost]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete("jwt");
+            Response.Cookies.Delete("jwt", new CookieOptions
+            {
+                SameSite = SameSiteMode.None,
+                Secure=true
+            });
             return Ok(new
             {
                 message = "success"
