@@ -15,17 +15,18 @@ const MainPage = (props) => {
         setSelectedProductId(id)
     }
 
-    let [product, setProduct] = useState(null)
-    useEffect(() => {
-        fetch(`https://localhost:7136/Product/ProductDetails/${selectedProductId}`, { method: "GET", })
-            .then(response => response.json())
-            .then((response) => { setProduct(response) })
-    }, [selectedProductId])
+    // let [product, setProduct] = useState(null)
+    // useEffect(() => {
+    //     fetch(`https://localhost:7136/Product/ProductDetails/${selectedProductId}`, { method: "GET", })
+    //         .then(response => response.json())
+    //         .then((response) => { setProduct(response) })
+    // }, [selectedProductId])
         if (selectedProductId == 0) {
             result = <ProductList categoryId={categoryId} selectProduct={selectProduct} />
         }
         else {
-            result = <ProductDetails productId={selectedProductId} product={product}  />
+            // result = <ProductDetails productId={selectedProductId} product={product}  />
+            result = <ProductDetails productId={selectedProductId}  />
         }
     return (
         <div className="MainPage">

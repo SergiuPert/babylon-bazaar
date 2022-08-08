@@ -7,16 +7,17 @@ import useToken from './useToken.js';
 const NavBar = (props) => {
     return (
         <nav className="NavBar" >
+            {/*{props.user != null && <h1>{props.user.name}</h1>}*/}
             <Link className="NavBarButtonStyle NavBarButtonText" to="/" >Home</Link>
-            {props.username == '' &&
+            {props.user === null &&
                 <>
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/register" >Register</Link>
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/login" >Login</Link>
                 </>
             }
-            {props.username != '' &&
+            {props.user != null &&
                 <>
-                    <Info text={props.username} />
+                    <Info text={props.user.name} />
                     <Info text="User balance" />
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/cart" >Cart</Link>
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/profile" >Profile</Link>

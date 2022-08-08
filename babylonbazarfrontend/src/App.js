@@ -9,10 +9,13 @@ import Footer from "./components/Footer";
 import React from "react";
 import {useEffect, useState} from "react";
 import MainPage from "./components/MainPage";
+import {useAtom} from "jotai";
+import {USER_ATOM} from "./STORE";
 
 function App() {
-  const [username, setUserName] = useState('')
-
+    const [username, setUserName] = useState('')
+    const [userId, setUserId] = useState('')
+    const [user, setUser] = useAtom(USER_ATOM)
   useEffect(() => {
     (
         async () => {
@@ -21,7 +24,9 @@ function App() {
             credentials: 'include',
           });
           const content = await response.json();
-          setUserName(content.name)
+          // setUserName(content.name);
+          // setUserId(content.Id);
+          setUser(content)
         }
     )();
   });
@@ -32,16 +37,23 @@ function App() {
       headers: {'Content-Type': 'application/json'},
       credentials: 'include'
     })
-    setUserName('')
+    // setUserName('')
+      setUser(null)
   }
+
+  // if (user === null) {
+  //     return <div>Loading...</div>
+  // }
+
+
   return (
       <BrowserRouter>
-        <NavBar username={username} setUserName={setUserName} logout={logout} />
+        <NavBar user={user} setUser={setUser} logout={logout} />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login setUserName={setUserName} />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />

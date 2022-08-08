@@ -40,7 +40,7 @@ namespace BabylonBazar.Controllers
             Console.WriteLine(Response.Cookies);
             return Ok(new {message = "success"});
         }
-
+        
         public IActionResult User()
         {
             try
