@@ -78,6 +78,12 @@ namespace BabylonBazar.Controllers
             List<CardInfo> cards = _userService.GetCardsForUser(userId);
             return View(cards);
         }
+
+        public IActionResult DeleteCard(int cardId)
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpGet]
         public IActionResult EditCredentials(int userId)
         {
@@ -104,7 +110,10 @@ namespace BabylonBazar.Controllers
             return View("ProfilePage", location.UserId);
         }
 
-        
+        public IActionResult DeleteLocation(int locationId)
+        {
+            throw new NotImplementedException();
+        }
 
 
 

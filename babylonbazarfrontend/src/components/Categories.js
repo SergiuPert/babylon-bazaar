@@ -1,5 +1,5 @@
 import SubCategories from "./SubCategories";
-import Button from "./Button"
+import CategoriesButton from "./CategoriesButton"
 import { useEffect, useState } from 'react'
 import React from 'react';
 
@@ -26,7 +26,7 @@ const Categories = (props) => {
         <div>
             {categories.map((category, index) =>
                 <React.Fragment key={index}>
-                    <Button buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
+                    <CategoriesButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" categoryId={category.id} link={changeCurrentCategoryId} text={category.name} />
                     <SubCategories changeCategory={props.changeCategory} parentId={category.id} currentCategoryId={currentCategoryId} currentSubCategoryId={currentSubCategoryId} changeSubCategoryId={changeSubCategoryId} selectProduct={props.selectProduct} />
                 </React.Fragment>
                 )}

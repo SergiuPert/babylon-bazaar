@@ -1,12 +1,14 @@
 import React from 'react';
 import {useEffect, useState} from "react";
 import CartItem from "./CartItem";
+import {useAtom} from "jotai";
+import {USER_ATOM} from "../STORE";
 
 const Cart = (props) => {
-    let [userId, setUserId] = useState(2)
+    let [user] = useAtom(USER_ATOM)
     let [cart, setCart] = useState(null)
     useEffect(() => {
-        fetch(`https://localhost:7136/Order/Cart/${userId}`, { method: "GET", })
+        fetch(`https://localhost:7136/Order/Cart/${user.id}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setCart(response) })
     }, [props.userId])

@@ -1,5 +1,5 @@
 
-const Button = (props) => {
+const CategoriesButton = (props) => {
     return (
         <div className={props.buttonStyle} onClick={() => props.link(props.categoryId)}>
             <button className={props.buttonTextStyle} >{props.text}</button>
@@ -7,4 +7,4 @@ const Button = (props) => {
     );
 }
 
-export default Button;
+export default CategoriesButton;

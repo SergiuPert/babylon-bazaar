@@ -21,7 +21,7 @@ import {Navigate} from "react-router-dom";
 		});
 		const content = response.json()
 		// props.setUserName(content.name)
-		props.setUser(content)
+		props.setUserId(content.id)
 		setRedirect(true)
 	};
 

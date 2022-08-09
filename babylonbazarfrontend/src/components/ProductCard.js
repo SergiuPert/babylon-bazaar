@@ -1,5 +1,5 @@
 import Info from './Info.js'
-import Button from "./Button";
+import CategoriesButton from "./CategoriesButton";
 // import Stars from "./Stars";
 import StarRatings from "react-star-ratings";
 
@@ -21,7 +21,7 @@ const ProductCard = (props) => {
             </div>
                 <span className="ProductCardText">Price: {props.productModel.product.price}$</span>
             <br/>
-            <Button buttonStyle="AddButton" buttonTextStyle="AddButtonText" link="" text="Add" />
+            <CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link="" text="Add" />
         </div>
     );
 }

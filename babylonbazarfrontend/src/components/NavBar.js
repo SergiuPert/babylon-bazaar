@@ -1,4 +1,4 @@
-import Button from "./Button"
+import CategoriesButton from "./CategoriesButton"
 import Info from "./Info"
 import { useEffect, useState } from 'react'
 import {Link, useNavigate} from "react-router-dom";

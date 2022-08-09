@@ -14,9 +14,10 @@ import {USER_ATOM} from "./STORE";
 
 function App() {
     const [username, setUserName] = useState('')
-    const [userId, setUserId] = useState('')
     const [user, setUser] = useAtom(USER_ATOM)
-  useEffect(() => {
+    const [userId, setUserId] = useState('')
+
+    useEffect(() => {
     (
         async () => {
           const response = await fetch('https://localhost:7136/login/user', {
@@ -29,7 +30,7 @@ function App() {
           setUser(content)
         }
     )();
-  });
+  }, [userId]);
 
   const logout = async () => {
     await fetch('https://localhost:7136/login/logout', {
@@ -38,7 +39,8 @@ function App() {
       credentials: 'include'
     })
     // setUserName('')
-      setUser(null)
+      setUser(null);
+      setUserId('')
   }
 
   // if (user === null) {
@@ -53,7 +55,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/login" element={<Login setUserId={setUserId} />} />
           <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />

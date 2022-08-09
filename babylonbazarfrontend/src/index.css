@@ -223,12 +223,37 @@ button {
 }
 
 .Profile {
+    display: grid;
+    grid-template-columns: 1.5fr 8fr;
     border: 2vw solid;
     border-image: url('images/backgroundBorder1.png') 10% round;
     border-image-width: 2vw;
     background-color: rgba(122, 46, 43, 0.9);
     color: white;
     margin: 5% 1vw;
+
+}
+
+.ProfilePageTitle {
+    text-align: center;
+    font-size: 3vw;
+}
+
+.ProfilePic {
+    width: 25vw;
+    height: 25vw;
+    border: 0.7vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+}
+
+.ProfileInfo {
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+.ProfileInfoLines {
+    margin: 40% 0%;
 }
 
 .Cart {
