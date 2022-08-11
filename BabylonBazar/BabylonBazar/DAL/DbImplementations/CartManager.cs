@@ -49,7 +49,8 @@ namespace BabylonBazar.DAL
 
         public IEnumerable<Cart> GetCartItemsForUser(int userId)
         {
-            return _dbManager.Cart.Where(c => c.UserId == userId);
+            IEnumerable<Cart> result = _dbManager.Cart.Where(c => c.UserId == userId);
+            return result;
         }
     }
 }

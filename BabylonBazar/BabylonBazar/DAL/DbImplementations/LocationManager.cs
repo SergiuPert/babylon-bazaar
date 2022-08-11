@@ -31,7 +31,9 @@ namespace BabylonBazar.DAL
 
         public IEnumerable<Location> GetLocationsForUser(int userId)
         {
-            return _dbManager.Location.Where(l => l.UserId == userId);
+            IEnumerable<Location> result = _dbManager.Location.Where(l => l.UserId == userId);
+            List<Location> locations = result.ToList();
+            return result;
         }
 
         public void Remove(int id)
@@ -46,7 +48,7 @@ namespace BabylonBazar.DAL
         {
             Location? existing = _dbManager.Location.FirstOrDefault(l => l.Id == item.Id);
             if (existing is null) return;
-            existing.Addres = item.Addres;
+            existing.Address = item.Address;
             existing.Name = item.Name;
             existing.PhoneNumber = item.PhoneNumber;
             existing.Email = item.Email;

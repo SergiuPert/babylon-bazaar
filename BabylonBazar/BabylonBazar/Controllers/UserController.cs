@@ -1,4 +1,5 @@
 ﻿using BabylonBazar.DSL;
+using BabylonBazar.Dtos;
 using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
 using Microsoft.AspNetCore.Cors;
@@ -11,12 +12,14 @@ namespace BabylonBazar.Controllers
         private UserService _userService;
         private ProductService _productService;
         private OrderService _orderService;
+        private readonly JwtService _jwtService;
 
-        public UserController(UserService userService, ProductService productService, OrderService orderService)
+        public UserController(UserService userService, ProductService productService, OrderService orderService, JwtService jwtService)
         {
             _userService = userService;
             _productService = productService;
             _orderService = orderService;
+            _jwtService = jwtService;
         }
         [EnableCors("Policy")]
         public JsonResult ProfilePage(int id)
@@ -67,10 +70,11 @@ namespace BabylonBazar.Controllers
             }
             return View(ordersVM);
         }
-        public IActionResult GetUserLocations(int userId)
+        [EnableCors("Policy")]
+        public JsonResult GetUserLocations(int id)
         {
-            List<Location> locations = _userService.GetLocations(userId);
-            return View(locations);
+            List<Location> locations = _userService.GetLocations(id);
+            return Json(locations);
         }
 
         public IActionResult GetUserCards(int userId)
@@ -91,11 +95,35 @@ namespace BabylonBazar.Controllers
             return View(user);
         }
         [HttpPost]
-        public IActionResult EditCredentials(Users user)
+        public IActionResult EditCredentials([FromBody]CredentialsDto credentials)
         {
-            _userService.Update(user);
-            return View("ProfilePage", user.Id);
+
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+                var token = _jwtService.Verify(jwt);
+                int userId = int.Parse(token.Issuer);
+                var user = _userService.Get(userId);
+                user.Email = credentials.Email;
+                user.Password = credentials.Password;
+                user.Name = credentials.Name;
+                user.Image = credentials.Image;
+                _userService.Update(user);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized();
+            }
+            return Ok(new { message = "success" });
         }
+
+        [HttpPost]
+        public IActionResult AddLocation([FromBody] Location location)
+        {
+            _userService.RegisterLocation(location);
+            return Ok(new { message = "success" });
+        }
+
 
         [HttpGet]
         public IActionResult EditLocation(int id)
@@ -104,16 +132,63 @@ namespace BabylonBazar.Controllers
             return View(location);
         }
         [HttpPost]
-        public IActionResult EditLocation(Location location)
+        public IActionResult EditLocation([FromBody]Location location)
         {
             _userService.UpdateLocation(location);
             return View("ProfilePage", location.UserId);
         }
-
-        public IActionResult DeleteLocation(int locationId)
+        [HttpPost]
+        public IActionResult DeleteLocation([FromRoute]int id)
         {
-            throw new NotImplementedException();
+            _userService.RemoveLocation(id);
+            return Ok();
         }
+        [HttpPost]
+        public async Task<IActionResult> SavePhoto([FromBody] ImageDto file)
+        {
+            if (file == null)
+            {
+                return BadRequest("No file sent");
+            }
+            //if (file.Length <= 0)
+            //{
+            //    return BadRequest("Empty File");
+            //}
+
+            var originalFileName = Path.GetFileName(file.FileName);
+
+            //this needs to be edited when we move to a server
+            var uniqueFilePath = Path.Combine(@"D:\Code\Projects\BabylonBazar\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\BabylonBazar\BabylonBazar\wwwroot\Images\Users\", originalFileName);
+
+            using (var stream = System.IO.File.Create(uniqueFilePath))
+            {
+                await file.File.CopyToAsync(stream);
+            }
+
+            return Ok("Photo saved");
+
+        }
+
+
+
+
+
+
+
+
+        //[HttpPost("CreateImage")]
+        //public void CreateImage([FromBody] ImageDTO img)
+        //{
+        //    Image image = new Image { FileName = img.FileName };
+        //    byte[] imageData = null;
+        //    using (var binaryReader = new BinaryReader(img.Image.OpenReadStream()))
+        //    {
+        //        imageData = binaryReader.ReadBytes((int)img.Image.Length);
+        //    }
+        //    image.Picture = imageData;
+
+        //    imageRepo.Create(image);
+        //}
 
 
 
