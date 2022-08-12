@@ -21,7 +21,7 @@ const DeliveryOptions = () => {
     const [county, setCounty] = useState("")
     const [city, setCity] = useState("")
     const [address, setAddress] = useState("")
-    const [zipCode, setZipCode] = useState("")
+    const [zipCode, setZipCode] = useState("") //try variables
 
 
     const [selectedLocation, setSelectedLocation] = useState({
@@ -80,10 +80,10 @@ const DeliveryOptions = () => {
         setForm("")
     };
 
-    const useEditLocation = async (e) => {
+    const editLocation = async (e) => {
         e.preventDefault()
         formValues()
-        useEffect(() => { fetch('https://localhost:7136/user/EditLocation', {
+        let res = await fetch('https://localhost:7136/user/EditLocation', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
             body: JSON.stringify({
@@ -110,9 +110,9 @@ const DeliveryOptions = () => {
             setCity("")
             setAddress("")
             setZipCode("")
-        })}, [selectedLocation, reload] )
-
+        })
     };
+
     const deleteLocation = async (locationId) => {
         await fetch(`https://localhost:7136/user/DeleteLocation/${locationId}`, {
             method: 'POST',
@@ -176,7 +176,7 @@ const DeliveryOptions = () => {
                 <form onSubmit={addLocation}>
                     <h1>Name</h1>
                     <input type={"text"} onChange={e => setName(e.target.value)}/>
-                    <h1>PhoneNumber</h1>
+                    <h1>Phone Number</h1>
                     <input type={"text"} onChange={e => setPhoneNumber(e.target.value)}/>
                     <h1>Email</h1>
                     <input type={"text"} onChange={e => setEmail(e.target.value)}/>
@@ -196,10 +196,10 @@ const DeliveryOptions = () => {
 
             }
             {form === "Edit" &&
-                <form id="form" onSubmit={useEditLocation}>
+                <form id="form" onSubmit={editLocation}>
                     <h1>New Name</h1>
                     <input type={"text"} defaultValue={selectedLocation.name} onChange={e => setName(e.target.value)}/>
-                    <h1>New PhoneNumber</h1>
+                    <h1>New Phone Number</h1>
                     <input type={"text"} defaultValue={selectedLocation.phoneNumber} onChange={e => setPhoneNumber(e.target.value)}/>
                     <h1>New Email</h1>
                     <input type={"text"} defaultValue={selectedLocation.email} onChange={e => setEmail(e.target.value)}/>

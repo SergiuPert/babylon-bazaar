@@ -17,7 +17,7 @@ const NavBar = (props) => {
             }
             {props.user != null &&
                 <>
-                    <Info text={props.user.name} />
+                    <Info class="username" text={props.user.name} />
                     <Info text="User balance" />
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/cart" >Cart</Link>
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/profile" >Profile</Link>

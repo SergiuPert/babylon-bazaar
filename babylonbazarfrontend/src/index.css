@@ -49,6 +49,10 @@ h1, h2, h3, h4, h5, p, span, button {
     font-size: 1vw;
 }
 
+.username {
+    color: white;
+}
+
 .AddButton {
     background-image: url('images/addButton1.png');
     text-decoration: none;
