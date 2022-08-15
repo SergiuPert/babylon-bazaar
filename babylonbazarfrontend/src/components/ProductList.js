@@ -7,7 +7,8 @@ const ProductList = (props) => {
     const [showForm, setShowForm] = useState(false)
     let [productModels, setProductModels] = useState([])
     useEffect(() => {
-        fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}`, { method: "GET", })
+        fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}`,
+            { method: "GET", })
             .then(response => response.json())
             .then((response) => { setProductModels(response) })////////to work ss
     }, [props.categoryId])

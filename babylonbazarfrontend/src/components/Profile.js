@@ -5,7 +5,6 @@ import {USER_ATOM} from "../STORE";
 import ProfileSidebar from "./ProfileSidebar";
 import ProfileInfo from "./ProfileInfo";
 import EditProfile from "./EditProfile";
-import Funds from "./Funds";
 import OrderHistory from "./OrderHistory";
 import SellerProducts from "./SellerProducts";
 import SellerNotifications from "./SellerNotifications";
@@ -22,9 +21,6 @@ const Profile = () => {
             break;
         case "Edit Profile":
             content = <EditProfile />;
-            break;
-        case "Funds":
-            content = <Funds />;
             break;
         case "Orders":
             content = <OrderHistory />;

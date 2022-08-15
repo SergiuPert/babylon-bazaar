@@ -143,27 +143,20 @@ namespace BabylonBazar.Controllers
             _userService.RemoveLocation(id);
             return Ok();
         }
-        [HttpPost]
-        public async Task<IActionResult> SavePhoto([FromBody] ImageDto file)
+        [HttpPost("savephoto")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> SavePhoto([FromForm] ImageDto _file)
         {
-            if (file == null)
-            {
-                return BadRequest("No file sent");
-            }
-            //if (file.Length <= 0)
-            //{
-            //    return BadRequest("Empty File");
-            //}
+            if (_file == null) return BadRequest("No file sent");
+            //if (file.Length <= 0) return BadRequest("Empty File");
 
-            var originalFileName = Path.GetFileName(file.FileName);
+            var receivedFileName = Path.GetFileName(_file.FileName);
 
             //this needs to be edited when we move to a server
-            var uniqueFilePath = Path.Combine(@"D:\Code\Projects\BabylonBazar\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\BabylonBazar\BabylonBazar\wwwroot\Images\Users\", originalFileName);
+            var fullFileName = Path.Combine(@"D:\Code\Projects\BabylonBazar\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\BabylonBazar\BabylonBazar\wwwroot\Images\Users\",receivedFileName);
 
-            using (var stream = System.IO.File.Create(uniqueFilePath))
-            {
-                await file.File.CopyToAsync(stream);
-            }
+            using (var stream = System.IO.File.Create(fullFileName))
+                await _file.File.CopyToAsync(stream);
 
             return Ok("Photo saved");
 

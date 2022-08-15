@@ -8,7 +8,6 @@ const ProfileSidebar = (props) => {
         <div>
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Show Profile" />
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Edit Profile" />
-            <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Funds" />
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="OrderHistory" />
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="My Products" />
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Notifications" />

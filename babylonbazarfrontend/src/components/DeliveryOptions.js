@@ -2,9 +2,6 @@ import React from 'react';
 import {useAtom} from "jotai";
 import {USER_ATOM} from "../STORE";
 import {useEffect, useState} from "react";
-import CartItem from "./CartItem";
-import {Navigate} from "react-router-dom";
-import LocationForm from "./LocationForm";
 
 const DeliveryOptions = () => {
     let [user] = useAtom(USER_ATOM)
@@ -14,15 +11,14 @@ const DeliveryOptions = () => {
     const [reload, setReload] = useState(true)
 
     const [id, setId] = useState("")
-    const [name, setName] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [email, setEmail] = useState("")
-    const [country, setCountry] =useState("")
-    const [county, setCounty] = useState("")
-    const [city, setCity] = useState("")
-    const [address, setAddress] = useState("")
-    const [zipCode, setZipCode] = useState("") //try variables
-
+    const [_name, setName] = useState("")
+    const [_phoneNumber, setPhoneNumber] = useState("")
+    const [_email, setEmail] = useState("")
+    const [_country, setCountry] =useState("")
+    const [_county, setCounty] = useState("")
+    const [_city, setCity] = useState("")
+    const [_address, setAddress] = useState("")
+    const [_zipCode, setZipCode] = useState("") //try variables
 
     const [selectedLocation, setSelectedLocation] = useState({
         userId: userId,
@@ -52,7 +48,7 @@ const DeliveryOptions = () => {
         fetch(`https://localhost:7136/User/GetUserLocations/${user.id}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setLocations(response) })
-    }, [user.id, reload, name, phoneNumber, email]) // crashed
+    }, [user.id, reload, _name, _phoneNumber, _email]) // crashed
 
     if (locations.name === "") {
         return <div>Loading...</div>
@@ -66,14 +62,14 @@ const DeliveryOptions = () => {
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
             body: JSON.stringify({
                 userId,
-                name,
-                phoneNumber,
-                email,
-                country,
-                county,
-                city,
-                address,
-                zipCode
+                name: _name,
+                phoneNumber: _phoneNumber,
+                email: _email,
+                country: _country,
+                county: _county,
+                city: _city,
+                address: _address,
+                zipCode: _zipCode
             })
         })
         setReload(!reload)
@@ -82,7 +78,14 @@ const DeliveryOptions = () => {
 
     const editLocation = async (e) => {
         e.preventDefault()
-        formValues()
+        let name= (_name !== "")?_name:selectedLocation.name
+        let phoneNumber=((_phoneNumber!== "") ? _phoneNumber : selectedLocation.phoneNumber)
+        let email=((_email !== "") ? _email : selectedLocation.email)
+        let country=((_country !== "") ? _country : selectedLocation.country)
+        let county=((_county !== "") ? _county : selectedLocation.county)
+        let city=((_city !== "") ? _city : selectedLocation.city)
+        let address=((_address !== "") ? _address : selectedLocation.address)
+        let zipCode=((_zipCode!=="") ? _zipCode : selectedLocation.zipCode)
         let res = await fetch('https://localhost:7136/user/EditLocation', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
@@ -120,22 +123,8 @@ const DeliveryOptions = () => {
 
     };
 
-
     const refreshForm = () => {
         document.getElementById("form").reset()
-    }
-
-    const formValues = () => {
-        if (name == null) {
-            setName("selectedLocation.name")
-        }
-        setPhoneNumber((phoneNumber!== "") ? phoneNumber : selectedLocation.phoneNumber)
-        setEmail((email !== "") ? email : selectedLocation.email)
-        setCountry((country !== "") ? country : selectedLocation.country)
-        setCounty((county !== "") ? county : selectedLocation.county)
-        setCity((city !== "") ? city : selectedLocation.city)
-        setAddress((address !== "") ? address : selectedLocation.address)
-        setZipCode((zipCode!=="") ? zipCode : selectedLocation.zipCode)
     }
 
     return (
@@ -193,7 +182,6 @@ const DeliveryOptions = () => {
                     <br/>
                     <button type={"submit"}>Submit</button>
                 </form>
-
             }
             {form === "Edit" &&
                 <form id="form" onSubmit={editLocation}>
