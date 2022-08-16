@@ -77,17 +77,27 @@ namespace BabylonBazar.Controllers
             return Json(locations);
         }
 
-        public IActionResult GetUserCards(int userId)
+        public JsonResult GetUserCards(int id)
         {
-            List<CardInfo> cards = _userService.GetCardsForUser(userId);
-            return View(cards);
+            List<CardInfo> cards = _userService.GetCardsForUser(id);
+            return Json(cards);
         }
-
-        public IActionResult DeleteCard(int cardId)
+        [HttpPost]
+        public IActionResult AddCard([FromBody] CardDto card) {
+            CardInfo cInfo = new();
+            cInfo.CardNumber=card.CardNumber;
+            cInfo.UserId=card.UserId;
+            cInfo.OwnerName=card.OwnerName;
+            cInfo.CVC=card.CVC;
+            cInfo.ExpirationDate=DateTime.Parse(card.ExpirationDate);
+            _userService.RegisterCard(cInfo);
+            return Ok(new { message = "success" });
+        }
+        public IActionResult DeleteCard([FromRoute] int id)
         {
-            throw new NotImplementedException();
+            _userService.RemoveCard(id);
+            return Ok();
         }
-
         [HttpGet]
         public IActionResult EditCredentials(int userId)
         {
@@ -97,7 +107,6 @@ namespace BabylonBazar.Controllers
         [HttpPost]
         public IActionResult EditCredentials([FromBody]CredentialsDto credentials)
         {
-
             try
             {
                 var jwt = Request.Cookies["jwt"];
@@ -116,15 +125,12 @@ namespace BabylonBazar.Controllers
             }
             return Ok(new { message = "success" });
         }
-
         [HttpPost]
         public IActionResult AddLocation([FromBody] Location location)
         {
             _userService.RegisterLocation(location);
             return Ok(new { message = "success" });
         }
-
-
         [HttpGet]
         public IActionResult EditLocation(int id)
         {
@@ -161,29 +167,5 @@ namespace BabylonBazar.Controllers
             return Ok("Photo saved");
 
         }
-
-
-
-
-
-
-
-
-        //[HttpPost("CreateImage")]
-        //public void CreateImage([FromBody] ImageDTO img)
-        //{
-        //    Image image = new Image { FileName = img.FileName };
-        //    byte[] imageData = null;
-        //    using (var binaryReader = new BinaryReader(img.Image.OpenReadStream()))
-        //    {
-        //        imageData = binaryReader.ReadBytes((int)img.Image.Length);
-        //    }
-        //    image.Picture = imageData;
-
-        //    imageRepo.Create(image);
-        //}
-
-
-
     }
 }
