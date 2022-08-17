@@ -2,6 +2,8 @@ Babylon Bazaar is an online shop themed around an ancient babylonian bazaar wher
 
 Babylon Bazaar is still in development and currently we just finished the 4th sprint (each sprint has 4 days)
 
+Team members: Pert Sergiu & Radu Brezeanu
+
 The technologies we used for this project are:
 
 React, Webstorm, Photoshop and CSS for the Frontend
