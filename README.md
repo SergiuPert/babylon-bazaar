@@ -25,6 +25,7 @@ Git hub for version control and Jira for task management
 ![jira](https://user-images.githubusercontent.com/89579316/185109883-7c2f5c84-5d90-47ea-a60c-677598a08415.jpg)
 
 Website features (in progress):
+- ASP.NET Core Entity framework Database
 - Every user can make an account and buy products
 - Every user can add and sell their own products
 - Products are filtered by categories and sub categories
