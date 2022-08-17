@@ -13,7 +13,7 @@ React, Webstorm, Photoshop and CSS for the Frontend
 ![photoshop](https://user-images.githubusercontent.com/89579316/185109186-c39aff6b-7b9b-4ec5-b127-cee23e51c8fb.jpg)
 ![css](https://user-images.githubusercontent.com/89579316/185109159-c1016cac-e63d-4f01-b96b-0ba8302d97fb.jpg)
 
-C#, Visual studio and ASP.NET Core for the backend
+C#, Visual studio and ASP.NET Core for the Backend
 
 ![C#](https://user-images.githubusercontent.com/89579316/185109331-6d9c3bc8-e555-4d48-bbb0-6ed4bfe8f48a.jpg)
 ![VS](https://user-images.githubusercontent.com/89579316/185109336-2200ace4-5b32-4909-a0ce-3e0f961004b0.jpg)
