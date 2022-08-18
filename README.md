@@ -39,4 +39,4 @@ Screenshots (the product and profile images are just placeholders for now):
 
 ![bb2](https://user-images.githubusercontent.com/89579316/185111332-68d319d0-28e9-4920-a51b-2ae4c3540696.JPG)
 
-![bb3](https://user-images.githubusercontent.com/89579316/185111354-bdfe19d4-8c1f-4c24-93c3-0b03f8b79204.JPG)
+![image](https://user-images.githubusercontent.com/89579316/185402528-1f9172f6-d35d-441d-a9ff-1bbf199b81ea.png)
