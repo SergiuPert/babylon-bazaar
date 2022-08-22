@@ -39,7 +39,32 @@ const SellerProducts = () => {
             .then((response) => { setProducts(response) })
     }, [user.id, reload, _name, _description, _price])
 
-    if (products.name === "") {
+    let [categories, setCategories] = useState("")
+    let [categoryId, setCategoryId] = useState("")
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetCategoriesGroup`, { method: "GET", })
+            .then(response => response.json())
+            .then((response) => { setCategories(response) })
+    }, [])
+
+    let [subCategories, setSubCategories] = useState("")
+    let [subCategoryId, setSubCategoryId] = useState("")
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetCategoriesGroup/${categoryId}`, { method: "GET", })
+            .then(response => response.json())
+            .then((response) => { setSubCategories(response) })
+    }, [categoryId])
+
+    let [subSubCategories, setSubSubCategories] = useState("")
+    let [subSubCategoryId, setSubSubCategoryId] = useState("")
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetCategoriesGroup/${subCategoryId}`, { method: "GET", })
+            .then(response => response.json())
+            .then((response) => { setSubSubCategories(response) })
+    }, [subCategoryId])
+
+
+    if (products[0].name === "") {
         return <div>Loading...</div>
     }
 
@@ -53,6 +78,7 @@ const SellerProducts = () => {
                 name: _name,
                 price: _price,
                 description: _description,
+                subSubCategoryId
             })
         })
         setReload(!reload)
@@ -62,8 +88,8 @@ const SellerProducts = () => {
     const editProduct = async (e) => {
         e.preventDefault()
         let name= (_name !== "")?_name:selectedProduct.name
-        let price=((_price !== "") ? _price : selectedProduct.email)
-        let description=((_description !== "") ? _description : selectedProduct.country)
+        let price=((_price !== "") ? _price : selectedProduct.price)
+        let description=((_description !== "") ? _description : selectedProduct.description)
         let res = await fetch('https://localhost:7136/product/EditProduct', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
@@ -77,7 +103,6 @@ const SellerProducts = () => {
         }).then(() => {
             setReload(!reload)
             setForm("")
-
             setName("")
             setPrice("")
             setDescription("")
@@ -117,24 +142,54 @@ const SellerProducts = () => {
                 <tbody>
                 {products.map(product =>
                     <tr>
-                        <td>{product.name} </td>
-                        <td>{product.price}</td>
-                        <td>{product.description}</td>
-                        <td><button type={"button"} onClick={() => { productPhotos(product.id) }}>ManagePhotos</button></td>
-                        <td><button type={"button"} onClick={() => {setSelectedProduct(product); setId(product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
-                        <td><button type={"button"} onClick={() => { deleteProduct(product.id) }}>Delete</button></td>
+                        <td>{product.product.name} </td>
+                        <td>{product.product.price}</td>
+                        <td>{product.product.description}</td>
+                        <td><button type={"button"} onClick={() => { productPhotos(product.product.id); refreshForm() }}>ManagePhotos</button></td>
+                        <td><button type={"button"} onClick={() => {setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
+                        <td><button type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>
                     </tr>
                 )}
                 </tbody>
             </table>
             {form === "Add" &&
-                <form onSubmit={addProduct}>
+                <form id="form" onSubmit={addProduct}>
                     <h1>Name</h1>
-                    <input type={"text"} onChange={e => setName(e.target.value)}/>
+                    <input type={"text"} onChange={e => setName(e.target.value)} required={true}/>
                     <h1>Price</h1>
-                    <input type={"text"} onChange={e => setPrice(e.target.value)}/>
+                    <input type={"number"} onChange={e => setPrice(e.target.value)} required={true}/>
                     <h1>Description</h1>
-                    <input type={"text"} onChange={e => setDescription(e.target.value)}/>
+                    <input type={"text"} onChange={e => setDescription(e.target.value)} required={true}/>
+                    {/*<br/>*/}
+                    <h2>Main Category</h2>
+                    <select onChange={(e) => setCategoryId(e.target.value)} required={true}>
+                        <option></option>
+                        {categories.map(category =>
+                            <option value={category.id}>{category.name}</option>
+                        )}
+                    </select>
+                    {categoryId !== "" &&
+                        <>
+                            <h2>Sub-Category</h2>
+                            <select onChange={(e) => setSubCategoryId(e.target.value)} required={true}>
+                            <option></option>
+                                {subCategories.map(subCategory =>
+                                    <option value={subCategory.id}>{subCategory.name}</option>
+                                )}
+                            </select>
+                        </>
+                    }
+                    {subCategoryId !== "" &&
+                        <>
+                            <h2>Sub-Sub-Category</h2>
+                            <select onChange={(e) => setSubSubCategoryId(e.target.value)} required={true}>
+                            <option></option>
+                                {subSubCategories.map(subSubCategory =>
+                                    <option value={subSubCategory.id}>{subSubCategory.name}</option>
+                                )}
+                            </select>
+                        </>
+                    }
                     <br/>
                     <button type={"submit"}>Submit</button>
                 </form>

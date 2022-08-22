@@ -76,13 +76,18 @@ namespace BabylonBazar.Controllers {
 			product.Name = data.Name;
 			product.Description = data.Description;
 			product.Price = data.Price;//<-- not sure casting is done during binding for this to work
-			_productService.AddProduct(product);
+			int productId = _productService.AddProduct(product);
+			ProductCategories productCategories = new ProductCategories();
+			productCategories.ProductId = productId;
+			productCategories.CategoryId = data.SubSubCategoryId;
+			_productService.SetProductCategory(productCategories);
 			return Ok(new { message = "success" });
 		}
 		[EnableCors("Policy")]
 		[HttpPost]
 		public IActionResult DeleteProduct([FromRoute] int id) {
 			_productService.DeleteProduct(id);
+			_productService.DeleteProductCategory(id);
 			return Ok();
 		}
 		[EnableCors("Policy")]

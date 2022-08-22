@@ -6,9 +6,10 @@ namespace BabylonBazar.DAL {
 		public NotificationsManager(DbManager dbManager) {
 			_dbManager=dbManager;
 		}
-		public void Add(Notifications item) {
+		public int Add(Notifications item) {
 			_dbManager.Notifications.Add(item);
 			_dbManager.SaveChanges();
+			return item.Id;
 		}
 
 		public IEnumerable<Notifications> GetAll() {

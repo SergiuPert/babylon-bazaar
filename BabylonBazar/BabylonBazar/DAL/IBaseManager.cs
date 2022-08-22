@@ -2,7 +2,7 @@
 {
     public interface IBaseManager<T>
     {
-        void Add(T item);
+        int Add(T item);
         void Remove(int id);
 
         T? GetById(int id);

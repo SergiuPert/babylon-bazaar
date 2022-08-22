@@ -9,11 +9,12 @@ namespace BabylonBazar.DAL
         {
             _dbManager = dbManager;
         }
-        public void Add(ProductCategories item)
+        public int Add(ProductCategories item)
         {
             ProductCategories? productCategories = _dbManager.ProductCategories.FirstOrDefault(c => c.CategoryId == item.CategoryId && c.ProductId == item.ProductId);
             if (productCategories is null) _dbManager.ProductCategories.Add(item);
             _dbManager.SaveChanges();
+            return item.Id;
         }
 
         public IEnumerable<ProductCategories> GetAll()
@@ -39,12 +40,13 @@ namespace BabylonBazar.DAL
             ProductCategories? existing = _dbManager.ProductCategories.FirstOrDefault(c => c.CategoryId == productCategories.CategoryId && c.ProductId == productCategories.ProductId);
             if (existing is null) return;
             _dbManager.ProductCategories.Remove(existing);
+            
             _dbManager.SaveChanges();
         }
 
         public void Remove(int id)
         {
-            ProductCategories? existing = _dbManager.ProductCategories.FirstOrDefault(c => c.Id == id);
+            ProductCategories? existing = _dbManager.ProductCategories.FirstOrDefault(c => c.ProductId == id);
             if (existing is null) return;
             _dbManager.ProductCategories.Remove(existing);
             _dbManager.SaveChanges();

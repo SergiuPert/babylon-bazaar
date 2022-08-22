@@ -8,7 +8,7 @@ const ProfileInfo = () => {
         <div>
             <h1 className="ProfilePageTitle">Profile</h1>
             <div className="Flex">
-                <img className="ProfilePic" src={require("../images/profilePic.jpg")}/>
+                <img className="ProfilePic" src={require("../images/beffjesos.jpg")}/>
                 <div className="ProfileInfo">
                     <h1 className="ProfileInfoLines">Username: {user.name}</h1>
                     <h1 className="ProfileInfoLines">Email: {user.email}</h1>

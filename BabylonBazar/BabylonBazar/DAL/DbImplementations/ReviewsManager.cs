@@ -9,10 +9,11 @@ namespace BabylonBazar.DAL
         {
             _dbManager = dbManager;
         }
-        public void Add(Reviews item)
+        public int Add(Reviews item)
         {
             _dbManager.Reviews.Add(item);
             _dbManager.SaveChanges();
+            return item.Id;
         }
 
         public IEnumerable<Reviews> GetAll()

@@ -9,10 +9,11 @@ namespace BabylonBazar.DAL
         {
             _dbManager = dbManager;
         }
-        public void Add(OrderItem item)
+        public int Add(OrderItem item)
         {
             _dbManager.OrderItem.Add(item);
             _dbManager.SaveChanges();
+            return item.Id;
         }
 
         public IEnumerable<OrderItem> GetAll()

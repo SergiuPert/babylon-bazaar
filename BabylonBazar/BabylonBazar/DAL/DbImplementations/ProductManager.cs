@@ -10,10 +10,11 @@ namespace BabylonBazar.DAL
             _dbManager = dbManager;
         }
 
-        public void Add(Product product)
+        public int Add(Product product)
         {
             _dbManager.Products.Add(product);
             _dbManager.SaveChanges();
+            return product.Id;
         }
 
         public void Remove(int id)

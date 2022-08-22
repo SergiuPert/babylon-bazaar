@@ -9,10 +9,11 @@ namespace BabylonBazar.DAL
         {
             _dbManager = dbManager;
         }
-        public void Add(CardInfo item)
+        public int Add(CardInfo item)
         {
             _dbManager.CardInfo.Add(item);
             _dbManager.SaveChanges();
+            return item.Id;
         }
 
         public IEnumerable<CardInfo> GetAll()

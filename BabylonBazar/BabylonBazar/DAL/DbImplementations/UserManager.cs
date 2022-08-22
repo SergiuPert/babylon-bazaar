@@ -6,9 +6,10 @@ namespace BabylonBazar.DAL.DbImplementations {
 		public UserManager(DbManager dbmanager) {
 			_dbManager=dbmanager;
 		}
-		public void Add(Users item) {
+		public int Add(Users item) {
 			_dbManager.Users.Add(item);
 			_dbManager.SaveChanges();
+			return item.Id;
 		}
 
 		public Users AddUser(Users user)
