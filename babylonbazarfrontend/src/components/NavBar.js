@@ -17,8 +17,8 @@ const NavBar = (props) => {
             }
             {props.user != null &&
                 <>
-                    <Info class="username" text={props.user.name} />
-                    <Info text="User balance" />
+                    <Info class="Info" text={props.user.name} />
+                    <Info class="Info" text={" Balance "+props.user.balance+"$"} />
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/cart" >Cart</Link>
                     <Link className="NavBarButtonStyle NavBarButtonText" to="/profile" >Profile</Link>
                     <Link className="NavBarButtonStyle NavBarButtonText" onClick={props.logout} to="/login" >Logout</Link>

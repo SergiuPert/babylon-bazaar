@@ -1,6 +1,7 @@
 ﻿using BabylonBazar.DAL;
 using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
+using System.Linq;
 
 namespace BabylonBazar.DSL {
 	public class ProductService {
@@ -56,7 +57,8 @@ namespace BabylonBazar.DSL {
 				ProductHeadersVM productHeaders = new();
 				productHeaders.product=product;
 				productHeaders.supplier=_userManager.GetById(supplierId).Name;
-				productHeaders.image=_imagesManager.GetImagesForProduct(product.Id).ToList()[0];
+				var images = _imagesManager.GetImagesForProduct(product.Id);
+				productHeaders.image=(images.Count()>0)?images.ToList()[0]:null;
 				productHeaders.rating=_reviewsManager.GetRatingForProduct(product.Id);
 				productHeaders.categories=_categoriesManager.GetCategoriesForProduct(product.Id).ToList();
 				headers.Add(productHeaders);
@@ -91,5 +93,31 @@ namespace BabylonBazar.DSL {
         {
 			return _categoriesManager.GetCategoriesGroup(id).ToList();
         }
+		public void AddProduct(Product product) {
+			_productManager.Add(product);
+		}
+		public void DeleteProduct(int id) {
+			_productManager.Remove(id);
+			var images = _imagesManager.GetImagesForProduct(id);
+			foreach(Images image in images) _imagesManager.Remove(image.Id);
+			var categories = _productCategoriesManager.GetCategoriesForProduct(id);
+			foreach(ProductCategories category in categories) _productCategoriesManager.Remove(category.Id);
+		}
+		public List<Images> GetProductImages(int id) {
+			if(id==0) return null;
+			return _imagesManager.GetImagesForProduct(id).ToList();
+		}
+		public void AddProductImage(Images image) {
+			_imagesManager.Add(image);
+		}
+		public void DeleteProductImage(int id) {
+			_imagesManager.Remove(id);
+		}
+		public void SetProductCategory(ProductCategories link) {
+			_productCategoriesManager.Add(link);
+		}
+		public void DeleteProductCategory(int id) {
+			_productCategoriesManager.Remove(id);
+		}
 	}
 }

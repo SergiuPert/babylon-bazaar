@@ -119,8 +119,8 @@ const DeliveryOptions = () => {
     const deleteLocation = async (locationId) => {
         await fetch(`https://localhost:7136/user/DeleteLocation/${locationId}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }}).then(() => setReload(!reload))
-
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
+            .then(() => setReload(!reload))
     };
 
     const refreshForm = () => {
@@ -155,8 +155,8 @@ const DeliveryOptions = () => {
                     <td>{location.city}</td>
                     <td>{location.address}</td>
                     <td>{location.zipCode}</td>
-                    <button type={"button"} onClick={() => {setSelectedLocation(location); setId(location.id); setForm("Edit"); refreshForm()}}>Edit</button>
-                    <button type={"button"} onClick={(e) => { deleteLocation(location.id) }}>Delete</button>
+                    <td><button type={"button"} onClick={() => {setSelectedLocation(location); setId(location.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
+                    <td><button type={"button"} onClick={() => { deleteLocation(location.id) }}>Delete</button></td>
                 </tr>
             )}
                 </tbody>

@@ -1,4 +1,5 @@
 ﻿using BabylonBazar.DSL;
+using BabylonBazar.Dtos;
 using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
 using Microsoft.AspNetCore.Cors;
@@ -33,10 +34,11 @@ namespace BabylonBazar.Controllers {
 			return Json(product);
         }
 
-		public IActionResult FilterBySupplier(int id)
+		[EnableCors("Policy")]
+		public JsonResult FilterBySupplier(int id)
         {
 			List <ProductHeadersVM> products = _productService.GetProductHeadersForSupplier(id);
-			return View(products);
+			return Json(products);
         }
 		[HttpGet]
 		public IActionResult EditProduct(int id)
@@ -44,11 +46,12 @@ namespace BabylonBazar.Controllers {
 			ProductDetailsVM product = _productService.GetProductDetails(id);
 			return View(product);
         }
+		[EnableCors("Policy")]
 		[HttpPost]
-		public IActionResult EditProduct(Product product)
+		public IActionResult EditProduct([FromBody]Product product)
 		{
 			_productService.Update(product);
-			return View("ProductDetails", product.Id); /*aaaaaaaaaaaaaaaaaaa*/
+			return Ok(new { message = "success" });
 		}
 
 		public IActionResult Search(string query)
@@ -59,6 +62,52 @@ namespace BabylonBazar.Controllers {
         public JsonResult GetCategoriesGroup(int id=0)
         {
 			return Json(_productService.GetCategoriesGroup(id));
-        } 
+        }
+		[EnableCors("Policy")]
+		public JsonResult GetProductImages(int id = 0) {
+			return Json(_productService.GetProductImages(id));
+		}
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult AddProduct([FromBody] ProductDto data) {
+			Product product = new();
+			product.Aproved = true;//<--this will be false, to be switched by an admin
+			product.UserId = data.UserId;
+			product.Name = data.Name;
+			product.Description = data.Description;
+			product.Price = data.Price;//<-- not sure casting is done during binding for this to work
+			_productService.AddProduct(product);
+			return Ok(new { message = "success" });
+		}
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult DeleteProduct([FromRoute] int id) {
+			_productService.DeleteProduct(id);
+			return Ok();
+		}
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult AddProductImage([FromBody] Images image) {
+			_productService.AddProductImage(image);
+			return Ok(new { message = "success" });
+		}
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult DeleteProductImage([FromRoute] int id) {
+			_productService.DeleteProductImage(id);
+			return Ok();
+		}
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult SetProductCategory([FromBody] ProductCategories link) {
+			_productService.SetProductCategory(link);
+			return Ok();
+		}
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult DeleteProductCategory([FromRoute] int id) {
+			_productService.DeleteProductCategory(id);
+			return Ok();
+		}
 	}
 }
