@@ -86,8 +86,8 @@ namespace BabylonBazar.Controllers {
 		[EnableCors("Policy")]
 		[HttpPost]
 		public IActionResult DeleteProduct([FromRoute] int id) {
-			_productService.DeleteProduct(id);
 			_productService.DeleteProductCategory(id);
+			_productService.DeleteProduct(id);
 			return Ok();
 		}
 		[EnableCors("Policy")]

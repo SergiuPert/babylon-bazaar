@@ -146,7 +146,7 @@ const SellerProducts = () => {
                         <td>{product.product.price}</td>
                         <td>{product.product.description}</td>
                         <td><button type={"button"} onClick={() => { productPhotos(product.product.id); refreshForm() }}>ManagePhotos</button></td>
-                        <td><button type={"button"} onClick={() => {setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
+                        <td><button type={"button"} onClick={() => { setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
                         <td><button type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>
                     </tr>
                 )}
