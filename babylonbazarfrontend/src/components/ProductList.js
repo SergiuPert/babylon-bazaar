@@ -12,55 +12,16 @@ const ProductList = (props) => {
             .then(response => response.json())
             .then((response) => { setProductModels(response) })////////to work ss
     }, [props.categoryId])
-    const add = (product) => {
-        const id = productModels.length
-        let newProduct =
-        {
-            product:
-            {
-                Id: id,
-                UserId: 1,
-                Name: product.name,
-                Price: product.price,
-                Description: product.description,
-                Approved: true
-            },
-            rating: product.rating,
-            supplier: product.supplier,
-            image:
-            {
-                Id: Math.floor(Math.random() * 10000) + 1,
-                ProductId: id,
-                Name: product.image
-            },
-            categories: [
-                {
-                    Id: 5000,
-                    Name: "New Category"
-                },
-                {
-                    Id: 5000,
-                    Name: "New Category2"
-                }
-            ]
-        }
-        setProductModels([...productModels, newProduct])
-        activateForm()
-    }
-    const activateForm = () => {
-        setShowForm(!showForm)
-    }
 
     return (
         <div className="ProductList">
-            {showForm && <ProductAddForm add={add} />}
-            {!showForm && productModels.map((productModel, index) =>
+
+            {productModels.map((productModel, index) =>
                     <React.Fragment key={index}>
                         <ProductCard productModel={productModel} selectProduct={props.selectProduct} />
                     </React.Fragment>
                 )
             }
-            {/*try ternary*/}
         </div>
     );
 }

@@ -10,7 +10,7 @@ const FinancialData = () => {
 
     const [CardNumber, setCardNumber] = useState("")
     const [OwnerName, setOwnerName] = useState("")
-    const [ExpirationDate, setExpirationDate] = useState("")
+    let [ExpirationDate, setExpirationDate] = useState("")
     const [CVC, setCVC] = useState("")
 
     let [cards,setCards]=useState([{
@@ -71,7 +71,7 @@ const FinancialData = () => {
                     <tr>
                         <td>{card.cardNumber} </td>
                         <td>{card.ownerName}</td>
-                        <td>{card.expirationDate}</td>
+                        <td>{card.expirationDate.substring(0,10)}</td>
                         <td>{card.cvc}</td>
                         <td><button type={"button"} onClick={() => { deleteCard(card.id) }}>Delete</button></td>
                     </tr>
@@ -81,13 +81,13 @@ const FinancialData = () => {
             {form === "Add" &&
                 <form onSubmit={addCard}>
                     <h1>CardNumber</h1>
-                    <input type={"text"} onChange={e => setCardNumber(e.target.value)}/>
+                    <input type={"text"} onChange={e => setCardNumber(e.target.value)} required={true}/>
                     <h1>OwnerName</h1>
-                    <input type={"text"} onChange={e => setOwnerName(e.target.value)}/>
+                    <input type={"text"} onChange={e => setOwnerName(e.target.value)} required={true}/>
                     <h1>ExpirationDate</h1>
-                    <input type={"text"} onChange={e => setExpirationDate(e.target.value)}/>
+                    <input type={"date"} onChange={e => setExpirationDate(e.target.value)} required={true}/>
                     <h1>CVC</h1>
-                    <input type={"text"} onChange={e => setCVC(e.target.value)}/>
+                    <input type={"text"} onChange={e => setCVC(e.target.value)} required={true}/>
                     <br/>
                     <button type={"submit"}>Submit</button>
                 </form>

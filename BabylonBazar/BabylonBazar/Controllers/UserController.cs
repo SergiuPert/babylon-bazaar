@@ -4,6 +4,7 @@ using BabylonBazar.Models;
 using BabylonBazar.ViewModels;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace BabylonBazar.Controllers
 {
@@ -149,21 +150,38 @@ namespace BabylonBazar.Controllers
             _userService.RemoveLocation(id);
             return Ok();
         }
+        //[HttpPost("savephoto")]
+        //[Consumes("multipart/form-data")]
+        //public async Task<IActionResult> SavePhoto([FromForm] ImageDto _file)
+        //{
+        //    if (_file == null) return BadRequest("No file sent");
+        //    //if (file.Length <= 0) return BadRequest("Empty File");
+
+        //    var receivedFileName = Path.GetFileName(_file.FileName);
+
+        //    //this needs to be edited when we move to a server
+        //    var fullFileName = Path.Combine(@"D:\Code\Projects\BabylonBazar\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\BabylonBazar\BabylonBazar\wwwroot\Images\Users\",receivedFileName);
+
+        //    using (var stream = System.IO.File.Create(fullFileName))
+        //        await _file.File.CopyToAsync(stream);
+
+        //    return Ok("Photo saved");
+
+        //}
         [HttpPost("savephoto")]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> SavePhoto([FromForm] ImageDto _file)
+        public async Task<IActionResult> SavePhoto([FromForm] IFormFile _file)
         {
             if (_file == null) return BadRequest("No file sent");
             //if (file.Length <= 0) return BadRequest("Empty File");
-
-            var receivedFileName = Path.GetFileName(_file.FileName);
-
+            Console.WriteLine(_file);
+            //var receivedFileName = Path.GetFileName(_file);
+            
             //this needs to be edited when we move to a server
-            var fullFileName = Path.Combine(@"D:\Code\Projects\BabylonBazar\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\BabylonBazar\BabylonBazar\wwwroot\Images\Users\",receivedFileName);
-
+            var fullFileName = Path.Combine(@".\img.jpg");
             using (var stream = System.IO.File.Create(fullFileName))
-                await _file.File.CopyToAsync(stream);
-
+                await _file.CopyToAsync(stream);
+            Console.WriteLine("a ajuns");
             return Ok("Photo saved");
 
         }

@@ -24,15 +24,6 @@ const NavBar = (props) => {
                     <Link className="NavBarButtonStyle NavBarButtonText" onClick={props.logout} to="/login" >Logout</Link>
                 </>
             }
-
-
-
-            <Link to="/about" >About</Link> |{" "}
-            <Link to="/contacts" >Contacts</Link>
-
-
-
-
         </nav>
     );
 }

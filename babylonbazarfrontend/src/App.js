@@ -11,6 +11,9 @@ import {useEffect, useState} from "react";
 import MainPage from "./components/MainPage";
 import {useAtom} from "jotai";
 import {USER_ATOM} from "./STORE";
+import About from "./components/About";
+import Privacy from "./components/Privacy";
+import Contact from "./components/Contact";
 
 function App() {
     const [username, setUserName] = useState('')
@@ -50,15 +53,18 @@ function App() {
 
   return (
       <BrowserRouter>
-        <NavBar user={user} setUser={setUser} logout={logout} />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login setUserId={setUserId} />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-        <Footer />
+          <NavBar user={user} setUser={setUser} logout={logout} />
+          <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login setUserId={setUserId} />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/privacy" element={<Privacy />}/>
+              <Route path="/contact" element={<Contact />}/>
+          </Routes>
+          <Footer />
       </BrowserRouter>
   );
 }

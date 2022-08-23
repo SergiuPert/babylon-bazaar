@@ -1,13 +1,14 @@
 import CategoriesButton from "./CategoriesButton"
 import Info from "./Info"
+import {Link} from "react-router-dom";
 
 const Footer = () => {
     return (
         <div className="Footer">
             <Info class="Info" text="Copyright OOPanik @2022" />
-            <CategoriesButton buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="About" />
-            <CategoriesButton buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Privacy" />
-            <CategoriesButton buttonStyle="NavBarButtonStyle" buttonTextStyle="NavBarButtonText" link="" text="Contact" />
+            <Link className="NavBarButtonStyle NavBarButtonText" to="/about">About</Link>
+            <Link className="NavBarButtonStyle NavBarButtonText" to="/privacy">Privacy</Link>
+            <Link className="NavBarButtonStyle NavBarButtonText" to="/contact">Contact</Link>
         </div>
     );
 }
