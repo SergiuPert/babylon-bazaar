@@ -10,7 +10,7 @@ import React from "react";
 import {useEffect, useState} from "react";
 import MainPage from "./components/MainPage";
 import {useAtom} from "jotai";
-import {USER_ATOM} from "./STORE";
+import {REFRESH, USER_ATOM} from "./STORE";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
 import Contact from "./components/Contact";
@@ -19,6 +19,7 @@ function App() {
     const [username, setUserName] = useState('')
     const [user, setUser] = useAtom(USER_ATOM)
     const [userId, setUserId] = useState('')
+    const [refresh, setRefresh] = useAtom(REFRESH)
 
     useEffect(() => {
     (
@@ -33,7 +34,7 @@ function App() {
           setUser(content)
         }
     )();
-  }, [userId]);
+  }, [userId, refresh]);
 
   const logout = async () => {
     await fetch('https://localhost:7136/login/logout', {

@@ -65,7 +65,12 @@ namespace BabylonBazar.Controllers {
         }
 		[EnableCors("Policy")]
 		public JsonResult GetProductImages(int id = 0) {
-			return Json(_productService.GetProductImages(id));
+			List<Images> images = _productService.GetProductImages(id);
+			if (images == null)
+            {
+				images = new List<Images>();
+            }
+			return Json(images);
 		}
 		[EnableCors("Policy")]
 		[HttpPost]
@@ -87,6 +92,11 @@ namespace BabylonBazar.Controllers {
 		[HttpPost]
 		public IActionResult DeleteProduct([FromRoute] int id) {
 			_productService.DeleteProductCategory(id);
+			List<Images> images = _productService.GetProductImages(id).ToList();
+			foreach (Images image in images) 
+			{
+				_productService.DeleteProductImage(image.Id);
+			}
 			_productService.DeleteProduct(id);
 			return Ok();
 		}

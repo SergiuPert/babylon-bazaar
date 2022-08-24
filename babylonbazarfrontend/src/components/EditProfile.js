@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {useAtom} from "jotai";
-import {USER_ATOM} from "../STORE";
+import {REFRESH, USER_ATOM} from "../STORE";
 import axios from "axios";
 
-const EditProfile = () => {
+const EditProfile = (props) => {
     const [user] = useAtom(USER_ATOM)
-
+    const [refresh, setRefresh] = useAtom(REFRESH)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -32,32 +32,9 @@ const EditProfile = () => {
         console.log(formData["_file"]);
         submitForm("multipart/form-data", formData, (msg) => console.log(msg));
     }
-    const uploadWithJSON = async ()=>{
-        const toBase64 = _file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(_file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-        });
-        const data = { image: await toBase64(file) }
-        submitForm("application/json", data, (msg) => console.log(msg));
-    }
     const submit = async (e) => {
         e.preventDefault()
-        if (image !== "") { await uploadWithFormData()
-            // const formData = new FormData();
-            // formData.append("image", image);
-            // const response = await fetch('https://localhost:7136/user/savephoto', {
-            //         method: "POST",
-            //         headers: {'Content-Type': 'multipart/form-data', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
-            //         body: formData
-            //     });
-            // const content = response.json( )
-
-            // try one or the other
-            // uploadWithFormData()
-            // uploadWithJSON()
-        }
+        if (image !== "") { await uploadWithFormData()}
         const credentials = await fetch('https://localhost:7136/user/editcredentials', {
                 method: "POST",
                 headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
@@ -69,6 +46,8 @@ const EditProfile = () => {
                     image
                 })
             })
+        props.setCurrentPage("Show Profile")
+        setRefresh(!refresh)
     }
 const getImage=(image)=>{setFile(image);setImage(image.name)}
 
@@ -77,11 +56,11 @@ const getImage=(image)=>{setFile(image);setImage(image.name)}
             <form onSubmit={submit}>
                 <h1 className="ProfilePageTitle">Edit Profile</h1>
                 <p>Username</p>
-                <input type="text" placeholder={user.name} onChange={e => setName(e.target.value)}  />
+                <input type="text" defaultValue={user.name} onChange={e => setName(e.target.value)}  />
                 <p>Email</p>
-                <input type="email" placeholder={user.email} onChange={e => setEmail(e.target.value)}  />
+                <input type="email" defaultValue={user.email} onChange={e => setEmail(e.target.value)}  />
                 <p>Password</p>
-                <input type="password" placeholder={user.password} onChange={e => setPassword(e.target.value)}  />
+                <input type="password" defaultValue={user.password} onChange={e => setPassword(e.target.value)}  />
                 <p>Profile Image</p>
                 <input type="file" onChange={e => getImage(e.target.files[0])}  />
                 <button type="submit">Submit</button>

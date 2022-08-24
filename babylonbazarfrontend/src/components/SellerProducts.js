@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useAtom} from "jotai";
 import {USER_ATOM} from "../STORE";
+import axios from "axios";
 
 const SellerProducts = () => {
     let [user] = useAtom(USER_ATOM)
@@ -21,17 +22,19 @@ const SellerProducts = () => {
         description: "",
     })
 
-    let [products, setProducts] = useState([{
-        userId: userId,
-        name: "",
-        price: "",
-        description: "",
-    }])
+    let [products, setProducts] = useState([])
 
-    let [pictures, setPictures]=useState([{
-        productId:"",
-        name:""
-    }])
+    let [pictures, setPictures]=useState([])
+    let [file, setFile] = useState()
+    let [image, setImage] = useState("")
+
+
+    useEffect(() => {
+        fetch(`https://localhost:7136/Product/GetProductImages/${id}`, {method: "GET"})
+            .then(response => response.json())
+            .then((response) => { setPictures(response) })
+    }, [id, reload])
+
 
     useEffect(() => {
         fetch(`https://localhost:7136/Product/FilterBySupplier/${user.id}`, { method: "GET", })
@@ -64,9 +67,9 @@ const SellerProducts = () => {
     }, [subCategoryId])
 
 
-    if (products[0].name === "") {
-        return <div>Loading...</div>
-    }
+    // if (products.length === 0) {
+    //     return <div>Loading...</div>
+    // }
 
     const addProduct = async (e) => {
         e.preventDefault()
@@ -113,21 +116,59 @@ const SellerProducts = () => {
         await fetch(`https://localhost:7136/product/DeleteProduct/${locationId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
-            .then(() => setReload(!reload))
+            .then(() => {setReload(!reload); setForm("")})
     };
 
     const refreshForm = () => {
-        document.getElementById("form").reset()
+        document.getElementById("content").reset()
     };
 
-    const productPhotos = async (id) => {
-            await fetch(`https://localhost:7136/Product/GetProductImages/${user.id}`, { method: "GET", })
-                .then(response => response.json())
-                .then((response) => { setPictures(response);setForm("Pics") })
-        }
+    const getImage=(image)=>{setFile(image);setImage(image.name)}
+    const uploadWithFormData = async ()=>{
+        const formData = new FormData();
+        formData.append("target", "Products");
+        formData.append("_file", file);
+        console.log(formData["_file"]);
+        submitForm("multipart/form-data", formData, (msg) => console.log(msg));
+    }
+    const submitForm = (contentType, data, setResponse) => {
+        axios({
+            url: `https://localhost:7136/user/savephoto`,
+            method: 'POST',
+            data: data,
+            headers: {
+                'Content-Type': contentType,
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+            }
+        }).then((response) => { setResponse(response.data);
+        }).catch((error) => { setResponse(error);
+        })
+    }
+
+    const submit = async (e) => {
+        e.preventDefault()
+        if (image !== "") { await uploadWithFormData()}
+        const credentials = await fetch('https://localhost:7136/product/addproductimage', {
+            method: "POST",
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
+            body: JSON.stringify({
+                productId: id,
+                name: image
+            })
+        })
+        setReload(!reload)
+    }
+
+    const deleteImage = async (imageId) => {
+        await fetch(`https://localhost:7136/product/DeleteProductImage/${imageId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
+            .then(() => setReload(!reload))
+    };
+
 
     return (
-        <div>
+        <div id="content">
             <h1 className="ProfilePageTitle">My Shop</h1>
             <button type={"button"} onClick={() => setForm("Add")} >Add Product</button>
             <table>
@@ -145,7 +186,7 @@ const SellerProducts = () => {
                         <td>{product.product.name} </td>
                         <td>{product.product.price}</td>
                         <td>{product.product.description}</td>
-                        <td><button type={"button"} onClick={() => { productPhotos(product.product.id); refreshForm() }}>ManagePhotos</button></td>
+                        <td><button type={"button"} onClick={() => { setId((product.product.id)); setForm("Pics"); refreshForm()}}>Manage</button></td>
                         <td><button type={"button"} onClick={() => { setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
                         <td><button type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>
                     </tr>
@@ -207,12 +248,24 @@ const SellerProducts = () => {
                 </form>
             }
             {form === "Pics" &&
-                <form id="form" onSubmit={editProduct}>
-                    <h1>Cum drak pun lista de poze aici?</h1>
-                    <input type={"text"} defaultValue={"broken"} onChange={e => setName(e.target.value)}/>
-                    <br/>
-                    <button type={"submit"}>Submit</button>
-                </form>
+                <>
+                    <table>
+                        <thead>
+                        </thead>
+                        <tbody>
+                        {pictures.map(picture =>
+                            <tr>
+                              <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
+                              <td><button onClick={() => deleteImage(picture.id)}>Delete</button></td>
+                            </tr>
+                            )}
+                        </tbody>
+                    </table>
+                    <form onSubmit={submit}>
+                        <input type="file" onChange={e => getImage(e.target.files[0])}  />
+                        <button type="submit">Upload Image</button>
+                    </form>
+                </>
             }
         </div>
     );

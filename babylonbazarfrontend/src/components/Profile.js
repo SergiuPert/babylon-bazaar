@@ -20,7 +20,7 @@ const Profile = () => {
             content = <ProfileInfo />;
             break;
         case "Edit Profile":
-            content = <EditProfile />;
+            content = <EditProfile setCurrentPage={setCurrentPage} />;
             break;
         case "Orders":
             content = <OrderHistory />;

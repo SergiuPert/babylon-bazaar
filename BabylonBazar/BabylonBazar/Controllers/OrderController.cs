@@ -13,12 +13,14 @@ namespace BabylonBazar.Controllers
         private ProductService _productService;
         private UserService _userService;
         private IHttpContextAccessor _contextAccessor;
-        public OrderController(OrderService orderService, ProductService productService, UserService userService, IHttpContextAccessor httpContextAccessor)
+        private readonly JwtService _jwtService;
+        public OrderController(OrderService orderService, ProductService productService, UserService userService, IHttpContextAccessor httpContextAccessor, JwtService jwtService)
         {
             _orderService = orderService;
             _productService = productService;
             _contextAccessor = httpContextAccessor;
             _userService = userService;
+            _jwtService = jwtService;
         }
         [EnableCors("Policy")]
         public JsonResult Cart(int id)
@@ -42,12 +44,13 @@ namespace BabylonBazar.Controllers
             return Json(cartVM);
         }
         [HttpPost]
-        public IActionResult AddToCart(int productId)
+        public IActionResult AddToCart([FromRoute]int id)
         {
-            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
-            int userId = int.Parse(Encoding.ASCII.GetString(userByte));
-            _orderService.AddToUserCart(userId, productId, 1);
-            return View();
+            var jwt = Request.Cookies["jwt"];
+            var token = _jwtService.Verify(jwt);
+            int userId = int.Parse(token.Issuer);
+            _orderService.AddToUserCart(userId, id, 1);
+            return Ok();
         }
         [HttpPost]
         public IActionResult RemoveFromCart(int cartId)
