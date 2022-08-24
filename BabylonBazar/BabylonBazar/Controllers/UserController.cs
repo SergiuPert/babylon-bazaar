@@ -114,10 +114,10 @@ namespace BabylonBazar.Controllers
                 var token = _jwtService.Verify(jwt);
                 int userId = int.Parse(token.Issuer);
                 var user = _userService.Get(userId);
-                user.Email = credentials.Email;
-                user.Password = credentials.Password;
-                user.Name = credentials.Name;
-                user.Image = credentials.Image;
+                if(!String.IsNullOrEmpty(credentials.Email)) user.Email = credentials.Email;
+                if(!String.IsNullOrEmpty(credentials.Password)) user.Password = credentials.Password;
+                if(!String.IsNullOrEmpty(credentials.Name)) user.Name = credentials.Name;
+                if(!String.IsNullOrEmpty(credentials.Image)) user.Image = credentials.Image;
                 _userService.Update(user);
             }
             catch (Exception ex)
@@ -150,27 +150,9 @@ namespace BabylonBazar.Controllers
             _userService.RemoveLocation(id);
             return Ok();
         }
-        //[HttpPost("savephoto")]
-        //[Consumes("multipart/form-data")]
-        //public async Task<IActionResult> SavePhoto([FromForm] ImageDto _file)
-        //{
-        //    if (_file == null) return BadRequest("No file sent");
-        //    //if (file.Length <= 0) return BadRequest("Empty File");
-
-        //    var receivedFileName = Path.GetFileName(_file.FileName);
-
-        //    //this needs to be edited when we move to a server
-        //    var fullFileName = Path.Combine(@"D:\Code\Projects\BabylonBazar\el-proyecte-grande-sprint-1-csharp-Eagle-Thunder\BabylonBazar\BabylonBazar\wwwroot\Images\Users\",receivedFileName);
-
-        //    using (var stream = System.IO.File.Create(fullFileName))
-        //        await _file.File.CopyToAsync(stream);
-
-        //    return Ok("Photo saved");
-
-        //}
-        [HttpPost("savephoto")]
+        [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> SavePhoto([FromForm] IFormFile _file)
+        public async Task<IActionResult> SavePhoto([FromForm] IFormFile _file,[FromForm] string target)
         {
             if (_file == null) return BadRequest("No file sent");
             //if (file.Length <= 0) return BadRequest("Empty File");
@@ -178,7 +160,7 @@ namespace BabylonBazar.Controllers
             //var receivedFileName = Path.GetFileName(_file);
             
             //this needs to be edited when we move to a server
-            var fullFileName = Path.Combine(@".\img.jpg");
+            var fullFileName = Path.Combine(@".\wwwroot\Images\"+target+"\\"+_file.FileName);
             using (var stream = System.IO.File.Create(fullFileName))
                 await _file.CopyToAsync(stream);
             Console.WriteLine("a ajuns");

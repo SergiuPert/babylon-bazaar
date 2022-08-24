@@ -10,7 +10,7 @@ const EditProfile = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [image, setImage] = useState("")
-    let file;
+    let [file, setFile] = useState();
 
     const submitForm = (contentType, data, setResponse) => {
         axios({
@@ -22,13 +22,14 @@ const EditProfile = () => {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
             }
         }).then((response) => { setResponse(response.data);
-        }).catch((error) => { setResponse("error");
+        }).catch((error) => { setResponse(error);
         })
     }
     const uploadWithFormData = async ()=>{
         const formData = new FormData();
-        formData.append("FileName", image);
-        formData.append("File", file);
+        formData.append("target", "Users");
+        formData.append("_file", file);
+        console.log(formData["_file"]);
         submitForm("multipart/form-data", formData, (msg) => console.log(msg));
     }
     const uploadWithJSON = async ()=>{
@@ -60,6 +61,7 @@ const EditProfile = () => {
         const credentials = await fetch('https://localhost:7136/user/editcredentials', {
                 method: "POST",
                 headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
+                credentials: 'include',
                 body: JSON.stringify({
                     name,
                     email,
@@ -68,7 +70,7 @@ const EditProfile = () => {
                 })
             })
     }
-const getImage=(image)=>{file=image;setImage(image.name)}
+const getImage=(image)=>{setFile(image);setImage(image.name)}
 
     return (
         <div>
