@@ -13,7 +13,7 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-h1, h2, h3, h4, h5, p, span, button {
+h1, h2, h3, h4, h5, p, span, button, td {
     /*font-family: "Arial Rounded MT Bold";*/
     font-family: Tahoma;
     font-size: 1vw;
@@ -285,6 +285,42 @@ button {
     text-align: center;
 }
 
+.Quantity {
+    font-weight: bold;
+    font-size: 1vw;
+    position: relative;
+    padding-top: 2vw;
+}
+
+.AddAndSubtractQuantity {
+    display: flex;
+    position: relative;
+    margin: auto;
+    padding-top: 0.4vw;
+    /*left: 1vw;*/
+    /* flex-direction: row; */
+    /* align-items: unset; */
+    /* justify-content: center; */
+    width: 17vw;
+    /*padding-left: 1vw;*/
+}
+
+.TableBorder {
+    border: 1vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 3vw;
+    width: fit-content;
+}
+
+.TableButton{
+    padding: 1vw;
+}
+
+.productPicturesInForm {
+    height: auto;
+    width: 29vw;
+}
+
 .cardImage {
     position: relative;
     top: 0px;
@@ -332,6 +368,23 @@ button {
 }
 
 table, tr, td {
-    border: 2px black solid;
+    border: 2px #bb8c60 solid;
     border-collapse: collapse;
 }
+
+.InputField {
+    color: white;
+    background: transparent !important;
+    /*background-color: #7A2E2BE5;*/
+    border: 1vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+}
+
+.blackText {
+    color: black;
+}
+
+
+
+

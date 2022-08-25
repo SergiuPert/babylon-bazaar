@@ -56,40 +56,42 @@ const FinancialData = () => {
     return (
         <div>
             <h1 className="ProfilePageTitle">Financial Options</h1>
-            <button type={"button"} onClick={() => setForm("Add")} >Add Card</button>
-            <table>
-                <thead>
-                <tr>
-                    <td>Card Number</td>
-                    <td>Owner</td>
-                    <td>Expires on</td>
-                    <td>CVC</td>
-                </tr>
-                </thead>
-                <tbody>
-                {cards.map(card =>
+            <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"button"} onClick={() => setForm("Add")} >Add</button>
+            <div className={"TableBorder"}>
+                <table>
+                    <thead>
                     <tr>
-                        <td>{card.cardNumber} </td>
-                        <td>{card.ownerName}</td>
-                        <td>{card.expirationDate.substring(0,10)}</td>
-                        <td>{card.cvc}</td>
-                        <td><button type={"button"} onClick={() => { deleteCard(card.id) }}>Delete</button></td>
+                        <td>Card Number</td>
+                        <td>Owner</td>
+                        <td>Expires on</td>
+                        <td>CVC</td>
                     </tr>
-                )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {cards.map(card =>
+                        <tr>
+                            <td>{card.cardNumber} </td>
+                            <td>{card.ownerName}</td>
+                            <td>{card.expirationDate.substring(0,10)}</td>
+                            <td>{card.cvc}</td>
+                            <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { deleteCard(card.id) }}>Delete</button></td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+            </div>
             {form === "Add" &&
                 <form onSubmit={addCard}>
                     <h1>CardNumber</h1>
-                    <input type={"text"} onChange={e => setCardNumber(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setCardNumber(e.target.value)} required={true}/>
                     <h1>OwnerName</h1>
-                    <input type={"text"} onChange={e => setOwnerName(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setOwnerName(e.target.value)} required={true}/>
                     <h1>ExpirationDate</h1>
-                    <input type={"date"} onChange={e => setExpirationDate(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"date"} onChange={e => setExpirationDate(e.target.value)} required={true}/>
                     <h1>CVC</h1>
-                    <input type={"text"} onChange={e => setCVC(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setCVC(e.target.value)} required={true}/>
                     <br/>
-                    <button type={"submit"}>Submit</button>
+                    <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Submit</button>
                 </form>
             }
         </div>

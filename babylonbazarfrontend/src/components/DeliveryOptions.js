@@ -130,79 +130,81 @@ const DeliveryOptions = () => {
     return (
         <div>
             <h1 className="ProfilePageTitle">Delivery Options</h1>
-            <button type={"button"} onClick={() => setForm("Add")} >Add Location</button>
-            <table>
-                <thead>
+            <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"button"} onClick={() => setForm("Add")} >Add</button>
+            <div className={"TableBorder"}>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Phone Number</td>
+                            <td>Email</td>
+                            <td>Country</td>
+                            <td>County</td>
+                            <td>City</td>
+                            <td>Address</td>
+                            <td>ZipCode</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {locations.map(location =>
                     <tr>
-                        <td>Name</td>
-                        <td>Phone Number</td>
-                        <td>Email</td>
-                        <td>Country</td>
-                        <td>County</td>
-                        <td>City</td>
-                        <td>Address</td>
-                        <td>ZipCode</td>
+                        <td>{location.name} </td>
+                        <td>{location.phoneNumber}</td>
+                        <td>{location.email}</td>
+                        <td>{location.country}</td>
+                        <td>{location.county}</td>
+                        <td>{location.city}</td>
+                        <td>{location.address}</td>
+                        <td>{location.zipCode}</td>
+                        <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => {setSelectedLocation(location); setId(location.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
+                        <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { deleteLocation(location.id) }}>Delete</button></td>
                     </tr>
-                </thead>
-                <tbody>
-            {locations.map(location =>
-                <tr>
-                    <td>{location.name} </td>
-                    <td>{location.phoneNumber}</td>
-                    <td>{location.email}</td>
-                    <td>{location.country}</td>
-                    <td>{location.county}</td>
-                    <td>{location.city}</td>
-                    <td>{location.address}</td>
-                    <td>{location.zipCode}</td>
-                    <td><button type={"button"} onClick={() => {setSelectedLocation(location); setId(location.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
-                    <td><button type={"button"} onClick={() => { deleteLocation(location.id) }}>Delete</button></td>
-                </tr>
-            )}
-                </tbody>
-            </table>
+                )}
+                    </tbody>
+                </table>
+            </div>
             {form === "Add" &&
                 <form onSubmit={addLocation}>
                     <h1>Name</h1>
-                    <input type={"text"} onChange={e => setName(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setName(e.target.value)}/>
                     <h1>Phone Number</h1>
-                    <input type={"text"} onChange={e => setPhoneNumber(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setPhoneNumber(e.target.value)}/>
                     <h1>Email</h1>
-                    <input type={"text"} onChange={e => setEmail(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setEmail(e.target.value)}/>
                     <h1>Country</h1>
-                    <input type={"text"} onChange={e => setCountry(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setCountry(e.target.value)}/>
                     <h1>County</h1>
-                    <input type={"text"} onChange={e => setCounty(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setCounty(e.target.value)}/>
                     <h1>City</h1>
-                    <input type={"text"} onChange={e => setCity(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setCity(e.target.value)}/>
                     <h1>Address</h1>
-                    <input type={"text"} onChange={e => setAddress(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setAddress(e.target.value)}/>
                     <h1>ZipCode</h1>
-                    <input type={"text"} onChange={e => setZipCode(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setZipCode(e.target.value)}/>
                     <br/>
-                    <button type={"submit"}>Submit</button>
+                    <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Submit</button>
                 </form>
             }
             {form === "Edit" &&
                 <form id="form" onSubmit={editLocation}>
                     <h1>New Name</h1>
-                    <input type={"text"} defaultValue={selectedLocation.name} onChange={e => setName(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.name} onChange={e => setName(e.target.value)}/>
                     <h1>New Phone Number</h1>
-                    <input type={"text"} defaultValue={selectedLocation.phoneNumber} onChange={e => setPhoneNumber(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.phoneNumber} onChange={e => setPhoneNumber(e.target.value)}/>
                     <h1>New Email</h1>
-                    <input type={"text"} defaultValue={selectedLocation.email} onChange={e => setEmail(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.email} onChange={e => setEmail(e.target.value)}/>
                     <h1>New Country</h1>
-                    <input type={"text"} defaultValue={selectedLocation.country} onChange={e => setCountry(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.country} onChange={e => setCountry(e.target.value)}/>
                     <h1>New County</h1>
-                    <input type={"text"} defaultValue={selectedLocation.county} onChange={e => setCounty(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.county} onChange={e => setCounty(e.target.value)}/>
                     <h1>New City</h1>
-                    <input type={"text"} defaultValue={selectedLocation.city} onChange={e => setCity(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.city} onChange={e => setCity(e.target.value)}/>
                     <h1>New Address</h1>
-                    <input type={"text"} defaultValue={selectedLocation.address} onChange={e => setAddress(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.address} onChange={e => setAddress(e.target.value)}/>
                     <h1>New ZipCode</h1>
-                    <input type={"text"} defaultValue={selectedLocation.zipCode} onChange={e => setZipCode(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedLocation.zipCode} onChange={e => setZipCode(e.target.value)}/>
                     <br/>
-                    <button type={"submit"}>Submit</button>
+                    <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Submit</button>
                 </form>
             }
         </div>

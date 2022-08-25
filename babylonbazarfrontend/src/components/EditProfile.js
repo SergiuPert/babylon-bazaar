@@ -56,14 +56,15 @@ const getImage=(image)=>{setFile(image);setImage(image.name)}
             <form onSubmit={submit}>
                 <h1 className="ProfilePageTitle">Edit Profile</h1>
                 <p>Username</p>
-                <input type="text" defaultValue={user.name} onChange={e => setName(e.target.value)}  />
+                <input className={"InputField"} type="text" defaultValue={user.name} onChange={e => setName(e.target.value)}  />
                 <p>Email</p>
-                <input type="email" defaultValue={user.email} onChange={e => setEmail(e.target.value)}  />
+                <input className={"InputField"} type="email" defaultValue={user.email} onChange={e => setEmail(e.target.value)}  />
                 <p>Password</p>
-                <input type="password" defaultValue={user.password} onChange={e => setPassword(e.target.value)}  />
+                <input className={"InputField"} type="password" onChange={e => setPassword(e.target.value)}  />
                 <p>Profile Image</p>
-                <input type="file" onChange={e => getImage(e.target.files[0])}  />
-                <button type="submit">Submit</button>
+                <input className={"InputField"} type="file" onChange={e => getImage(e.target.files[0])}  />
+                <br/>
+                <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type="submit">Submit</button>
 
 
             </form>

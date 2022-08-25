@@ -38,7 +38,7 @@ namespace BabylonBazar.DAL
         {
             Cart? existing = _dbManager.Cart.FirstOrDefault(c => c.UserId == cart.UserId && c.ProductId == cart.ProductId);
             if (existing is null) return;
-            existing.Quantity -= cart.Quantity;
+            existing.Quantity -= 1;
             _dbManager.Cart.Update(existing);
             if (existing.Quantity <= 0)
             {

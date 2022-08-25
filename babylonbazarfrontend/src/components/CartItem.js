@@ -17,6 +17,12 @@ const CartItem = (props) => {
         credentials: "include"
     })}
 
+    const removeFromCart = async (productId) => {await fetch(`https://localhost:7136/order/removefromcart/${productId}`, {
+        method: "POST",
+        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
+        credentials: "include"
+    })}
+
     return (
         // <div className="CartItem">
         //     <h1>Name: {props.product.product.name}</h1>
@@ -33,11 +39,15 @@ const CartItem = (props) => {
             <div className="test">
                 <span className="ProductCardText">{props.product.product.name}</span>
             </div>
-            <span className={"ProductCardText"}>Quantity: {props.product.cart.quantity}</span>
             <br/>
             <span className="ProductCardText">Price: {props.product.product.price}$</span>
         </div>
-        <CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={addToCart} categoryId={props.product.product.id} text="+" />
+        {/*<br/>*/}
+        <div className="AddAndSubtractQuantity">
+            <CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={removeFromCart} categoryId={props.product.cart.id} text="-" />
+            <span className={"Quantity"}>Quantity: {props.product.cart.quantity}</span>
+            <CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={addToCart} categoryId={props.product.product.id} text="+" />
+        </div>
     </div>
 
 

@@ -53,11 +53,11 @@ namespace BabylonBazar.Controllers
             return Ok();
         }
         [HttpPost]
-        public IActionResult RemoveFromCart(int cartId)
+        public IActionResult RemoveFromCart([FromRoute]int id)
         {
-            Cart cart = _orderService.GetCartById(cartId);
+            Cart cart = _orderService.GetCartById(id);
             _orderService.RemoveFromUserCart(cart);
-            return View();
+            return Ok();
         }
         [HttpGet]
         public IActionResult Checkout()

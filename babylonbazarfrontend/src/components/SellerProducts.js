@@ -170,52 +170,54 @@ const SellerProducts = () => {
     return (
         <div id="content">
             <h1 className="ProfilePageTitle">My Shop</h1>
-            <button type={"button"} onClick={() => setForm("Add")} >Add Product</button>
-            <table>
-                <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Price</td>
-                    <td>Description</td>
-                    <td>Photos</td>
-                </tr>
-                </thead>
-                <tbody>
-                {products.map(product =>
+            <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"button"} onClick={() => setForm("Add")} >Add</button>
+            <div className={"TableBorder"}>
+                <table >
+                    <thead>
                     <tr>
-                        <td>{product.product.name} </td>
-                        <td>{product.product.price}</td>
-                        <td>{product.product.description}</td>
-                        <td><button type={"button"} onClick={() => { setId((product.product.id)); setForm("Pics"); refreshForm()}}>Manage</button></td>
-                        <td><button type={"button"} onClick={() => { setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
-                        <td><button type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>
+                        <td>Name</td>
+                        <td>Price</td>
+                        <td>Description</td>
+                        <td>Photos</td>
                     </tr>
-                )}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {products.map(product =>
+                        <tr>
+                            <td>{product.product.name} </td>
+                            <td>{product.product.price}</td>
+                            <td>{product.product.description}</td>
+                            <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { setId((product.product.id)); setForm("Pics"); refreshForm()}}>Manage</button></td>
+                            <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
+                            <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+            </div>
             {form === "Add" &&
                 <form id="form" onSubmit={addProduct}>
                     <h1>Name</h1>
-                    <input type={"text"} onChange={e => setName(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setName(e.target.value)} required={true}/>
                     <h1>Price</h1>
-                    <input type={"number"} onChange={e => setPrice(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"number"} onChange={e => setPrice(e.target.value)} required={true}/>
                     <h1>Description</h1>
-                    <input type={"text"} onChange={e => setDescription(e.target.value)} required={true}/>
+                    <input className={"InputField"} type={"text"} onChange={e => setDescription(e.target.value)} required={true}/>
                     {/*<br/>*/}
                     <h2>Main Category</h2>
-                    <select onChange={(e) => setCategoryId(e.target.value)} required={true}>
+                    <select className={"InputField"} onChange={(e) => setCategoryId(e.target.value)} required={true}>
                         <option></option>
                         {categories.map(category =>
-                            <option value={category.id}>{category.name}</option>
+                            <option className={"blackText"} value={category.id}>{category.name}</option>
                         )}
                     </select>
                     {categoryId !== "" &&
                         <>
                             <h2>Sub-Category</h2>
-                            <select onChange={(e) => setSubCategoryId(e.target.value)} required={true}>
+                            <select className={"InputField"} onChange={(e) => setSubCategoryId(e.target.value)} required={true}>
                             <option></option>
                                 {subCategories.map(subCategory =>
-                                    <option value={subCategory.id}>{subCategory.name}</option>
+                                    <option className={"blackText"} value={subCategory.id}>{subCategory.name}</option>
                                 )}
                             </select>
                         </>
@@ -223,47 +225,52 @@ const SellerProducts = () => {
                     {subCategoryId !== "" &&
                         <>
                             <h2>Sub-Sub-Category</h2>
-                            <select onChange={(e) => setSubSubCategoryId(e.target.value)} required={true}>
+                            <select className={"InputField"} onChange={(e) => setSubSubCategoryId(e.target.value)} required={true}>
                             <option></option>
                                 {subSubCategories.map(subSubCategory =>
-                                    <option value={subSubCategory.id}>{subSubCategory.name}</option>
+                                    <option className={"blackText"} value={subSubCategory.id}>{subSubCategory.name}</option>
                                 )}
                             </select>
                         </>
                     }
                     <br/>
-                    <button type={"submit"}>Submit</button>
+                    <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Submit</button>
                 </form>
             }
             {form === "Edit" &&
                 <form id="form" onSubmit={editProduct}>
                     <h1>New Name</h1>
-                    <input type={"text"} defaultValue={selectedProduct.name} onChange={e => setName(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedProduct.name} onChange={e => setName(e.target.value)}/>
                     <h1>New Price</h1>
-                    <input type={"text"} defaultValue={selectedProduct.price} onChange={e => setPrice(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedProduct.price} onChange={e => setPrice(e.target.value)}/>
                     <h1>New Description</h1>
-                    <input type={"text"} defaultValue={selectedProduct.description} onChange={e => setDescription(e.target.value)}/>
+                    <input className={"InputField"} type={"text"} defaultValue={selectedProduct.description} onChange={e => setDescription(e.target.value)}/>
                     <br/>
-                    <button type={"submit"}>Submit</button>
+                    <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Submit</button>
                 </form>
             }
             {form === "Pics" &&
                 <>
-                    <table>
-                        <thead>
-                        </thead>
-                        <tbody>
-                        {pictures.map(picture =>
-                            <tr>
-                              <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
-                              <td><button onClick={() => deleteImage(picture.id)}>Delete</button></td>
-                            </tr>
-                            )}
-                        </tbody>
-                    </table>
+                    <br/>
+                    <div className={"TableBorder"}>
+                        <table>
+                            <thead>
+                            </thead>
+                            <tbody>
+                            {pictures.map(picture =>
+                                <tr>
+                                  <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
+                                  <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} onClick={() => deleteImage(picture.id)}>Delete</button></td>
+                                </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                    <br/>
                     <form onSubmit={submit}>
-                        <input type="file" onChange={e => getImage(e.target.files[0])}  />
-                        <button type="submit">Upload Image</button>
+                        <input className={"InputField"} type="file" onChange={e => getImage(e.target.files[0])}  />
+                        <br/>
+                        <button className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type="submit">Upload</button>
                     </form>
                 </>
             }
