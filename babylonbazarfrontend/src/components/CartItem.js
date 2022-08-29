@@ -15,13 +15,18 @@ const CartItem = (props) => {
         method: "POST",
         headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
         credentials: "include"
-    })}
+    })
+        .then(() => props.refresh())
+
+    }
 
     const removeFromCart = async (productId) => {await fetch(`https://localhost:7136/order/removefromcart/${productId}`, {
         method: "POST",
         headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
         credentials: "include"
-    })}
+    })
+        .then(() => props.refresh())
+    }
 
     return (
         // <div className="CartItem">
@@ -35,7 +40,7 @@ const CartItem = (props) => {
 
     <div className="ProductCard">
         <div onClick={() => props.selectProduct(props.product.product.id)}>
-            <img className="cardImage" src={"https://localhost:7136/Images/Products/" + picture}></img>
+            <img className="cardImage" src={"https://localhost:7136/Images/Products/" + picture.name}></img>
             <div className="test">
                 <span className="ProductCardText">{props.product.product.name}</span>
             </div>

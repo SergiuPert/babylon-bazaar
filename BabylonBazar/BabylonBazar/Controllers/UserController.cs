@@ -152,7 +152,7 @@ namespace BabylonBazar.Controllers
         }
         [HttpPost]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> SavePhoto([FromForm] IFormFile _file,[FromForm] string target)
+        public async Task<IActionResult> SavePhoto([FromForm] IFormFile _file,[FromForm] string target, string fileName)
         {
             if (_file == null) return BadRequest("No file sent");
             //if (file.Length <= 0) return BadRequest("Empty File");
@@ -160,12 +160,19 @@ namespace BabylonBazar.Controllers
             //var receivedFileName = Path.GetFileName(_file);
             
             //this needs to be edited when we move to a server
-            var fullFileName = Path.Combine(@".\wwwroot\Images\"+target+"\\"+_file.FileName);
+
+            var fullFileName = Path.Combine(@".\wwwroot\Images\"+target+"\\"+fileName);
             using (var stream = System.IO.File.Create(fullFileName))
                 await _file.CopyToAsync(stream);
             Console.WriteLine("a ajuns");
             return Ok("Photo saved");
 
+        }
+
+        public JsonResult GetUsernameById([FromRoute]int id)
+        {
+            Users user = _userService.Get(id);
+            return Json(user.Name);
         }
     }
 }

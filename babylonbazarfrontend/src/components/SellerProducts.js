@@ -123,10 +123,17 @@ const SellerProducts = () => {
         document.getElementById("content").reset()
     };
 
-    const getImage=(image)=>{setFile(image);setImage(image.name)}
+    const getImage = (image) => {
+        setFile(image);
+        let fileName = image.name.split(".")
+        let name = fileName[0] + Date.now().toString() + "." + fileName[1]
+        setImage(name)
+    }
+
     const uploadWithFormData = async ()=>{
         const formData = new FormData();
         formData.append("target", "Products");
+        formData.append("fileName", image)
         formData.append("_file", file);
         console.log(formData["_file"]);
         submitForm("multipart/form-data", formData, (msg) => console.log(msg));
@@ -252,20 +259,20 @@ const SellerProducts = () => {
             {form === "Pics" &&
                 <>
                     <br/>
-                    <div className={"TableBorder"}>
-                        <table>
-                            <thead>
-                            </thead>
-                            <tbody>
-                            {pictures.map(picture =>
-                                <tr>
-                                  <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
-                                  <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} onClick={() => deleteImage(picture.id)}>Delete</button></td>
-                                </tr>
+                        <div className={"TableBorder"}>
+                            <table>
+                                <thead>
+                                </thead>
+                                <tbody>
+                                {pictures.map(picture =>
+                                    <tr>
+                                        <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
+                                        <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} onClick={() => deleteImage(picture.id)}>Delete</button></td>
+                                    </tr>
                                 )}
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
                     <br/>
                     <form onSubmit={submit}>
                         <input className={"InputField"} type="file" onChange={e => getImage(e.target.files[0])}  />

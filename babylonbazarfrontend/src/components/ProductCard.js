@@ -19,7 +19,7 @@ const ProductCard = (props) => {
     return (
         <div className="ProductCard">
             <div onClick={() => props.selectProduct(props.productModel.product.id)}>
-                <img className="cardImage" src={require(`../images/${images[Math.floor(Math.random()*images.length)]}`)}></img>
+                <img className="cardImage" src={"https://localhost:7136/Images/Products/" + props.productModel.image.name}></img>
             <div className="test">
                 <span className="ProductCardText">{props.productModel.product.name}</span>
             </div>

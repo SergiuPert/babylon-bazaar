@@ -221,6 +221,31 @@ button {
     right: 4vw;
 }
 
+.ReviewBox {
+    border: 2vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw;
+    margin-bottom: 1vw;
+}
+
+.ReviewTitleText {
+    color: white;
+    font-size: xx-large;
+}
+
+.ReviewHeading {
+    display: flex;
+}
+
+.ReviewStars {
+    position: absolute;
+    right: 5vw;
+}
+
+.ReviewComment {
+    width: 87%;
+}
+
 .responsiveCarousel {
     height: 20vw;
     width: 20vw;
@@ -263,12 +288,22 @@ button {
 .Cart {
     margin: 5% 1vw;
     /*width: 100%;*/
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 24rem);
+
     border: 2vw solid;
     border-image: url('images/backgroundBorder1.png') 10% round;
     border-image-width: 2vw;
     background-color: rgba(122, 46, 43, 0.9);
+}
+
+.CartItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 24rem);
+}
+
+.TotalText {
+    color: white;
+    text-align: center;
+    font-size: xx-large;
 }
 
 .CartItem {

@@ -120,5 +120,13 @@ namespace BabylonBazar.DSL {
 		public void DeleteProductCategory(int id) {
 			_productCategoriesManager.Remove(id);
 		}
+
+		public void AddProductReview(Reviews review) { 
+			_reviewsManager.Add(review);
+		}
+
+		public void RemoveProductReview(int id){
+			_reviewsManager.Remove(id);
+		}
 	}
 }

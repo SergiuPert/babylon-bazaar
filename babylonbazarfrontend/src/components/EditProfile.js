@@ -28,8 +28,8 @@ const EditProfile = (props) => {
     const uploadWithFormData = async ()=>{
         const formData = new FormData();
         formData.append("target", "Users");
+        formData.append("fileName", image)
         formData.append("_file", file);
-        console.log(formData["_file"]);
         submitForm("multipart/form-data", formData, (msg) => console.log(msg));
     }
     const submit = async (e) => {
@@ -49,7 +49,12 @@ const EditProfile = (props) => {
         props.setCurrentPage("Show Profile")
         setRefresh(!refresh)
     }
-const getImage=(image)=>{setFile(image);setImage(image.name)}
+const getImage = (image) => {
+        setFile(image);
+        let fileName = image.name.split(".")
+        let name = fileName[0] + Date.now().toString() + "." + fileName[1]
+        setImage(name)
+    }
 
     return (
         <div>

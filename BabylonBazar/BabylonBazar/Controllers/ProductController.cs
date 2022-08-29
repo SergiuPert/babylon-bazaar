@@ -9,10 +9,12 @@ using Newtonsoft.Json;
 namespace BabylonBazar.Controllers {
 	public class ProductController:Controller {
 		private ProductService _productService;
+		private JwtService _jwtService;
 
-        public ProductController(ProductService productService)
+        public ProductController(ProductService productService, JwtService jwtService)
         {
 			_productService = productService;
+			_jwtService = jwtService;
         }
 		public IActionResult Home(int page=0)
 		{
@@ -122,6 +124,29 @@ namespace BabylonBazar.Controllers {
 		[HttpPost]
 		public IActionResult DeleteProductCategory([FromRoute] int id) {
 			_productService.DeleteProductCategory(id);
+			return Ok();
+		}
+
+		[HttpPost]
+		public IActionResult AddProductReview([FromBody] ReviewDto review)
+        {
+			var jwt = Request.Cookies["jwt"];
+			var token = _jwtService.Verify(jwt);
+			int userId = int.Parse(token.Issuer);
+
+			Reviews newReview = new Reviews();
+			newReview.ProductId = review.ProductId;
+			newReview.Comment = review.Comment;
+			newReview.Rating = review.Rating;
+			newReview.UserId = userId;
+			_productService.AddProductReview(newReview);
+			return Ok();
+        }
+
+		[EnableCors("Policy")]
+		[HttpPost]
+		public IActionResult RemoveProductReview(int id) { 
+			_productService.RemoveProductReview(id);
 			return Ok();
 		}
 	}
