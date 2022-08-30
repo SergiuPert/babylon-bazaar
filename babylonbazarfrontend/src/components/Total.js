@@ -7,6 +7,7 @@ const Total = (props) => {
             props.cart.products.map(product => {
                 total += product.product.price * product.cart.quantity
             })
+            props.setCartTotal(total)
             return total
         }
     }

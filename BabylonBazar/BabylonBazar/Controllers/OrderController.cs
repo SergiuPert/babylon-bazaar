@@ -59,24 +59,26 @@ namespace BabylonBazar.Controllers
             _orderService.RemoveFromUserCart(cart);
             return Ok();
         }
+        //[HttpGet]
+        //public IActionResult Checkout()
+        //{
+        //    var jwt = Request.Cookies["jwt"];
+        //    var token = _jwtService.Verify(jwt);
+        //    int userId = int.Parse(token.Issuer);
+        //    List<Location> locations = _userService.GetLocations(userId);
+        //    return View(locations);
+        //}
         [HttpGet]
-        public IActionResult Checkout()
+        public IActionResult Checkout([FromRoute] int id)
         {
-            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
-            int userId = int.Parse(Encoding.ASCII.GetString(userByte));
-            List<Location> locations = _userService.GetLocations(userId);
-            return View(locations);
-        }
-        [HttpPost]
-        public IActionResult Checkout(int locationId)
-        {
-            byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
-            int userId = int.Parse(Encoding.ASCII.GetString(userByte));
+            var jwt = Request.Cookies["jwt"];
+            var token = _jwtService.Verify(jwt);
+            int userId = int.Parse(token.Issuer);
             double totalCost = _orderService.GetTotalOrderCost(userId);
             int orderId = _orderService.ProcessUserOrder(userId);
-            _orderService.SendNotifications(orderId, locationId);
+            _orderService.SendNotifications(orderId, id);
             _userService.UpdateUserBalance(userId, -totalCost);
-            return View("PaymentCompletePage");
+            return Ok();
         }
         public IActionResult PaymentCompletePage()
         {

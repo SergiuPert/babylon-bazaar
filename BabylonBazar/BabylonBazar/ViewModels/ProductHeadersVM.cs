@@ -3,6 +3,7 @@
 namespace BabylonBazar.ViewModels {
 	[Serializable]
 	public class ProductHeadersVM {
+		public int pages { get; set; }
 		public Product product { get; set; }
 		public double rating { get; set; }
 		public string supplier { get; set; }

@@ -48,7 +48,7 @@ const DeliveryOptions = () => {
         fetch(`https://localhost:7136/User/GetUserLocations/${user.id}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setLocations(response) })
-    }, [user.id, reload, _name, _phoneNumber, _email]) // crashed
+    }, [user.id, reload, _name, _phoneNumber, _email])
 
     if (locations.name === "") {
         return <div>Loading...</div>

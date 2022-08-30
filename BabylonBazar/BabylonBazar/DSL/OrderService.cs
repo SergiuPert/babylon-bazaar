@@ -44,7 +44,7 @@ namespace BabylonBazar.DSL {
 				_orderItemManager.Add(entry);
 			}
 			foreach(Cart cart in carts) {
-				_cartManager.Remove(cart);
+				_cartManager.RemoveAll(cart);
 			}
 			return order.Id;
 		}

@@ -35,8 +35,7 @@ const Review = (props) => {
             </div>
             <div className={"ReviewHeading"}>
                 <p className={"ReviewComment"}>{props.review.comment}</p>
-
-                {user.id === props.review.userId &&
+                {user !== null && user.id === props.review.userId &&
                     <div className={"ReviewStars"}>
                         <button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={deleteReview}>Delete</button>
                     </div>

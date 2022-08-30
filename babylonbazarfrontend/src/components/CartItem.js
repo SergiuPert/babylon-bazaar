@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import ProductCard from "./ProductCard";
-import StarRatings from "react-star-ratings";
-import CategoriesButton from "./CategoriesButton";
 import {useEffect} from "react";
+import 'react-notifications/lib/notifications.css';
 
 const CartItem = (props) => {
     const [picture, setPicture] = useState("")
@@ -16,7 +14,8 @@ const CartItem = (props) => {
         headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
         credentials: "include"
     })
-        .then(() => props.refresh())
+        .then(() => {props.refresh()})
+
 
     }
 
@@ -39,9 +38,15 @@ const CartItem = (props) => {
         // </div>
 
     <div className="ProductCard">
-        <div onClick={() => props.selectProduct(props.product.product.id)}>
-            <img className="cardImage" src={"https://localhost:7136/Images/Products/" + picture.name}></img>
-            <div className="test">
+        {/*<div onClick={() => props.selectProduct(props.product.product.id)}>*/}
+        <div onClick={props.createNotification("success")}>
+            {picture != null &&
+                <img className="cardImage" src={"https://localhost:7136/Images/Products/" + picture.name}></img>
+            }
+            {picture == null &&
+                <img className="cardImage" src={require("../images/default-image.jpg")}></img>
+            }
+            <div className="test" >
                 <span className="ProductCardText">{props.product.product.name}</span>
             </div>
             <br/>
@@ -49,10 +54,17 @@ const CartItem = (props) => {
         </div>
         {/*<br/>*/}
         <div className="AddAndSubtractQuantity">
-            <CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={removeFromCart} categoryId={props.product.cart.id} text="-" />
+            {/*<CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={removeFromCart} categoryId={props.product.cart.id} text="-" />*/}
+            <div className={"AddButton"} onClick={(props.createNotification("remove", removeFromCart, props.product.cart.id))}>
+                <button className={"AddButtonText"} >-</button>
+            </div>
             <span className={"Quantity"}>Quantity: {props.product.cart.quantity}</span>
-            <CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={addToCart} categoryId={props.product.product.id} text="+" />
+            {/*<CategoriesButton buttonStyle="AddButton" buttonTextStyle="AddButtonText" link={addToCart} categoryId={props.product.product.id} text="+"/>*/}
+            <div className={"AddButton"} onClick={(props.createNotification("add", addToCart, props.product.product.id))}>
+                <button className={"AddButtonText"} >+</button>
+            </div>
         </div>
+
     </div>
 
 

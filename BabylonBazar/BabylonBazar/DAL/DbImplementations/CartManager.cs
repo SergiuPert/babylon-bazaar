@@ -47,6 +47,14 @@ namespace BabylonBazar.DAL
             _dbManager.SaveChanges();
         }
 
+        public void RemoveAll(Cart cart)
+        {
+            Cart? existing = _dbManager.Cart.FirstOrDefault(c => c.UserId == cart.UserId && c.ProductId == cart.ProductId);
+            if (existing is null) return;
+            _dbManager.Cart.Remove(cart);
+            _dbManager.SaveChanges();
+        }
+
         public IEnumerable<Cart> GetCartItemsForUser(int userId)
         {
             IEnumerable<Cart> result = _dbManager.Cart.Where(c => c.UserId == userId);

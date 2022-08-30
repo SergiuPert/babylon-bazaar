@@ -1,7 +1,7 @@
 
 const CategoriesButton = (props) => {
     return (
-        <div className={props.buttonStyle} onClick={() => props.link(props.categoryId)}>
+        <div className={props.buttonStyle} onClick={() => {props.link(props.categoryId)}}>
             <button className={props.buttonTextStyle} >{props.text}</button>
         </div>
     );

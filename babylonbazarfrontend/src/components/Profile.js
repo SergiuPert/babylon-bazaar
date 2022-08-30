@@ -10,6 +10,7 @@ import SellerProducts from "./SellerProducts";
 import SellerNotifications from "./SellerNotifications";
 import DeliveryOptions from "./DeliveryOptions";
 import FinancialData from "./FinancialData";
+import AdminPage from "./AdminPage";
 
 const Profile = () => {
     let [user] = useAtom(USER_ATOM)
@@ -36,6 +37,9 @@ const Profile = () => {
             break;
         case "Payment Options":
             content = <FinancialData />;
+            break;
+        case "Admin":
+            content = <AdminPage />;
             break;
     }
     if (user === null) {
