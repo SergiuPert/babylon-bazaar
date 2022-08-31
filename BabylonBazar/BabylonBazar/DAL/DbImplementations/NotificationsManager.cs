@@ -18,7 +18,7 @@ namespace BabylonBazar.DAL {
 
 		public IEnumerable<Notifications> GetNotificationsByUser(int userId)
 		{
-			return _dbManager.Notifications.Where(n => n.UserId == userId);
+			return _dbManager.Notifications.Where(n => n.UserId == userId).OrderBy(n => n.Completed);
 		}
 		public Notifications? GetById(int id) {
 			return _dbManager.Notifications.FirstOrDefault(r => r.Id==id);

@@ -116,7 +116,8 @@ namespace BabylonBazar.DSL
         }
         public List<Location> GetLocations(int userId)
         {
-            return _locationManager.GetLocationsForUser(userId).ToList();
+            List<Location> locations = _locationManager.GetLocationsForUser(userId).ToList();
+            return locations != null ? locations : new List<Location>();
         }
         public CardInfo GetCard(int id)
         {
@@ -134,7 +135,8 @@ namespace BabylonBazar.DSL
             OrderItem orderItem = _orderItemManager.GetById(notification.OrderItemId);
             Product product = _productManager.GetById(orderItem.ProductId);
             _notificationsManager.Update(notification);
-            UpdateUserBalance(notification.UserId, product.Price * orderItem.Quantity);
+            double ballanceToBeAdded = (product.Price * orderItem.Quantity) * 0.9;
+            UpdateUserBalance(notification.UserId, ballanceToBeAdded);
         }
     }
 }

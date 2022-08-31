@@ -19,7 +19,7 @@ function App() {
     const [username, setUserName] = useState('')
     const [user, setUser] = useAtom(USER_ATOM)
     const [userId, setUserId] = useState('')
-    const [refresh, setRefresh] = useAtom(REFRESH)
+    const [refresh] = useAtom(REFRESH)
 
     useEffect(() => {
     (

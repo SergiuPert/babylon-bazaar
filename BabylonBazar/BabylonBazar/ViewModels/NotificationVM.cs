@@ -8,5 +8,7 @@ namespace BabylonBazar.ViewModels
         public Location location { get; set; }
         public OrderItem orderItem { get; set; }
         public Product product { get; set; }
+        public Order order { get; set; }
+        public string name { get; set; }
     }
 }

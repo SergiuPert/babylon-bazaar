@@ -2,7 +2,7 @@ import React from 'react';
 import {useEffect, useState} from "react";
 import CartItem from "./CartItem";
 import {useAtom} from "jotai";
-import {USER_ATOM} from "../STORE";
+import {REFRESH, USER_ATOM} from "../STORE";
 import Total from "./Total";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import CategoriesButton from "./CategoriesButton";
@@ -10,6 +10,7 @@ import Info from "./Info";
 
 const Cart = (props) => {
     let [user] = useAtom(USER_ATOM)
+    let [updateBalance, setUpdateBalance] = useAtom(REFRESH)
     let [cart, setCart] = useState(null)
     let [refresh, setRefresh] = useState(true)
     let [cartTotal, setCartTotal] = useState(0)
@@ -17,14 +18,14 @@ const Cart = (props) => {
     let [location, setLocation] = useState()
     let [submitted, setSubmitted] = useState(false)
     useEffect( () => {
-        fetch(`https://localhost:7136/Order/Cart/${user? user.id:0}`, { method: "GET", })
+        fetch(`https://localhost:7136/Order/Cart/${user? user.id : 0}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setCart(response)})
     }, [user, refresh])
 
 
     useEffect(() => {
-        fetch(`https://localhost:7136/User/GetUserLocations/${user? user.id:0}`, { method: "GET", })
+        fetch(`https://localhost:7136/User/GetUserLocations/${user? user.id : 0}`, { method: "GET", })
             .then(response => response.json())
             .then((response) => { setLocations(response) })
     }, [user])
@@ -32,11 +33,11 @@ const Cart = (props) => {
     const order = (e) => {
         e.preventDefault()
         fetch(`https://localhost:7136/Order/Checkout/${location}`, { method: "GET", credentials: "include" })
-            .then(() => setSubmitted(true))
+            .then(() => {setSubmitted(true); setUpdateBalance(!updateBalance)})
     }
 
 
-    if (cart === null || user === null) {
+    if (cart === null || user === null || locations === null) {
         return <div>Loading...</div>
     }
 
@@ -65,7 +66,7 @@ const Cart = (props) => {
             }
         };
     };
-    if (!submitted) {
+    if (!submitted && cart != null && user != null && locations != null) {
         return (
         <>
         <div className="Cart">

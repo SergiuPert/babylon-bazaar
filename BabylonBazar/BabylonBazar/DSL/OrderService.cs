@@ -71,7 +71,7 @@ namespace BabylonBazar.DSL {
 			foreach(OrderItem item in items)
             {
 				Notifications notification = new Notifications();
-				notification.UserId = _orderManager.GetById(orderId).UserId;
+				notification.UserId = _productManager.GetById(item.ProductId).UserId;
 				notification.OrderItemId = item.Id;
 				notification.LocationId = locationId;
 				_notificationsManager.Add(notification);
@@ -88,5 +88,9 @@ namespace BabylonBazar.DSL {
             }
 			return total;
 		}
+		public Order? GetById(int id)
+        {
+			return _orderManager.GetById(id);
+        }
 	}
 }

@@ -4,7 +4,6 @@ import React from 'react';
 import CategoriesButton from "./CategoriesButton";
 
 const ProductList = (props) => {
-    const [showForm, setShowForm] = useState(false)
     let [productModels, setProductModels] = useState([])
     let [page, setPage] = useState(0)
     let [pages, setPages] = useState(0)

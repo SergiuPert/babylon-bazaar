@@ -387,6 +387,53 @@ button {
 
 }
 
+.NotificationButtonComplete {
+    background-image: url('images/HorizontalScroll4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 2vw;
+    width: 100%;
+    text-align: center;
+}
+
+.NotificationButtonDone {
+    background-image: url('images/addButton1.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 2vw;
+    width: 100%;
+    text-align: center;
+}
+
+.Accordions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 16vw);
+}
+
+.Orders {
+    margin-bottom: 2vw;
+}
+
+.OrderHeader {
+    background-image: url('images/HorizontalScroll4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 2vw;
+    width: 100%;
+    color: black;
+    background-position-x: 2.5vw;
+    padding-left: 4.5vw;
+}
+
+.OrderTable {
+    border: 0.5vw solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 1.5vw;
+    width: fit-content;
+}
+
 .Flex {
     display: flex;
 }

@@ -29,7 +29,7 @@ namespace BabylonBazar.Controllers
             return Json(user);
         }
         [HttpGet]
-        public IActionResult NotificationsPage(int id)
+        public JsonResult NotificationsPage(int id)
         {
             List<NotificationVM> notifications = new List<NotificationVM>();
             List<Notifications> userNotifications = _userService.GetUserNotifications(id);
@@ -37,21 +37,27 @@ namespace BabylonBazar.Controllers
             {
                 NotificationVM notification = new NotificationVM();
                 notification.notification = item;
-                notification.product = _productService.GetProductDetails(id).product;
                 notification.orderItem = _orderService.GetOrderItem(item.OrderItemId);
+                notification.product = _productService.GetProductById(notification.orderItem.ProductId);
                 notification.location = _userService.GetLocation(item.LocationId);
+                notification.order = _orderService.GetById(notification.orderItem.OrderId);
+                notification.name = _userService.Get(notification.order.UserId).Name;
                 notifications.Add(notification);
             }
-            return View(notifications);
+            return Json(notifications);
         }
         [HttpPost]
-        public IActionResult CompleteOrder(int notificationId)
+        public IActionResult CompleteOrder([FromRoute] int id)
         {
-            _userService.CompleteNotification(notificationId);
-            return View("NotificationsPage");
+            _userService.CompleteNotification(id);
+            return Ok("NotificationsPage");
         }
-        public IActionResult GetOrderHistory(int userId)
+        [HttpGet]
+        public JsonResult GetOrderHistory()
         {
+            var jwt = Request.Cookies["jwt"];
+            var token = _jwtService.Verify(jwt);
+            int userId = int.Parse(token.Issuer);
             List<Order> orders = _orderService.GetOrdersForUser(userId);
             List<OrderVM> ordersVM = new List<OrderVM>();
             foreach(Order order in orders)
@@ -69,7 +75,7 @@ namespace BabylonBazar.Controllers
                 }
                 ordersVM.Add(orderVM);
             }
-            return View(ordersVM);
+            return Json(ordersVM);
         }
         [EnableCors("Policy")]
         public JsonResult GetUserLocations(int id)

@@ -25,9 +25,7 @@ namespace BabylonBazar.DAL
 
         public Location? GetById(int id)
         {
-            Console.WriteLine("Nah Brah");
-            Location result = new Location();
-            return result;
+            return _dbManager.Location.FirstOrDefault(l => l.Id == id);
         }
 
         public IEnumerable<Location> GetLocationsForUser(int userId)
