@@ -31,11 +31,9 @@ namespace BabylonBazar.DAL
             return _dbManager.ProductCategories.Where(c => c.ProductId==productId);
         }
 
-        public (IEnumerable<ProductCategories>, int) GetProductsForCategory(int categoryId, int page) {
-            int pagination = 12;
-            IEnumerable<ProductCategories> products = _dbManager.ProductCategories.Where(c => c.CategoryId == categoryId).Skip(page * pagination).Take(pagination);
-            int pages = (int)Math.Ceiling((decimal)(_dbManager.ProductCategories.Where(c => c.CategoryId == categoryId).Count()/12));
-            return (products, pages);
+        public IEnumerable<ProductCategories> GetProductsForCategory(int categoryId) {
+            IEnumerable<ProductCategories> products = _dbManager.ProductCategories.Where(c => c.CategoryId == categoryId);
+            return products;
         }
 
         public void Remove(ProductCategories productCategories)

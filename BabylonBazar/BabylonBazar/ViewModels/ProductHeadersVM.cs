@@ -8,7 +8,7 @@ namespace BabylonBazar.ViewModels {
 		public double rating { get; set; }
 		public string supplier { get; set; }
 		public Images image { get; set; }
-		public List<Categories> categories { get; set; }
+		public Categories categories { get; set; }
 
 	}
 }

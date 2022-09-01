@@ -434,10 +434,6 @@ button {
     width: fit-content;
 }
 
-.Flex {
-    display: flex;
-}
-
 /*CSS/styling Frameworks*/
 
 .registerForm {
@@ -459,6 +455,19 @@ button {
     align-items: center;
     margin: 5%;
     background-color: white;
+}
+
+.AdminTablePics {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 10vw;
+    width: 13vw;
+}
+
+
+.Flex {
+    display: flex;
 }
 
 table, tr, td {

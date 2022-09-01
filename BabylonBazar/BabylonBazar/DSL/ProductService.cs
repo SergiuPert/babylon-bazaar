@@ -33,13 +33,20 @@ namespace BabylonBazar.DSL {
 		}
 		public List<ProductHeadersVM> GetProductHeadersForCategory(int categoryId, int page) {
 			List<ProductHeadersVM> headers=new();
-			var productsAndPages = _productCategoriesManager.GetProductsForCategory(categoryId, page);
-			List<ProductCategories> productCategoriess = productsAndPages.Item1.ToList();
-			int pages = productsAndPages.Item2;
+			List<ProductCategories> productCategoriess = _productCategoriesManager.GetProductsForCategory(categoryId).ToList();
 			List<int> productIds = productCategoriess.Select(c => c.ProductId).ToList();
 			List<Product> products = new();
-			foreach(int productId in productIds) { products.Add(_productManager.GetById(productId)); }
-			foreach(Product product in products) {
+			foreach(int productId in productIds) {
+				Product? product = _productManager.GetById(productId);
+				if (product is not null && product.Aproved)
+                {
+					products.Add(product);
+				}
+			}
+			int pagination = 12;
+			int pages = (int)Math.Ceiling((decimal)(products.Count() / pagination));
+			products = products.Skip(page * pagination).Take(pagination).ToList();
+			foreach (Product product in products) {
 				List<Images> ProductImages=_imagesManager.GetImagesForProduct(product.Id).ToList();
 				Images defaultImage = new() {Name="default",ProductId=0};
 			ProductHeadersVM productHeaders = new();
@@ -47,7 +54,7 @@ namespace BabylonBazar.DSL {
 				productHeaders.supplier=_userManager.GetById(product.UserId).Name;
 				productHeaders.image=(ProductImages.Count==0)?defaultImage:ProductImages[0];
 				productHeaders.rating=_reviewsManager.GetRatingForProduct(product.Id);
-				productHeaders.categories=_categoriesManager.GetCategoriesForProduct(product.Id).ToList();
+				productHeaders.categories=_categoriesManager.GetCategoriesForProduct(product.Id).ToList()[0];
 				productHeaders.pages = pages;
 				headers.Add(productHeaders);
 			}
@@ -63,12 +70,12 @@ namespace BabylonBazar.DSL {
 				var images = _imagesManager.GetImagesForProduct(product.Id);
 				productHeaders.image=(images.Count()>0)?images.ToList()[0]:null;
 				productHeaders.rating=_reviewsManager.GetRatingForProduct(product.Id);
-				productHeaders.categories=_categoriesManager.GetCategoriesForProduct(product.Id).ToList();
+				productHeaders.categories=_categoriesManager.GetCategoriesForProduct(product.Id).ToList()[0];
 				headers.Add(productHeaders);
 			}
 			return headers;
 		}
-		public List<ProductHeadersVM> GetProducts(int page)
+		public List<ProductHeadersVM> GetApprovedProducts(int page)
         {
 			List<ProductHeadersVM> headers = new();
 			List<Product> products = _productManager.GetFirstXProducts(page).ToList();
@@ -79,11 +86,33 @@ namespace BabylonBazar.DSL {
 				productHeaders.supplier = _userManager.GetById(product.UserId).Name;
 				productHeaders.image = _imagesManager.GetImagesForProduct(product.Id).ToList()[0];
 				productHeaders.rating = _reviewsManager.GetRatingForProduct(product.Id);
-				productHeaders.categories = _categoriesManager.GetCategoriesForProduct(product.Id).ToList();
+				productHeaders.categories = _categoriesManager.GetCategoriesForProduct(product.Id).ToList()[0];
+				headers.Add(productHeaders);
+			}
+			return headers; //NOT USED
+        }
+
+		public List<ProductHeadersVM> GetAllProducts(int page)
+		{
+			List<ProductHeadersVM> headers = new();
+			var productsAndPages = _productManager.GetAllProducts(page);
+			List<Product> products = productsAndPages.Item1.ToList();
+			int pages = productsAndPages.Item2;
+			foreach (Product product in products)
+			{
+				ProductHeadersVM productHeaders = new();
+				productHeaders.product = product;
+				productHeaders.supplier = _userManager.GetById(product.UserId).Name;
+				var images = _imagesManager.GetImagesForProduct(product.Id).ToList();
+				productHeaders.image = (images.Count > 0)? images[0] : null;
+				productHeaders.rating = _reviewsManager.GetRatingForProduct(product.Id);
+				productHeaders.categories = _categoriesManager.GetCategoriesForProduct(product.Id).ToList()[0];
+				productHeaders.pages = pages;
 				headers.Add(productHeaders);
 			}
 			return headers;
-        }
+		}
+
 		public void Update(Product product)
         {
 			_productManager.Update(product);
@@ -131,5 +160,18 @@ namespace BabylonBazar.DSL {
 		public void RemoveProductReview(int id){
 			_reviewsManager.Remove(id);
 		}
+
+		public void SwitchApproval(int id)
+        {
+			_productManager.SwitchApproval(id);
+        }
+
+		public void AddCategory(string name, int id=0)
+        {
+			Categories categories = new Categories();
+			categories.Name = name;
+			categories.ParentId = id;
+			_categoriesManager.Add(categories);
+        }
 	}
 }

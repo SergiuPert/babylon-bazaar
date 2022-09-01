@@ -54,8 +54,24 @@ namespace BabylonBazar.DAL
         }
         public IEnumerable<Product> GetFirstXProducts(int page)
         {
-            int productsPerPage = 10;
-            return _dbManager.Products.Skip(page*productsPerPage).Take(productsPerPage);
+            int productsPerPage = 12;
+            return _dbManager.Products.Where(p => p.Aproved == true).Skip(page*productsPerPage).Take(productsPerPage); //NOT USED
+        }
+
+        public (IEnumerable<Product>, int pages) GetAllProducts(int page)
+        {
+            int productsPerPage = 20;
+            IEnumerable<Product> products = _dbManager.Products.Skip(page * productsPerPage).Take(productsPerPage).OrderBy(p => p.Aproved);
+            int pages = (int)Math.Ceiling((decimal)(_dbManager.Products.Count()/productsPerPage));
+        
+            return (products, pages);
+        }
+        public void SwitchApproval(int id)
+        {
+            Product product = _dbManager.Products.FirstOrDefault(p => p.Id == id);
+            product.Aproved = !product.Aproved;
+            _dbManager.Products.Update(product);
+            _dbManager.SaveChanges();
         }
     }
 }

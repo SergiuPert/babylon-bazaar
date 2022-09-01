@@ -18,7 +18,7 @@ namespace BabylonBazar.Controllers {
         }
 		public IActionResult Home(int page=0)
 		{
-			List<ProductHeadersVM> products = _productService.GetProducts(page);
+			List<ProductHeadersVM> products = _productService.GetApprovedProducts(page);
 			return View(products);
 		}
 
@@ -149,5 +149,28 @@ namespace BabylonBazar.Controllers {
 			_productService.RemoveProductReview(id);
 			return Ok();
 		}
+
+		[HttpGet]
+		public JsonResult GetAllProducts([FromRoute]int page)
+        {
+			List<ProductHeadersVM> products = _productService.GetAllProducts(page);
+			return Json(products);
+        }
+		[HttpPost]
+		public void SwitchApproval(int id)
+        {
+			_productService.SwitchApproval(id);
+        }
+
+		[HttpPost]
+		public IActionResult AddCategory([FromRoute] int id)
+        {
+			//var idObject = Request.RouteValues.Values.ToList();
+			var nameObject = Request.Query["name"];
+            //var actualId = Int32.Parse( idObject[2].ToString());
+			_productService.AddCategory( nameObject, id);
+			return Ok();
+        }
+
 	}
 }

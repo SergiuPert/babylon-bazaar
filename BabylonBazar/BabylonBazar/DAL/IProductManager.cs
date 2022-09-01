@@ -6,5 +6,7 @@ namespace BabylonBazar.DAL
     {
         IEnumerable<Product> GetProductsBySupplier(int supplierId);
         public IEnumerable<Product> GetFirstXProducts(int page);
+        public (IEnumerable<Product>, int pages) GetAllProducts(int page);
+        public void SwitchApproval(int id);
     }
 }
