@@ -1,3 +1,4 @@
+using BabylonBazar.Configuration;
 using BabylonBazar.DAL;
 using BabylonBazar.DAL.DbImplementations;
 using BabylonBazar.DSL;
@@ -15,6 +16,12 @@ namespace BabylonBazar {
         public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration) => Configuration = configuration;
         public void ConfigureServices(IServiceCollection services) {
+            services.Configure<StripeOptions>(options =>
+            {
+                options.SecretKey = "sk_test_51LeboKCsWiaXBlU74Xn2Ts1rVWLZZvnVGW1ggf8AzadSg9jw6QFVzRl8ugP2H1sKYet7asxwc7xbZy8YpfX3AF9D003weM7Nv7";
+                options.PublishableKey = "pk_test_51LeboKCsWiaXBlU7KaYvzA2RTLMIYLhL1JiH7x6PqJPyL9Iwxz0eBfQg6bAzrYVvbkRjCKSgUphCsYkgZEVPXqje0020Wgv3lP";
+                options.WebhookSecret = "whsec_37f6abc2bbb37596969bad4eb1b60f3bcd9198e39df689091246c4b78258453f";
+            });
             services.AddDbContext<DbManager>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
 				.AddScoped<ICardInfoManager,CardInfoManager>()

@@ -76,7 +76,7 @@ const Cart = (props) => {
                 )}
             </div>
             <Total setCartTotal={setCartTotal} cart={cart} />
-            {user.balance >= cartTotal &&
+            {user.balance >= cartTotal && cartTotal !== 0 &&
                 <div>
                     <Info class={"Info"} text={"Select Location: "} />
                     <br/>

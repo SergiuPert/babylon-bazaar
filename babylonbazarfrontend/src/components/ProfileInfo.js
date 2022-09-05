@@ -4,7 +4,6 @@ import {USER_ATOM} from "../STORE";
 
 const ProfileInfo = () => {
     let [user] = useAtom(USER_ATOM)
-    console.log(user)
     return (
         <div>
             <h1 className="ProfilePageTitle">Profile</h1>
