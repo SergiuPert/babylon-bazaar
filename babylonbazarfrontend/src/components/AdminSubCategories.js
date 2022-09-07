@@ -43,8 +43,10 @@ const AdminSubCategories = () => {
                     )}
                 </select>
                 <label>New Category Name:</label>
-                <input type={"text"} onChange={(e) => setName(e.target.value)} />
-                <button type={"submit"}>Add</button>
+                <input className={"InputField"}  type={"text"} onChange={(e) => setName(e.target.value)} />
+                <div className={"CategoriesHeaderButton"}>
+                    <button className={"CategoriesHeaderButtonText"} type="submit">Add</button>
+                </div>
             </form>
         </div>
     );

@@ -46,7 +46,7 @@ namespace BabylonBazar.DSL {
 				}
 			}
 			int pagination = 12;
-			int pages = (int)(products.Count() - 0.000001 / pagination);
+			int pages = (int)((products.Count() - 0.000001) / pagination);
 			products = products.Skip(page * pagination).Take(pagination).ToList();
 			foreach (Product product in products) {
 				List<Images> ProductImages=_imagesManager.GetImagesForProduct(product.Id).ToList();
