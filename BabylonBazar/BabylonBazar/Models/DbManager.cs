@@ -14,6 +14,7 @@ namespace BabylonBazar.Models {
 		public DbSet<Location> Location { get; set; }
 		public DbSet<Categories> Categories { get; set; }
 		public DbSet<ProductCategories> ProductCategories { get; set; }
+		public DbSet<PaymentRequest> PaymentRequests { get; set; }
 		public DbManager(DbContextOptions<DbManager> options) : base(options) { }
 
 	}

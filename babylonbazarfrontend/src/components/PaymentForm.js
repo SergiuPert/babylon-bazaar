@@ -56,8 +56,12 @@ const PaymentForm = () => {
         <div>
             <form id="payment-form" onSubmit={handleSubmit}>
                 <label>Amount</label>
-                <input type={"number"} defaultValue={"Amount"} onChange={(e) => setSum(e.target.value * 100)}/>
-                <CardElement className={"PaymentForm"} id="card-element" />
+                <br/>
+                <input className={"InputField"} type={"number"} defaultValue={"Amount"} onChange={(e) => setSum(e.target.value * 100)}/>
+                <br/>
+                <br/>
+                <label>Credit card info</label>
+                <CardElement className={"PaymentForm InputField"} id="card-element" />
                 <button  className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Pay</button>
             </form>
         </div>

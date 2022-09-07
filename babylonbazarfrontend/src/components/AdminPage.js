@@ -5,6 +5,7 @@ import AdminCategories from "./AdminCategories";
 import AdminSubSubCategories from "./AdminSubSubCategories";
 import AdminSubCategories from "./AdminSubCategories";
 import ProfileButton from "./ProfileButton";
+import AdminPaymentRequests from "./AdminPaymentRequests";
 
 const AdminPage = () => {
     let [content, setContent] = useState("Admin Products")
@@ -12,6 +13,9 @@ const AdminPage = () => {
     switch (content) {
         case "Admin Products":
             content = <AdminProducts/>;
+            break;
+        case "Payment Requests":
+            content = <AdminPaymentRequests/>;
             break;
         case "Add Categories 1":
             content = <AdminCategories/>;
@@ -29,6 +33,7 @@ const AdminPage = () => {
             <h1 className="ProfilePageTitle">Admin</h1>
             <div className={"Flex"}>
                 <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={setContent} text="Admin Products" />
+                <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={setContent} text="Payment Requests" />
                 <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={setContent} text="Add Categories 1" />
                 <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={setContent} text="Add Categories 2" />
                 <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={setContent} text="Add Categories 3" />

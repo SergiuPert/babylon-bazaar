@@ -36,6 +36,7 @@ namespace BabylonBazar {
                 .AddScoped<IProductManager,ProductManager>()
                 .AddScoped<IReviewsManager,ReviewsManager>()
                 .AddScoped<IUserManager,UserManager>()
+                .AddScoped<IPaymentRequestManager,PaymentRequestManager>()
                 .AddScoped<OrderService>()
                 .AddScoped<ProductService>()
                 .AddScoped<UserService>()

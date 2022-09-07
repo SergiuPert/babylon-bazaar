@@ -33,11 +33,14 @@ import {Navigate} from "react-router-dom";
 		<div className="registerForm">
 			<h1>Please Log In</h1>
 			<form onSubmit={submit}>
-					<input type="text" placeholder="Username" onChange={e => setUserName(e.target.value)} />
-					<br/>
-					<input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-					<div><button type="submit">Submit
-				</button></div></form>
+				<input className={"InputField"} type="text" placeholder="Username" onChange={e => setUserName(e.target.value)} />
+				<br/>
+				<input className={"InputField"} type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+				<br/>
+				<div className={"CategoriesHeaderButton"}>
+					<button className={"CategoriesHeaderButtonText"} type="submit">Login</button>
+				</div>
+			</form>
 		</div>)
 	}
 

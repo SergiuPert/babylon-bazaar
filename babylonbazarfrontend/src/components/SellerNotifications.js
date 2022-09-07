@@ -11,7 +11,7 @@ const SellerNotifications = () => {
         fetch(`https://localhost:7136/User/NotificationsPage/${user.id}`,
             { method: "GET", })
             .then(response => response.json())
-            .then((response) => { setNotifications(response); console.log(response) })
+            .then((response) => setNotifications(response))
 
     }, [user, refresh])
 

@@ -6,15 +6,17 @@ const AdminProducts = () => {
     let [page, setPage] = useState(0)
     let [refresh, setRefresh] = useState(true)
     useEffect(() => {
-        fetch(`https://localhost:7136/Product/GetAllProducts/${page}`, { method: "GET" })
-            .then(response => response.json())
-            .then((response) => { setProducts(response) })
+        (async () => {
+                await fetch(`https://localhost:7136/Product/GetAllProducts/${page}`, {method: "GET"})
+                    .then(response => response.json())
+                    .then((response) => setProducts(response))
+            }
+        )();
     }, [refresh])
 
-    const switchApproval = (id) => {
-        fetch(`https://localhost:7136/Product/SwitchApproval/${id}`, { method: "POST" })
-            .then(response => response.json())
-            .then((response) => { setRefresh(!refresh) })
+    const switchApproval = async (id) => {
+        await fetch(`https://localhost:7136/Product/SwitchApproval/${id}`, { method: "POST" })
+            .then(() => { setRefresh(!refresh) })
     }
 
 
@@ -23,7 +25,6 @@ const AdminProducts = () => {
             <div>Loading....</div>
         )
     }
-    console.log(products)
     return (
         <div>
             <div className={"TableBorder"}>

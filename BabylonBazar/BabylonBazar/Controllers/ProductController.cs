@@ -172,5 +172,36 @@ namespace BabylonBazar.Controllers {
 			return Ok();
         }
 
+		[HttpGet]
+		public JsonResult GetPaymentRequests()
+        {
+			List<PaymentRequestVM> requests = _productService.GetPaymentRequests();
+			return Json(requests);
+        }
+
+
+		[HttpPost]
+		public IActionResult AddPaymentRequest([FromBody] PaymentRequestDto paymentRequest)
+        {
+			PaymentRequest item = new PaymentRequest();
+			var jwt = Request.Cookies["jwt"];
+			var token = _jwtService.Verify(jwt);
+			int userId = int.Parse(token.Issuer);
+
+			item.UserId = userId;
+			item.Sum = paymentRequest.Sum;
+			item.IBAN = paymentRequest.IBAN;
+			item.Status = false;
+			_productService.AddPaymentRequest(item);
+			return Ok();
+		}
+
+
+		[HttpPost]
+		public IActionResult CompletePaymentRequest([FromRoute] int id)
+        {
+			_productService.CompletePaymentRequest(id);
+			return Ok();
+        }
 	}
 }

@@ -15,7 +15,8 @@ const ProfileSidebar = (props) => {
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Notifications" />
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Delivery Options" />
             <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Payment Options" />
-            <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Payment Form" />
+            <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Add Funds" />
+            <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Withdraw Funds" />
             {user.role === "Admin" &&
                 <ProfileButton buttonStyle="CategoriesHeaderButton" buttonTextStyle="CategoriesHeaderButtonText" link={props.setCurrentPage} text="Admin" />
             }

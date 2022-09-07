@@ -167,9 +167,8 @@ button {
 }
 
 .ProductList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 24rem);
     width: 100%;
+    height: max-content;
     margin-right: 1vw;
     background-color: rgba(122, 46, 43, 0.9);
     gap: 0rem;
@@ -178,8 +177,9 @@ button {
     border-image-width: 2vw;
 }
 
-.ProductList:empty{
-    display: none;
+.Products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 24rem);
 }
 
 .ProductCard {
@@ -405,6 +405,7 @@ button {
     padding: 2vw;
     width: 100%;
     text-align: center;
+    color: white;
 }
 
 .Accordions {
@@ -458,8 +459,23 @@ button {
 }
 
 .PaymentForm {
-    background-color: white;
+    color: white !important;
 }
+
+.ElementsApp {
+    color: white !important;
+}
+
+.InputElement {
+    color: white !important;
+
+}
+
+.InputContainer {
+    color: white !important;
+
+}
+
 
 
 

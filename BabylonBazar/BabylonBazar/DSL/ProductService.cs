@@ -11,15 +11,17 @@ namespace BabylonBazar.DSL {
 		private IUserManager _userManager;
 		private IImagesManager _imagesManager;
 		private IProductCategoriesManager _productCategoriesManager;
+		private IPaymentRequestManager _paymentRequestManager;
 		public ProductService(IProductManager productManager,ICategoriesManager categoriesManager,
 			IReviewsManager reviewsManager,IUserManager userManager,IImagesManager imagesManager,
-			IProductCategoriesManager productCategoriesManager) {
+			IProductCategoriesManager productCategoriesManager, IPaymentRequestManager paymentRequestManager) {
 			_productManager=productManager;
 			_categoriesManager=categoriesManager;
 			_reviewsManager=reviewsManager;
 			_userManager=userManager;
 			_imagesManager=imagesManager;
 			_productCategoriesManager=productCategoriesManager;
+			_paymentRequestManager=paymentRequestManager;
 		}
 		public ProductDetailsVM GetProductDetails(int productId) {
 			ProductDetailsVM productDetails = new();
@@ -44,7 +46,7 @@ namespace BabylonBazar.DSL {
 				}
 			}
 			int pagination = 12;
-			int pages = (int)Math.Ceiling((decimal)(products.Count() / pagination));
+			int pages = (int)(products.Count() - 0.000001 / pagination);
 			products = products.Skip(page * pagination).Take(pagination).ToList();
 			foreach (Product product in products) {
 				List<Images> ProductImages=_imagesManager.GetImagesForProduct(product.Id).ToList();
@@ -172,6 +174,37 @@ namespace BabylonBazar.DSL {
 			categories.Name = name;
 			categories.ParentId = id;
 			_categoriesManager.Add(categories);
+        }
+
+		public List<PaymentRequestVM> GetPaymentRequests() 
+		{
+			List<PaymentRequest> paymentRequests = _paymentRequestManager.GetAll().ToList();
+			List<PaymentRequestVM> result = new List<PaymentRequestVM>();
+			foreach (PaymentRequest paymentRequest in paymentRequests)
+            {
+				PaymentRequestVM paymentRequestVM = new PaymentRequestVM();
+				paymentRequestVM.Request = paymentRequest;
+				paymentRequestVM.Username = _userManager.GetById(paymentRequest.UserId).Name;
+				result.Add(paymentRequestVM);
+            }
+			return result;
+		}
+
+
+		public void AddPaymentRequest(PaymentRequest paymentRequest)
+        {
+			_paymentRequestManager.Add(paymentRequest);
+			Users user = _userManager.GetById(paymentRequest.UserId);
+			user.Balance -= paymentRequest.Sum;
+			_userManager.Update(user);
+		}
+
+		public void CompletePaymentRequest(int id)
+        {
+			PaymentRequest? request = _paymentRequestManager.GetById(id);
+			if (request == null) return;
+			request.Status = true;
+			_paymentRequestManager.Update(request);
         }
 	}
 }

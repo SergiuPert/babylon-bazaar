@@ -12,7 +12,6 @@ const ProductList = (props) => {
     useEffect(() => {
         (
             async ()=> {
-                console.log("updating");
                 await fetch(`https://localhost:7136/Product/FilterByCategory/${props.categoryId}?page=${page}`,
                     { method: "GET", })
                     .then(response => response.json())
@@ -21,23 +20,25 @@ const ProductList = (props) => {
         )();
     }, [props.categoryId, page])
     useEffect(()=>{setPages(productModels.length>0 ? productModels[0].pages : 0)},[productModels])
-console.log(pages)
-    console.log(page)
-    console.log(productModels)
+
     return (
         <>
+        {productModels.length > 0 &&
             <div className="ProductList">
-
-                {productModels.map((productModel, index) =>
-                    <React.Fragment key={index}>
-                        <ProductCard productModel={productModel} selectProduct={props.selectProduct} />
-                    </React.Fragment>
-                )}
-            <br/>
-                {productModels.length > 0 &&
-                    <Pagination page={page} pages={pages} setPage={setPage}/>
-                }
+                <div className="Products">
+                    {productModels.map((productModel, index) =>
+                        <React.Fragment key={index}>
+                            <ProductCard productModel={productModel} selectProduct={props.selectProduct} />
+                        </React.Fragment>
+                    )}
+                </div>
+                <div>
+                    {pages > 0 &&
+                        <Pagination page={page} pages={pages} setPage={setPage}/>
+                    }
+                </div>
             </div>
+        }
         </>
     );
 }
