@@ -23,7 +23,7 @@ namespace BabylonBazar.Controllers {
 		}
 
 		[EnableCors("Policy")]
-		public JsonResult FilterByCategory([FromRoute]int id, [FromRoute] int page)
+		public JsonResult FilterByCategory([FromRoute]int id, [FromQuery] int page)
 		{
 			List <ProductHeadersVM> products = _productService.GetProductHeadersForCategory(id, page);
 			return Json(products);
