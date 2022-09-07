@@ -457,6 +457,12 @@ button {
     background-color: white;
 }
 
+.PaymentForm {
+    background-color: white;
+}
+
+
+
 .AdminTablePics {
     position: relative;
     top: 0px;

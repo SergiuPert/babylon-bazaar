@@ -8,5 +8,7 @@ namespace BabylonBazar.PaymentModels
         public string PaymentMethodType { get; set; }
         [JsonProperty("currency")]
         public string Currency { get; set; }
+        [JsonProperty("amount")]
+        public int Amount { get; set; }
     }
 }

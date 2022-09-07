@@ -180,5 +180,18 @@ namespace BabylonBazar.Controllers
             Users user = _userService.Get(id);
             return Json(user.Name);
         }
+
+        [HttpPost]
+        public IActionResult AddBalance([FromRoute]string sum)
+        {
+            int balance = Int32.Parse(Request.RouteValues.Values.ToList()[2].ToString());
+            var jwt = Request.Cookies["jwt"];
+            var token = _jwtService.Verify(jwt);
+            int userId = int.Parse(token.Issuer);
+            _userService.UpdateUserBalance(userId, balance);
+            return Ok();
+        }
+
+
     }
 }
