@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js'
 
 
@@ -7,6 +7,7 @@ import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js'
 const PaymentForm = () => {
     const elements = useElements();
     const stripe = useStripe();
+    const [sum, setSum] = useState();
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!stripe || !elements) {
@@ -22,9 +23,10 @@ const PaymentForm = () => {
             body: JSON.stringify({
                 paymentMethodType: 'card',
                 currency: 'eur',
+                amount: sum
             }),
         }).then(response => response.json())
-
+        console.log(clientSecret)
         const {paymentIntent} = await stripe.confirmCardPayment(
             clientSecret, {
                 payment_method: {
@@ -32,14 +34,33 @@ const PaymentForm = () => {
                 }
             }
         )
-        console.log(paymentIntent.id)
-        console.log(paymentIntent.status)
+        // const {paymentIntent} = await stripe.(
+        //     clientSecret, {
+        //         payment_method: {
+        //             card: elements.getElement(CardElement),
+        //         }
+        //     }
+        // )
+        if (paymentIntent !== undefined) {
+            console.log(sum)
+            await fetch(`https://localhost:7136/User/AddBalance/${sum}`, {
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: "include"
+            })
+        }
     }
     return (
-        <form id="payment-form" onSubmit={handleSubmit}>
-            <CardElement id="card-element" />
-            <button  className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Pay</button>
-        </form>
+        <div>
+            <form id="payment-form" onSubmit={handleSubmit}>
+                <label>Amount</label>
+                <input type={"number"} defaultValue={"Amount"} onChange={(e) => setSum(e.target.value * 100)}/>
+                <CardElement className={"PaymentForm"} id="card-element" />
+                <button  className={"CategoriesHeaderButton CategoriesHeaderButtonText"} type={"submit"}>Pay</button>
+            </form>
+        </div>
     );
 };
 

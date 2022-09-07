@@ -21,7 +21,7 @@ namespace BabylonBazar.Controllers
         {
             var options = new PaymentIntentCreateOptions
             {
-                Amount = 1999,
+                Amount = req.Amount,
                 Currency = req.Currency,
                 PaymentMethodTypes = new List<string>
                 {
@@ -34,6 +34,7 @@ namespace BabylonBazar.Controllers
             try
             {
                 var paymentIntent = await service.CreateAsync(options);
+
                 return Ok(new CreatePaymentIntentResponse
                 {
                     ClientSecret = paymentIntent.ClientSecret
@@ -52,33 +53,33 @@ namespace BabylonBazar.Controllers
             
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Webhook()
-        {
-            var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-            Event stripeEvent;
-            try
-            {
-                stripeEvent = EventUtility.ConstructEvent(
-                    json,
-                    Request.Headers["Stripe-Signature"],
-                    _options.Value.WebhookSecret
-                    );
-                Console.WriteLine("ffffff" + stripeEvent.Type);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("fail 1" + e);
-                return BadRequest();
-            }
+        //[HttpPost]
+        //public async Task<IActionResult> Webhook()
+        //{
+        //    var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+        //    Event stripeEvent;
+        //    try
+        //    {
+        //        stripeEvent = EventUtility.ConstructEvent(
+        //            json,
+        //            Request.Headers["Stripe-Signature"],
+        //            _options.Value.WebhookSecret
+        //            );
+        //        Console.WriteLine("ffffff" + stripeEvent.Type);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("fail 1" + e);
+        //        return BadRequest();
+        //    }
 
-            if (stripeEvent.Type == "payment_intent.created")
-            {
-                var paymentIntent = stripeEvent.Data.Object as Stripe.PaymentIntent;
-                Console.WriteLine("PaymentIntent created!");
-            }
-            return Ok();
-        }
+        //    if (stripeEvent.Type == "payment_intent.created")
+        //    {
+        //        var paymentIntent = stripeEvent.Data.Object as Stripe.PaymentIntent;
+        //        Console.WriteLine("PaymentIntent created!");
+        //    }
+        //    return Ok();
+        //}
 
 
 
