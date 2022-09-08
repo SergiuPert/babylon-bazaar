@@ -29,6 +29,9 @@ h1, h2, h3, h4, h5, p, span, button, td {
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%;
+    border: solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 0vw 0vw 2vw 0vw;
 }
 
 .NavBarButtonStyle {
@@ -47,6 +50,15 @@ h1, h2, h3, h4, h5, p, span, button, td {
 .NavBarButtonText {
     font-weight: bold;
     font-size: 1vw;
+}
+
+.Logo {
+    text-decoration: none;
+    color: white;
+    font-family: Papyrus;
+    font-size: 2.5vw;
+    font-weight: 600;
+    padding-left: 1vw;
 }
 
 .username {
@@ -151,7 +163,11 @@ button {
     background-color: #333;
     position: fixed; /* Set the navbar to fixed position */
     bottom: 0; /* Position the navbar at the top of the page */
-    width: 100%
+    width: 100%;
+    border: solid;
+    border-image: url('images/backgroundBorder1.png') 10% round;
+    border-image-width: 2vw 0vw 0vw 0vw;
+
 }
 
 .SubSubCategories {
@@ -476,9 +492,6 @@ button {
 
 }
 
-
-
-
 .AdminTablePics {
     position: relative;
     top: 0px;
@@ -488,6 +501,11 @@ button {
 }
 
 
+
+.MarginRightAuto {
+    margin-right: auto;
+}
+
 .Flex {
     display: flex;
 }
@@ -496,6 +514,11 @@ table, tr, td {
     border: 2px #bb8c60 solid;
     border-collapse: collapse;
 }
+
+.CategoriesAddHeadings {
+    font-size: larger;
+}
+
 
 .InputField {
     color: white;

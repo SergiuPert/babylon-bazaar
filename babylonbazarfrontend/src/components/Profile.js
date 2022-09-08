@@ -37,9 +37,9 @@ const Profile = () => {
         case "Delivery Options":
             content = <DeliveryOptions />;
             break;
-        case "Payment Options":
-            content = <FinancialData />;
-            break;
+        // case "Payment Options":
+        //     content = <FinancialData />;
+        //     break;
         case "Add Funds":
             content = <PaymentForm />;
             break;

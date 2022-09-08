@@ -25,9 +25,6 @@ namespace BabylonBazar.Controllers
         [EnableCors("Policy")]
         public JsonResult Cart(int id)
         {
-            //byte[] userByte = _contextAccessor.HttpContext.Session.Get("user");
-            //int userId = int.Parse(Encoding.ASCII.GetString(userByte));
-
             CartVM cartVM = new CartVM();
             Users user = _userService.Get(id);
             List<Cart> carts = _orderService.GetUserCart(id);
@@ -46,9 +43,17 @@ namespace BabylonBazar.Controllers
         [HttpPost]
         public IActionResult AddToCart([FromRoute]int id)
         {
-            var jwt = Request.Cookies["jwt"];
-            var token = _jwtService.Verify(jwt);
-            int userId = int.Parse(token.Issuer);
+            int userId = -1;
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+                var token = _jwtService.Verify(jwt);
+                userId = int.Parse(token.Issuer);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized();
+            }
             _orderService.AddToUserCart(userId, id, 1);
             return Ok();
         }
@@ -59,30 +64,26 @@ namespace BabylonBazar.Controllers
             _orderService.RemoveFromUserCart(cart);
             return Ok();
         }
-        //[HttpGet]
-        //public IActionResult Checkout()
-        //{
-        //    var jwt = Request.Cookies["jwt"];
-        //    var token = _jwtService.Verify(jwt);
-        //    int userId = int.Parse(token.Issuer);
-        //    List<Location> locations = _userService.GetLocations(userId);
-        //    return View(locations);
-        //}
         [HttpGet]
         public IActionResult Checkout([FromRoute] int id)
         {
-            var jwt = Request.Cookies["jwt"];
-            var token = _jwtService.Verify(jwt);
-            int userId = int.Parse(token.Issuer);
+            int userId = -1;
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+                var token = _jwtService.Verify(jwt);
+                userId = int.Parse(token.Issuer);
+            }
+            catch (Exception ex)
+            {
+                return Unauthorized();
+            }
             double totalCost = _orderService.GetTotalOrderCost(userId);
             int orderId = _orderService.ProcessUserOrder(userId);
             _orderService.SendNotifications(orderId, id);
             _userService.UpdateUserBalance(userId, -totalCost);
             return Ok();
         }
-        public IActionResult PaymentCompletePage()
-        {
-            return View();
-        }
+
     }
 }

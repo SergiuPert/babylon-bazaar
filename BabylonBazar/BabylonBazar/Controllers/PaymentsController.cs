@@ -1,4 +1,5 @@
 ﻿using BabylonBazar.Configuration;
+using BabylonBazar.DSL;
 using BabylonBazar.PaymentModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -10,10 +11,12 @@ namespace BabylonBazar.Controllers
     {
         private readonly IOptions<StripeOptions> _options;
         private readonly IStripeClient _client;
-        public PaymentsController(IOptions<StripeOptions> options)
+        private readonly JwtService _jwtService;
+        public PaymentsController(IOptions<StripeOptions> options, JwtService jwtService)
         {
             _options = options;
             _client = new StripeClient(_options.Value.SecretKey);
+            _jwtService = jwtService;
         }
 
         [HttpPost]
@@ -53,37 +56,6 @@ namespace BabylonBazar.Controllers
             
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Webhook()
-        //{
-        //    var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-        //    Event stripeEvent;
-        //    try
-        //    {
-        //        stripeEvent = EventUtility.ConstructEvent(
-        //            json,
-        //            Request.Headers["Stripe-Signature"],
-        //            _options.Value.WebhookSecret
-        //            );
-        //        Console.WriteLine("ffffff" + stripeEvent.Type);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("fail 1" + e);
-        //        return BadRequest();
-        //    }
-
-        //    if (stripeEvent.Type == "payment_intent.created")
-        //    {
-        //        var paymentIntent = stripeEvent.Data.Object as Stripe.PaymentIntent;
-        //        Console.WriteLine("PaymentIntent created!");
-        //    }
-        //    return Ok();
-        //}
-
-
-
-
         [HttpGet]
         public ActionResult<PublicKeyResponse> GetPublicKeys()
         {
@@ -92,8 +64,5 @@ namespace BabylonBazar.Controllers
                 PublicKey = _options.Value.PublishableKey
             };
         }
-
-
-
     }
 }

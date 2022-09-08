@@ -6,5 +6,6 @@ namespace BabylonBazar.DAL
     {
         IEnumerable<Reviews> GetReviewsForProduct(int productId);
         double GetRatingForProduct(int productId);
+        public IEnumerable<Reviews> GetAllRatingsForProduct(int productId);
     }
 }

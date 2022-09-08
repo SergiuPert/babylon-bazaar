@@ -20,6 +20,7 @@ const AdminSubCategories = () => {
         console.log(name)
         await fetch(`https://localhost:7136/product/addcategory/${categoryId}?name=${name}`, {
             method: "POST",
+            credentials: 'include',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
             body: JSON.stringify({
                 name: name
@@ -36,14 +37,18 @@ const AdminSubCategories = () => {
     return (
         <div>
             <form onSubmit={addCategory}>
+                <h2 className={"CategoriesAddHeadings"}>Main Category:</h2>
                 <select className={"InputField"} onChange={(e) => setCategoryId(e.target.value)} required={true}>
                     <option></option>
                     {categories.map(category =>
                         <option className={"blackText"} value={category.id}>{category.name}</option>
                     )}
                 </select>
-                <label>New Category Name:</label>
+                <br/>
+                <h2 className={"CategoriesAddHeadings"}>New Category Name:</h2>
                 <input className={"InputField"}  type={"text"} onChange={(e) => setName(e.target.value)} />
+                <br/>
+                <br/>
                 <div className={"CategoriesHeaderButton"}>
                     <button className={"CategoriesHeaderButtonText"} type="submit">Add</button>
                 </div>

@@ -25,7 +25,10 @@ const Cart = (props) => {
 
 
     useEffect(() => {
-        fetch(`https://localhost:7136/User/GetUserLocations/${user? user.id : 0}`, { method: "GET", })
+        fetch(`https://localhost:7136/User/GetUserLocations`, {
+            method: "GET",
+            credentials: "include"
+        })
             .then(response => response.json())
             .then((response) => { setLocations(response) })
     }, [user])

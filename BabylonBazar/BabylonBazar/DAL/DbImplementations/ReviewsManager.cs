@@ -53,6 +53,11 @@ namespace BabylonBazar.DAL
             List<Reviews> ratings=_dbManager.Reviews.Where(r => r.ProductId==productId).ToList();
             return (ratings.Count==0)?0:ratings.Average(r => r.Rating);
         }
+        public IEnumerable<Reviews> GetAllRatingsForProduct(int productId)
+        {
+            return _dbManager.Reviews.Where(r => r.ProductId == productId);
+        }
+
 
     }
 }

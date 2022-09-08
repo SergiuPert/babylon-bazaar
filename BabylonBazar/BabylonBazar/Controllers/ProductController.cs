@@ -10,18 +10,15 @@ namespace BabylonBazar.Controllers {
 	public class ProductController:Controller {
 		private ProductService _productService;
 		private JwtService _jwtService;
+		private UserService _userService;
 
-        public ProductController(ProductService productService, JwtService jwtService)
+
+		public ProductController(ProductService productService, JwtService jwtService, UserService userService)
         {
 			_productService = productService;
 			_jwtService = jwtService;
+			_userService = userService;
         }
-		public IActionResult Home(int page=0)
-		{
-			List<ProductHeadersVM> products = _productService.GetApprovedProducts(page);
-			return View(products);
-		}
-
 		[EnableCors("Policy")]
 		public JsonResult FilterByCategory([FromRoute]int id, [FromQuery] int page)
 		{
@@ -36,30 +33,28 @@ namespace BabylonBazar.Controllers {
 			return Json(product);
         }
 
-		[EnableCors("Policy")]
 		public JsonResult FilterBySupplier(int id)
         {
 			List <ProductHeadersVM> products = _productService.GetProductHeadersForSupplier(id);
 			return Json(products);
         }
-		[HttpGet]
-		public IActionResult EditProduct(int id)
-        {
-			ProductDetailsVM product = _productService.GetProductDetails(id);
-			return View(product);
-        }
-		[EnableCors("Policy")]
 		[HttpPost]
 		public IActionResult EditProduct([FromBody]Product product)
 		{
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				int userId = int.Parse(token.Issuer);
+				var user = _userService.Get(userId);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 			_productService.Update(product);
 			return Ok(new { message = "success" });
 		}
-
-		public IActionResult Search(string query)
-        {
-			throw new NotImplementedException();
-        }
         [EnableCors("Policy")]
         public JsonResult GetCategoriesGroup(int id=0)
         {
@@ -74,15 +69,26 @@ namespace BabylonBazar.Controllers {
             }
 			return Json(images);
 		}
-		[EnableCors("Policy")]
 		[HttpPost]
 		public IActionResult AddProduct([FromBody] ProductDto data) {
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
+
 			Product product = new();
-			product.Aproved = true;//<--this will be false, to be switched by an admin
+			product.Aproved = false;
 			product.UserId = data.UserId;
 			product.Name = data.Name;
 			product.Description = data.Description;
-			product.Price = data.Price;//<-- not sure casting is done during binding for this to work
+			product.Price = data.Price;
 			int productId = _productService.AddProduct(product);
 			ProductCategories productCategories = new ProductCategories();
 			productCategories.ProductId = productId;
@@ -90,49 +96,86 @@ namespace BabylonBazar.Controllers {
 			_productService.SetProductCategory(productCategories);
 			return Ok(new { message = "success" });
 		}
-		[EnableCors("Policy")]
-		[HttpPost]
-		public IActionResult DeleteProduct([FromRoute] int id) {
-			_productService.DeleteProductCategory(id);
-			List<Images> images = _productService.GetProductImages(id).ToList();
-			foreach (Images image in images) 
-			{
-				_productService.DeleteProductImage(image.Id);
-			}
-			_productService.DeleteProduct(id);
-			return Ok();
-		}
-		[EnableCors("Policy")]
+		//[HttpPost]
+		//public IActionResult DeleteProduct([FromRoute] int id) {
+		//	int userId = -1;
+		//	try
+		//	{
+		//		var jwt = Request.Cookies["jwt"];
+		//		var token = _jwtService.Verify(jwt);
+		//		userId = int.Parse(token.Issuer);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		return Unauthorized();
+		//	}
+
+		//	_productService.DeleteProductCategory(id);
+		//	List<Images> images = _productService.GetProductImages(id).ToList();
+		//	foreach (Images image in images) 
+		//	{
+		//		_productService.DeleteProductImage(image.Id);
+		//	}
+		//	List<Reviews> reviews = _productService.GetProductRatings(id);
+		//	foreach (Reviews review in reviews)
+        //    {
+		//		_productService.RemoveProductReview(review.Id);
+        //    }
+		//	_productService.DeleteProduct(id);
+		//	return Ok();
+		//}
+		//Products should not be deleted in order to maintain an order history
+
+
 		[HttpPost]
 		public IActionResult AddProductImage([FromBody] Images image) {
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
+
 			_productService.AddProductImage(image);
 			return Ok(new { message = "success" });
 		}
-		[EnableCors("Policy")]
 		[HttpPost]
 		public IActionResult DeleteProductImage([FromRoute] int id) {
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
+
 			_productService.DeleteProductImage(id);
-			return Ok();
-		}
-		[EnableCors("Policy")]
-		[HttpPost]
-		public IActionResult SetProductCategory([FromBody] ProductCategories link) {
-			_productService.SetProductCategory(link);
-			return Ok();
-		}
-		[EnableCors("Policy")]
-		[HttpPost]
-		public IActionResult DeleteProductCategory([FromRoute] int id) {
-			_productService.DeleteProductCategory(id);
 			return Ok();
 		}
 
 		[HttpPost]
 		public IActionResult AddProductReview([FromBody] ReviewDto review)
         {
-			var jwt = Request.Cookies["jwt"];
-			var token = _jwtService.Verify(jwt);
-			int userId = int.Parse(token.Issuer);
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 
 			Reviews newReview = new Reviews();
 			newReview.ProductId = review.ProductId;
@@ -143,9 +186,19 @@ namespace BabylonBazar.Controllers {
 			return Ok();
         }
 
-		[EnableCors("Policy")]
 		[HttpPost]
-		public IActionResult RemoveProductReview(int id) { 
+		public IActionResult RemoveProductReview(int id) {
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 			_productService.RemoveProductReview(id);
 			return Ok();
 		}
@@ -157,17 +210,38 @@ namespace BabylonBazar.Controllers {
 			return Json(products);
         }
 		[HttpPost]
-		public void SwitchApproval(int id)
+		public IActionResult SwitchApproval(int id)
         {
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 			_productService.SwitchApproval(id);
+			return Ok();
         }
 
 		[HttpPost]
 		public IActionResult AddCategory([FromRoute] int id)
         {
-			//var idObject = Request.RouteValues.Values.ToList();
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 			var nameObject = Request.Query["name"];
-            //var actualId = Int32.Parse( idObject[2].ToString());
 			_productService.AddCategory( nameObject, id);
 			return Ok();
         }
@@ -184,9 +258,17 @@ namespace BabylonBazar.Controllers {
 		public IActionResult AddPaymentRequest([FromBody] PaymentRequestDto paymentRequest)
         {
 			PaymentRequest item = new PaymentRequest();
-			var jwt = Request.Cookies["jwt"];
-			var token = _jwtService.Verify(jwt);
-			int userId = int.Parse(token.Issuer);
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 
 			item.UserId = userId;
 			item.Sum = paymentRequest.Sum;
@@ -200,6 +282,17 @@ namespace BabylonBazar.Controllers {
 		[HttpPost]
 		public IActionResult CompletePaymentRequest([FromRoute] int id)
         {
+			int userId = -1;
+			try
+			{
+				var jwt = Request.Cookies["jwt"];
+				var token = _jwtService.Verify(jwt);
+				userId = int.Parse(token.Issuer);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized();
+			}
 			_productService.CompletePaymentRequest(id);
 			return Ok();
         }

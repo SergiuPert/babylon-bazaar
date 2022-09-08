@@ -17,7 +17,7 @@ const ProfileInfo = () => {
                 <div className="ProfileInfo">
                     <h1 className="ProfileInfoLines">Username: {user.name}</h1>
                     <h1 className="ProfileInfoLines">Email: {user.email}</h1>
-                    <h1 className="ProfileInfoLines">Balance: {user.balance}</h1>
+                    <h1 className="ProfileInfoLines">Balance: {user.balance}$</h1>
                 </div>
             </div>
         </div>

@@ -61,7 +61,7 @@ namespace BabylonBazar.DAL
         public (IEnumerable<Product>, int pages) GetAllProducts(int page)
         {
             int productsPerPage = 20;
-            IEnumerable<Product> products = _dbManager.Products.Skip(page * productsPerPage).Take(productsPerPage).OrderBy(p => p.Aproved);
+            IEnumerable<Product> products = _dbManager.Products.OrderBy(p => p.Aproved).Skip(page * productsPerPage).Take(productsPerPage);
             int pages = (int)Math.Ceiling((decimal)(_dbManager.Products.Count()/productsPerPage));
         
             return (products, pages);

@@ -8,6 +8,7 @@ const AdminCategories = () => {
         console.log(name)
         await fetch(`https://localhost:7136/product/addcategory/0?name=${name}`, {
             method: "POST",
+            credentials: "include",
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
             body: JSON.stringify({
                 name: name
@@ -21,8 +22,10 @@ const AdminCategories = () => {
         <div>
             {/*<h1 className="ProfilePageTitle">c</h1>*/}
             <form onSubmit={addCategory}>
-                <label>New Category Name:</label>
+                <h2 className={"CategoriesAddHeadings"}>New Category Name:</h2>
                 <input className={"InputField"}  type={"text"} onChange={(e) => setName(e.target.value)} />
+                <br/>
+                <br/>
                 <div className={"CategoriesHeaderButton"}>
                     <button className={"CategoriesHeaderButtonText"} type="submit">Add</button>
                 </div>

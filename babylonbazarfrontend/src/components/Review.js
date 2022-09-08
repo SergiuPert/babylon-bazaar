@@ -19,6 +19,7 @@ const Review = (props) => {
     const deleteReview = () => {
          fetch(`https://localhost:7136/product/RemoveProductReview/${props.review.id}`, {
             method: 'POST',
+             credentials: "include",
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
             .then(() => props.setRefresh(!props.refresh))
     }

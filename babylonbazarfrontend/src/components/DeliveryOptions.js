@@ -45,7 +45,10 @@ const DeliveryOptions = () => {
     }])
 
     useEffect(() => {
-        fetch(`https://localhost:7136/User/GetUserLocations/${user.id}`, { method: "GET", })
+        fetch(`https://localhost:7136/User/GetUserLocations`, {
+            method: "GET",
+            credentials: "include"
+        })
             .then(response => response.json())
             .then((response) => { setLocations(response) })
     }, [user.id, reload, _name, _phoneNumber, _email])
@@ -59,6 +62,7 @@ const DeliveryOptions = () => {
         e.preventDefault()
         let res = await fetch('https://localhost:7136/user/AddLocation', {
             method: 'POST',
+            credentials: "include",
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
             body: JSON.stringify({
                 userId,
@@ -88,6 +92,7 @@ const DeliveryOptions = () => {
         let zipCode=((_zipCode!=="") ? _zipCode : selectedLocation.zipCode)
         let res = await fetch('https://localhost:7136/user/EditLocation', {
             method: 'POST',
+            credentials: "include",
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
             body: JSON.stringify({
                 id,
@@ -119,6 +124,7 @@ const DeliveryOptions = () => {
     const deleteLocation = async (locationId) => {
         await fetch(`https://localhost:7136/user/DeleteLocation/${locationId}`, {
             method: 'POST',
+            credentials: "include",
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
             .then(() => setReload(!reload))
     };

@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js'
+import {useAtom} from "jotai";
+import {REFRESH} from "../STORE";
 
 
 
@@ -8,13 +10,12 @@ const PaymentForm = () => {
     const elements = useElements();
     const stripe = useStripe();
     const [sum, setSum] = useState();
+    let [refresh, setRefresh] = useAtom(REFRESH)
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!stripe || !elements) {
             return;
         }
-        console.log(elements)
-        console.log(stripe)
         const {clientSecret} = await fetch(`https://localhost:7136/Payments/CreatePaymentIntent`, {
             method: 'POST',
             headers: {
@@ -22,11 +23,10 @@ const PaymentForm = () => {
             },
             body: JSON.stringify({
                 paymentMethodType: 'card',
-                currency: 'eur',
+                currency: 'usd',
                 amount: sum
             }),
         }).then(response => response.json())
-        console.log(clientSecret)
         const {paymentIntent} = await stripe.confirmCardPayment(
             clientSecret, {
                 payment_method: {
@@ -42,14 +42,14 @@ const PaymentForm = () => {
         //     }
         // )
         if (paymentIntent !== undefined) {
-            console.log(sum)
-            await fetch(`https://localhost:7136/User/AddBalance/${sum}`, {
+            await fetch(`https://localhost:7136/User/AddBalance/${sum/100}`, {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 credentials: "include"
             })
+                .then(() => setRefresh(!refresh))
         }
     }
     return (

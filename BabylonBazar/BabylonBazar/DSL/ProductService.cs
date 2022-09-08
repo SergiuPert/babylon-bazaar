@@ -33,6 +33,10 @@ namespace BabylonBazar.DSL {
 			productDetails.categories=_categoriesManager.GetCategoriesForProduct(productId).ToList();
 			return productDetails;
 		}
+		public List<Reviews> GetProductRatings(int id)
+        {
+			return _reviewsManager.GetAllRatingsForProduct(id).ToList();
+        }
 		public List<ProductHeadersVM> GetProductHeadersForCategory(int categoryId, int page) {
 			List<ProductHeadersVM> headers=new();
 			List<ProductCategories> productCategoriess = _productCategoriesManager.GetProductsForCategory(categoryId).ToList();
@@ -133,10 +137,10 @@ namespace BabylonBazar.DSL {
 		}
 		public void DeleteProduct(int id) {
 			_productManager.Remove(id);
-			var images = _imagesManager.GetImagesForProduct(id);
-			foreach(Images image in images) _imagesManager.Remove(image.Id);
-			var categories = _productCategoriesManager.GetCategoriesForProduct(id);
-			foreach(ProductCategories category in categories) _productCategoriesManager.Remove(category.Id);
+			//var images = _imagesManager.GetImagesForProduct(id);
+			//foreach(Images image in images) _imagesManager.Remove(image.Id);
+			//var categories = _productCategoriesManager.GetCategoriesForProduct(id);
+			//foreach(ProductCategories category in categories) _productCategoriesManager.Remove(category.Id);
 		}
 		public List<Images> GetProductImages(int id) {
 			if(id==0) return null;

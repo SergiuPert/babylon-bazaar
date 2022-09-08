@@ -8,15 +8,20 @@ const SellerNotifications = () => {
     let [updateBalance, setUpdateBalance] = useAtom(REFRESH)
     let [refresh, setRefresh] = useState(true)
     useEffect(() => {
-        fetch(`https://localhost:7136/User/NotificationsPage/${user.id}`,
-            { method: "GET", })
+        fetch(`https://localhost:7136/User/NotificationsPage`, {
+            method: "GET",
+            credentials: "include"
+        })
             .then(response => response.json())
             .then((response) => setNotifications(response))
 
     }, [user, refresh])
 
     const completeNotification = (id) => {
-        fetch(`https://localhost:7136/User/CompleteOrder/${id}`, { method: "POST", credentials: "include" })
+        fetch(`https://localhost:7136/User/CompleteOrder/${id}`, {
+            method: "POST",
+            credentials: "include"
+        })
             .then(() => {setRefresh(!refresh); setUpdateBalance(!updateBalance)})
     }
 

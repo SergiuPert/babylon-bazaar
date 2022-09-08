@@ -15,7 +15,10 @@ const AdminPaymentRequests = () => {
     }, [refresh])
 
     const CompleteRequest = async (id) => {
-        await fetch(`https://localhost:7136/Product/CompletePaymentRequest/${id}`, { method: "POST" })
+        await fetch(`https://localhost:7136/Product/CompletePaymentRequest/${id}`, {
+            method: "POST",
+            credentials: "include"
+        })
             .then(() => { setRefresh(!refresh) })
     }
 

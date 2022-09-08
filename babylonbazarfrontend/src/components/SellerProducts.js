@@ -76,6 +76,7 @@ const SellerProducts = () => {
         let res = await fetch('https://localhost:7136/product/AddProduct', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
+            credentials: "include",
             body: JSON.stringify({
                 userId,
                 name: _name,
@@ -96,6 +97,7 @@ const SellerProducts = () => {
         let res = await fetch('https://localhost:7136/product/EditProduct', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
+            credentials: "include",
             body: JSON.stringify({
                 id,
                 userId,
@@ -115,6 +117,7 @@ const SellerProducts = () => {
     const deleteProduct = async (locationId) => {
         await fetch(`https://localhost:7136/product/DeleteProduct/${locationId}`, {
             method: 'POST',
+            credentials: "include",
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
             .then(() => {setReload(!reload); setForm("")})
     };
@@ -158,6 +161,7 @@ const SellerProducts = () => {
         const credentials = await fetch('https://localhost:7136/product/addproductimage', {
             method: "POST",
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000'},
+            credentials: "include",
             body: JSON.stringify({
                 productId: id,
                 name: image
@@ -169,10 +173,31 @@ const SellerProducts = () => {
     const deleteImage = async (imageId) => {
         await fetch(`https://localhost:7136/product/DeleteProductImage/${imageId}`, {
             method: 'POST',
+            credentials: "include",
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' }})
             .then(() => setReload(!reload))
     };
-
+    let picturesTableContent = ""
+    if (pictures.length > 0) {
+        picturesTableContent =
+            <div className={"TableBorder"}>
+                <table>
+                    <thead>
+                    </thead>
+                    <tbody>
+                    {pictures.map(picture =>
+                        <tr>
+                            <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
+                            <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} onClick={() => deleteImage(picture.id)}>Delete</button></td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+            </div>
+    }
+    else {
+        picturesTableContent = null
+    }
 
     return (
         <div id="content">
@@ -196,7 +221,8 @@ const SellerProducts = () => {
                             <td>{product.product.description}</td>
                             <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { setId((product.product.id)); setForm("Pics"); refreshForm()}}>Manage</button></td>
                             <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { setSelectedProduct(product.product); setId(product.product.id); setForm("Edit"); refreshForm()}}>Edit</button></td>
-                            <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>
+                            {/*<td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} type={"button"} onClick={() => { deleteProduct(product.product.id); refreshForm() }}>Delete</button></td>*/}
+                        {/*products should not be deleted in order to keep the product history*/}
                         </tr>
                     )}
                     </tbody>
@@ -259,20 +285,21 @@ const SellerProducts = () => {
             {form === "Pics" &&
                 <>
                     <br/>
-                        <div className={"TableBorder"}>
-                            <table>
-                                <thead>
-                                </thead>
-                                <tbody>
-                                {pictures.map(picture =>
-                                    <tr>
-                                        <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>
-                                        <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} onClick={() => deleteImage(picture.id)}>Delete</button></td>
-                                    </tr>
-                                )}
-                                </tbody>
-                            </table>
-                        </div>
+                    {picturesTableContent}
+                        {/*<div className={"TableBorder"}>*/}
+                        {/*    <table>*/}
+                        {/*        <thead>*/}
+                        {/*        </thead>*/}
+                        {/*        <tbody>*/}
+                        {/*        {pictures.map(picture =>*/}
+                        {/*            <tr>*/}
+                        {/*                <td><img className={"productPicturesInForm"} src={"https://localhost:7136/Images/Products/" + picture.name} /></td>*/}
+                        {/*                <td><button className={"CategoriesHeaderButton CategoriesHeaderButtonText TableButton"} onClick={() => deleteImage(picture.id)}>Delete</button></td>*/}
+                        {/*            </tr>*/}
+                        {/*        )}*/}
+                        {/*        </tbody>*/}
+                        {/*    </table>*/}
+                        {/*</div>*/}
                     <br/>
                     <form onSubmit={submit}>
                         <input className={"InputField"} type="file" onChange={e => getImage(e.target.files[0])}  />

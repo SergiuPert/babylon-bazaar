@@ -15,7 +15,10 @@ const AdminProducts = () => {
     }, [refresh])
 
     const switchApproval = async (id) => {
-        await fetch(`https://localhost:7136/Product/SwitchApproval/${id}`, { method: "POST" })
+        await fetch(`https://localhost:7136/Product/SwitchApproval/${id}`, {
+            method: "POST",
+            credentials: "include"
+        })
             .then(() => { setRefresh(!refresh) })
     }
 
