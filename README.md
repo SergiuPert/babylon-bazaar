@@ -35,8 +35,8 @@ Website features (in progress):
 
 Screenshots (the product and profile images are just placeholders for now):
 
-![bb1](https://user-images.githubusercontent.com/89579316/185111288-ad89af81-fd63-4a99-a444-01ac68d2366e.JPG)
+![5](https://user-images.githubusercontent.com/89579316/192119623-110bc89c-c2c9-45af-bbfe-ea94909e2641.JPG)
 
-![bb2](https://user-images.githubusercontent.com/89579316/185111332-68d319d0-28e9-4920-a51b-2ae4c3540696.JPG)
+![4](https://user-images.githubusercontent.com/89579316/192119627-8f86b90d-0e17-4304-add3-79e6ea5c8e1f.JPG)
 
-![image](https://user-images.githubusercontent.com/89579316/185402528-1f9172f6-d35d-441d-a9ff-1bbf199b81ea.png)
+![3](https://user-images.githubusercontent.com/89579316/192119634-ae05d88d-3138-4fbf-b184-ce6db13a32f4.JPG)
